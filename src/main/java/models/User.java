@@ -12,9 +12,24 @@ public class User {
     private String specialite;
     private String telephone;
     private String status;
+    private String image;
     private java.sql.Timestamp registrationDate;
 
     public User() {
+    }
+
+    public User(String email, String password, String role, String nom, String prenom, String localisation, String bio,
+            String specialite, String telephone, String image) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.localisation = localisation;
+        this.bio = bio;
+        this.specialite = specialite;
+        this.telephone = telephone;
+        this.image = image;
     }
 
     public User(String email, String password, String role, String nom, String prenom, String localisation, String bio,
@@ -141,6 +156,14 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public java.sql.Timestamp getRegistrationDate() {

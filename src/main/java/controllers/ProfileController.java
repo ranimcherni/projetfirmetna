@@ -79,17 +79,26 @@ public class ProfileController {
 
         boolean hasError = false;
 
-        if (!InputValidator.isValidName(nom)) {
+        if (nom.isEmpty()) {
+            showError(nomError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidName(nom)) {
             showError(nomError, "Nom invalide (2-50 lettres).");
             hasError = true;
         }
         
-        if (!InputValidator.isValidName(prenom)) {
+        if (prenom.isEmpty()) {
+            showError(prenomError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidName(prenom)) {
             showError(prenomError, "Prénom invalide (2-50 lettres).");
             hasError = true;
         }
         
-        if (!InputValidator.isValidEmail(email)) {
+        if (email.isEmpty()) {
+            showError(emailError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidEmail(email)) {
             showError(emailError, "Format e-mail invalide.");
             hasError = true;
         } else if (userService.isEmailTaken(email, currentUser.getId())) {
@@ -97,7 +106,10 @@ public class ProfileController {
             hasError = true;
         }
 
-        if (!InputValidator.isValidPhone(phone)) {
+        if (phone.isEmpty()) {
+            showError(phoneError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidPhone(phone)) {
             showError(phoneError, "Téléphone Tunisien invalide.");
             hasError = true;
         }

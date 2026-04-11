@@ -65,10 +65,10 @@
 
 /* Hero Sections */
 .landscape-bg {
-    -fx-background-color: #1b4332; /* Primary landscape green */
-    -fx-background-image: url("../images/front2.png");
+    -fx-background-color: #1b4332;
+    -fx-background-image: url("../images/unified_auth_bg.png");
     -fx-background-size: cover;
-    -fx-background-position: 85% center;
+    -fx-background-position: center center; /* Perfectly centered */
 }
 
 .home-bg {
@@ -205,9 +205,9 @@
 
 .login-root {
     -fx-background-color: #1b4332;
-    -fx-background-image: url("../images/premium_bg.png"); /* Unified premium background */
+    -fx-background-image: url("../images/unified_auth_bg.png");
     -fx-background-size: cover;
-    -fx-background-position: center;
+    -fx-background-position: center center; /* Perfectly centered */
 }
 
 .glass-card {

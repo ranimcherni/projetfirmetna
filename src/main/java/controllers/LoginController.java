@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -58,13 +59,16 @@ public class LoginController {
         boolean hasError = false;
 
         // Validation Format
-        if (!InputValidator.isValidEmail(email)) {
+        if (email.isEmpty()) {
+            showError(emailError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidEmail(email)) {
             showError(emailError, "Veuillez saisir un email valide.");
             hasError = true;
         }
 
         if (password.isEmpty()) {
-            showError(passwordError, "Mot de passe requis.");
+            showError(passwordError, "Ce champ est requis");
             hasError = true;
         }
 
@@ -85,24 +89,44 @@ public class LoginController {
 
         // DB User login
         UserService us = new UserService();
-        User foundUser = null;
-        for (User u : us.getAll()) {
-            if (u.getEmail().equals(email) && u.getPassword().equals(password)) {
-                foundUser = u;
+        User targetUser = null;
+
+        // 1. Chercher l'utilisateur par son email d'abord
+        List<User> allUsers = us.getAll();
+        for (User u : allUsers) {
+            if (u.getEmail().equalsIgnoreCase(email)) {
+                targetUser = u;
                 break;
             }
         }
 
-        if (foundUser != null) {
-            String status = foundUser.getStatus();
-            if (status != null && status.equalsIgnoreCase("Inactif")) {
+        if (targetUser != null) {
+            // 2. Vérifier s'il est bloqué (Inactif)
+            if ("Inactif".equalsIgnoreCase(targetUser.getStatus())) {
                 showGeneralError("Désolé, votre compte est bloqué.");
-            } else {
-                UserSession.getInstance().setUser(foundUser);
+                return;
+            }
+
+            // 3. Vérifier le mot de passe
+            boolean isPasswordCorrect = false;
+            try {
+                if (targetUser.getPassword().startsWith("$2a$")) {
+                    isPasswordCorrect = org.mindrot.jbcrypt.BCrypt.checkpw(password, targetUser.getPassword());
+                } else {
+                    isPasswordCorrect = targetUser.getPassword().equals(password);
+                }
+            } catch (Exception e) {
+                isPasswordCorrect = targetUser.getPassword().equals(password);
+            }
+
+            if (isPasswordCorrect) {
+                UserSession.getInstance().setUser(targetUser);
                 goToFront(event);
+            } else {
+                showGeneralError("Mot de passe incorrect.");
             }
         } else {
-            showGeneralError("Identifiants incorrects.");
+            showGeneralError("Cet email n'existe pas dans notre système.");
         }
     }
 

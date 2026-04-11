@@ -34,7 +34,7 @@ public class UserFormController {
 
     @FXML
     public void initialize() {
-        typeCombo.setItems(FXCollections.observableArrayList("Agriculteur", "Client", "Donateur", "Volontaire"));
+        typeCombo.setItems(FXCollections.observableArrayList("Agriculteur", "Client", "Donateur"));
         statusCombo.setItems(FXCollections.observableArrayList("Actif", "Inactif"));
         systemRoleCombo.setItems(FXCollections.observableArrayList("Utilisateur", "Administrateur", "Modérateur"));
         
@@ -133,17 +133,26 @@ public class UserFormController {
 
         boolean hasError = false;
 
-        if (!InputValidator.isValidName(nom)) {
+        if (nom.isEmpty()) {
+            showError(nomError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidName(nom)) {
             showError(nomError, "Nom invalide (2-50 lettres).");
             hasError = true;
         }
         
-        if (!InputValidator.isValidName(prenom)) {
+        if (prenom.isEmpty()) {
+            showError(prenomError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidName(prenom)) {
             showError(prenomError, "Prénom invalide (2-50 lettres).");
             hasError = true;
         }
         
-        if (!InputValidator.isValidEmail(email)) {
+        if (email.isEmpty()) {
+            showError(emailError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidEmail(email)) {
             showError(emailError, "Format e-mail invalide.");
             hasError = true;
         } else {
@@ -155,7 +164,10 @@ public class UserFormController {
         }
 
         // Passwords
-        if (isEdit && !pass.isEmpty()) {
+        if (!isEdit && pass.isEmpty()) {
+            showError(passwordError, "Ce champ est requis");
+            hasError = true;
+        } else if (isEdit && !pass.isEmpty()) {
             if (!InputValidator.isValidPassword(pass)) {
                 showError(passwordError, "Mot de passe trop faible.");
                 hasError = true;

@@ -3,6 +3,8 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import models.User;
 import services.UserService;
 import utils.InputValidator;
@@ -18,6 +20,10 @@ public class SignUpController {
     @FXML private ComboBox<String> roleCombo;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
+
+    @FXML private ImageView avatarImageView;
+    @FXML private Label avatarPlaceholder;
+    private String selectedImagePath = "";
 
     // Error Labels
     @FXML private Label nomError;
@@ -59,6 +65,24 @@ public class SignUpController {
     }
 
     @FXML
+    public void handleSelectAvatar(ActionEvent event) {
+        javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+        fileChooser.setTitle("Choisir une photo de profil");
+        fileChooser.getExtensionFilters().addAll(
+            new javafx.stage.FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+        
+        java.io.File file = fileChooser.showOpenDialog(((javafx.scene.Node)event.getSource()).getScene().getWindow());
+        
+        if (file != null) {
+            selectedImagePath = file.toURI().toString();
+            avatarImageView.setImage(new javafx.scene.image.Image(selectedImagePath));
+            avatarImageView.setVisible(true);
+            avatarPlaceholder.setVisible(false);
+        }
+    }
+
+    @FXML
     public void handleSignUp(ActionEvent event) {
         resetErrorLabels();
 
@@ -72,17 +96,26 @@ public class SignUpController {
 
         boolean hasError = false;
 
-        if (!InputValidator.isValidName(nom)) {
+        if (nom.isEmpty()) {
+            showError(nomError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidName(nom)) {
             showError(nomError, "Le nom doit contenir 2-50 lettres.");
             hasError = true;
         }
         
-        if (!InputValidator.isValidName(prenom)) {
+        if (prenom.isEmpty()) {
+            showError(prenomError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidName(prenom)) {
             showError(prenomError, "Le prénom doit contenir 2-50 lettres.");
             hasError = true;
         }
         
-        if (!InputValidator.isValidEmail(email)) {
+        if (email.isEmpty()) {
+            showError(emailError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidEmail(email)) {
             showError(emailError, "Format d'email invalide.");
             hasError = true;
         } else if (userService.existsByEmail(email)) {
@@ -90,13 +123,24 @@ public class SignUpController {
             hasError = true;
         }
 
-        if (!InputValidator.isValidPhone(phone)) {
+        if (phone.isEmpty()) {
+            showError(phoneError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidPhone(phone)) {
             showError(phoneError, "Téléphone invalide (Ex: +216 22123456).");
             hasError = true;
         }
         
-        if (!InputValidator.isValidPassword(pass)) {
-            showError(passwordError, "Mot de passe requis (Min 8 car, Maj, Chiffre, Symbole).");
+        if (pass.isEmpty()) {
+            showError(passwordError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidPassword(pass)) {
+            showError(passwordError, "Min 8 car, Majuscule, Chiffre, Symbole.");
+            hasError = true;
+        } 
+        
+        if (confirmPass.isEmpty()) {
+            showError(confirmPasswordError, "Ce champ est requis");
             hasError = true;
         } else if (!pass.equals(confirmPass)) {
             showError(confirmPasswordError, "Les mots de passe ne correspondent pas.");
@@ -108,6 +152,7 @@ public class SignUpController {
         // Save logic
         String cleanedPhone = InputValidator.cleanPhone(phone);
         User newUser = new User(email, pass, role, nom, prenom, "Tunisie", "Nouveau membre", "Agriculteur", cleanedPhone);
+        newUser.setImage(selectedImagePath);
 
         try {
             userService.add(newUser);

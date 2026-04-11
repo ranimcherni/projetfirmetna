@@ -42,10 +42,14 @@ public class UserService implements IService<User> {
     @Override
     public void add(User user) {
         String req = "INSERT INTO `user` (`email`, `password`, `role`, `nom`, `prenom`, `localisation`, `bio`, `specialite`, `telephone`, `status`, `registration_date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        // Hachage du mot de passe
+        String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(user.getPassword(), org.mindrot.jbcrypt.BCrypt.gensalt());
+        
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
             pstm.setString(1, user.getEmail());
-            pstm.setString(2, user.getPassword());
+            pstm.setString(2, hashedPassword);
             pstm.setString(3, user.getRole());
             pstm.setString(4, user.getNom());
             pstm.setString(5, user.getPrenom());
@@ -65,7 +69,9 @@ public class UserService implements IService<User> {
 
     @Override
     public void update(User user) {
-        String req = "UPDATE `user` SET `email`=?, `role`=?, `nom`=?, `prenom`=?, `localisation`=?, `bio`=?, `specialite`=?, `telephone`=?, `status`=? WHERE `id`=?";
+        String passwordPart = (user.getPassword() != null && !user.getPassword().isEmpty()) ? ", `password`=?" : "";
+        String req = "UPDATE `user` SET `email`=?, `role`=?, `nom`=?, `prenom`=?, `localisation`=?, `bio`=?, `specialite`=?, `telephone`=?, `status`=?" + passwordPart + " WHERE `id`=?";
+        
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
             pstm.setString(1, user.getEmail());
@@ -77,7 +83,16 @@ public class UserService implements IService<User> {
             pstm.setString(7, user.getSpecialite());
             pstm.setString(8, user.getTelephone());
             pstm.setString(9, user.getStatus());
-            pstm.setInt(10, user.getId());
+            
+            if (!passwordPart.isEmpty()) {
+                // Hachage du nouveau mot de passe
+                String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(user.getPassword(), org.mindrot.jbcrypt.BCrypt.gensalt());
+                pstm.setString(10, hashedPassword);
+                pstm.setInt(11, user.getId());
+            } else {
+                pstm.setInt(10, user.getId());
+            }
+            
             pstm.executeUpdate();
             System.out.println("User modifié avec succès !");
         } catch (SQLException e) {
