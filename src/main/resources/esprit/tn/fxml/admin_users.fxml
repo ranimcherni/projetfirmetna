@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminUsersController" stylesheets="@../css/style.css">
+    <children>
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <VBox>
+                    <Label text="Gestion Utilisateurs" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label text="Gérez tous les utilisateurs de la plateforme" style="-fx-text-fill: #636e72; -fx-font-size: 13;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleAddUser" text="+ Ajouter un utilisateur" styleClass="admin-btn-primary" />
+            </children>
+        </HBox>
+
+        <!-- Filters Section -->
+        <HBox spacing="15" alignment="CENTER_LEFT" styleClass="admin-filter-bar">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            <children>
+                <TextField fx:id="searchField" prefWidth="400" promptText="🔍 Rechercher par nom ou email..." styleClass="admin-search-field" />
+                <Region HBox.hgrow="ALWAYS" />
+                <ComboBox fx:id="typeFilter" prefWidth="180" styleClass="admin-combo-filter" />
+                <ComboBox fx:id="statusFilter" prefWidth="180" styleClass="admin-combo-filter" />
+            </children>
+        </HBox>
+
+        <!-- Users Table -->
+        <TableView fx:id="userTable" VBox.vgrow="ALWAYS" styleClass="admin-table">
+            <columns>
+                <TableColumn fx:id="idCol" text="ID" prefWidth="60" />
+                <TableColumn fx:id="nomCol" text="Nom" prefWidth="250" />
+                <TableColumn fx:id="emailCol" text="Email" prefWidth="250" />
+                <TableColumn fx:id="typeCol" text="Type" prefWidth="150" />
+                <TableColumn fx:id="statusCol" text="Statut" prefWidth="150" />
+                <TableColumn fx:id="dateCol" text="Date d'inscription" prefWidth="200" />
+                <TableColumn fx:id="actionsCol" text="Actions" prefWidth="120" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</VBox>

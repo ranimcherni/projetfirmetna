@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDashboardController" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+    <content>
+        <VBox spacing="30" style="-fx-padding: 40; -fx-background-color: #f8f9fa;">
+            <children>
+                <!-- TOP HEADER -->
+                <VBox spacing="10">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Tableau de Bord Analytique" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #1b4332;" />
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Button text="📥 Exporter Rapport" style="-fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10 20; -fx-cursor: hand;" />
+                            <Button text="🔄 Actualiser" onAction="#initialize" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-font-weight: bold; -fx-cursor: hand;" />
+                        </HBox>
+                        <Label text="Statistiques en temps réel et indicateurs de performance de Firmetna" style="-fx-text-fill: #7f8c8d; -fx-font-size: 15;" />
+                    </children>
+                </VBox>
+
+                <!-- STATS CARDS ROW -->
+                <HBox spacing="25" alignment="CENTER">
+                    <children>
+                        <VBox styleClass="admin-glass-card, stat-card-glow-blue" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10" style="-fx-padding: 25;">
+                            <Label text="👥" style="-fx-font-size: 30; -fx-text-fill: #0984e3;" />
+                            <Label fx:id="totalUsersLabel" text="0" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                            <Label text="Utilisateurs" style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                        </VBox>
+                        <VBox styleClass="admin-glass-card, stat-card-glow-green" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10" style="-fx-padding: 25;">
+                            <Label text="🌱" style="-fx-font-size: 30; -fx-text-fill: #27ae60;" />
+                            <Label fx:id="totalProductsLabel" text="0" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                            <Label text="Produits" style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                        </VBox>
+                        <VBox styleClass="admin-glass-card, stat-card-glow-orange" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10" style="-fx-padding: 25;">
+                            <Label text="📅" style="-fx-font-size: 30; -fx-text-fill: #f39c12;" />
+                            <Label fx:id="totalEventsLabel" text="0" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                            <Label text="Événements" style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                        </VBox>
+                        <VBox styleClass="admin-glass-card, stat-card-glow-red" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10" style="-fx-padding: 25;">
+                            <Label text="💡" style="-fx-font-size: 30; -fx-text-fill: #e74c3c;" />
+                            <Label fx:id="activeUsersLabel" text="0" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                            <Label text="Comptes Actifs" style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- MAIN CHARTS ROW -->
+                <HBox spacing="30">
+                    <children>
+                        <!-- ROLE DISTRIBUTION -->
+                        <VBox styleClass="admin-glass-card" HBox.hgrow="ALWAYS" spacing="15" style="-fx-padding: 30;">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <Label text="📊" style="-fx-font-size: 20;" />
+                                    <Label text="Répartition des Rôles" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                </HBox>
+                                <PieChart fx:id="userDistributionChart" prefHeight="350" legendVisible="true" style="-fx-font-size: 12;" />
+                            </children>
+                        </VBox>
+
+                        <!-- REGISTRATION TIMELINE -->
+                        <VBox styleClass="admin-glass-card" HBox.hgrow="ALWAYS" spacing="15" style="-fx-padding: 30;">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <Label text="📈" style="-fx-font-size: 20;" />
+                                    <Label text="Croissance de la Communauté" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                </HBox>
+                                <AreaChart fx:id="activityChart" prefHeight="350" legendVisible="false">
+                                    <xAxis><CategoryAxis label="Date d'inscription" side="BOTTOM" /></xAxis>
+                                    <yAxis><NumberAxis label="Nouveaux Inscrits" side="LEFT" /></yAxis>
+                                </AreaChart>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- SECONDARY STATS HEADER -->
+                <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 20 0 0 0;">
+                    <children>
+                        <Label text="Indicateurs par type d'utilisateur" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                        <Separator HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+
+                <!-- ROLE SPECIFIC COUNTS -->
+                <HBox spacing="30">
+                    <children>
+                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 20; -fx-border-color: #27ae60; -fx-border-width: 0 0 0 5;">
+                            <Label text="AGRICULTEURS" style="-fx-font-weight: bold; -fx-text-fill: #27ae60;" />
+                            <Label fx:id="agriculteurCountLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+                        </VBox>
+                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 20; -fx-border-color: #f1c40f; -fx-border-width: 0 0 0 5;">
+                            <Label text="CLIENTS" style="-fx-font-weight: bold; -fx-text-fill: #f39c12;" />
+                            <Label fx:id="clientCountLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+                        </VBox>
+                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 20; -fx-border-color: #2ecc71; -fx-border-width: 0 0 0 5;">
+                            <Label text="DONATEURS" style="-fx-font-weight: bold; -fx-text-fill: #2ecc71;" />
+                            <Label fx:id="donateurCountLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
