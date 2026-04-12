@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.AddPublicationController"
+            prefHeight="600.0" prefWidth="900.0"
+            stylesheets="@../css/forum.css" styleClass="main-bg">
+
+    <VBox spacing="15" alignment="CENTER" maxWidth="600"
+          AnchorPane.topAnchor="40" AnchorPane.bottomAnchor="40"
+          AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150"
+          styleClass="card">
+
+        <Label text="Nouvelle Publication" styleClass="header-title-lg"/>
+
+        <TextField fx:id="txtTitre" promptText="Titre de la publication" styleClass="text-field-custom"/>
+        <ComboBox fx:id="comboType" promptText="Type" prefWidth="600.0" styleClass="combo-box"/>
+        <TextArea fx:id="txtContenu" promptText="Rédigez votre contenu ici..." VBox.vgrow="ALWAYS" styleClass="text-area-custom"/>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="Parcourir Image" onAction="#chooseImage" styleClass="btn-secondary"/>
+            <Label fx:id="labelImage" text="Aucune image sélectionnée" styleClass="text-muted"/>
+        </HBox>
+
+        <HBox spacing="15" alignment="CENTER_RIGHT">
+            <Button text="Annuler" onAction="#goBack" styleClass="btn-secondary"/>
+            <Button text="Publier" onAction="#savePublication" styleClass="btn-success"/>
+        </HBox>
+
+    </VBox>
+</AnchorPane>

@@ -8,7 +8,8 @@ import utils.NavigationService;
 
 public class FrontController {
 
-    @FXML private Label welcomeLabel;
+    @FXML
+    private Label welcomeLabel;
 
     @FXML
     public void initialize() {
@@ -31,11 +32,34 @@ public class FrontController {
     private void handleAccueil(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
     }
-    
-    @FXML private void handleProduits(ActionEvent event) { System.out.println("Opening Produits"); }
-    @FXML private void handleEvenements(ActionEvent event) { System.out.println("Opening Evenements"); }
-    @FXML private void handleForum(ActionEvent event) { System.out.println("Opening Forum"); }
-    @FXML private void handleNotifications(ActionEvent event) { System.out.println("Opening Notifications"); }
-    @FXML private void handleDons(ActionEvent event) { System.out.println("Opening Dons"); }
-    @FXML private void handlePartenariats(ActionEvent event) { System.out.println("Opening Partenariats"); }
+
+    @FXML
+    private void handleProduits(ActionEvent event) {
+        System.out.println("Opening Produits");
+    }
+
+    @FXML
+    private void handleEvenements(ActionEvent event) {
+        System.out.println("Opening Evenements");
+    }
+
+    @FXML
+    private void handleForum(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Communauté et Forum");
+    }
+
+    @FXML
+    private void handleNotifications(ActionEvent event) {
+        System.out.println("Opening Notifications");
+    }
+
+    @FXML
+    private void handleDons(ActionEvent event) {
+        System.out.println("Opening Dons");
+    }
+
+    @FXML
+    private void handlePartenariats(ActionEvent event) {
+        System.out.println("Opening Partenariats");
+    }
 }

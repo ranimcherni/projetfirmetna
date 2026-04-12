@@ -89,7 +89,7 @@
                     <VBox GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="module-card">
                         <Label text="💬" style="-fx-font-size: 45;" />
                         <Label text="Forum" styleClass="module-name" />
-                        <Button text="Découvrir" styleClass="discover-btn" />
+                        <Button text="Découvrir" styleClass="discover-btn" onAction="#handleGoToForum" />
                     </VBox>
                     
                     <!-- Row 2 -->

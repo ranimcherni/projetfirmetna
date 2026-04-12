@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.ShowPublicationController"
+            prefHeight="600.0" prefWidth="900.0"
+            stylesheets="@../css/forum.css" styleClass="main-bg">
+
+    <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20"
+          AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40">
+
+        <HBox spacing="15" alignment="CENTER_LEFT">
+            <Button text="Retour" onAction="#goBack" styleClass="btn-secondary"/>
+            <Label text="Détail de la Publication" styleClass="header-title"/>
+        </HBox>
+
+        <VBox spacing="10" styleClass="card" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button fx:id="btnEdit" text="Editer" onAction="#toggleEditPublication" styleClass="btn-secondary"/>
+                <Button fx:id="btnSave" text="Sauvegarder" onAction="#savePublicationUpdate" styleClass="btn-success" visible="false" managed="false"/>
+                <Button fx:id="btnCancel" text="Annuler" onAction="#toggleEditPublication" styleClass="btn-secondary" visible="false" managed="false"/>
+            </HBox>
+            
+            <Label fx:id="lblTitre" text="Titre..." styleClass="header-title-lg"/>
+            <TextField fx:id="txtEditTitre" styleClass="text-field-custom" visible="false" managed="false"/>
+            
+            <HBox spacing="15">
+                <Label fx:id="lblType" text="Type: " styleClass="text-muted"/>
+                <Label fx:id="lblDate" text="Date: " styleClass="text-muted"/>
+            </HBox>
+            <Separator/>
+            
+            <Label fx:id="lblContenu" text="Contenu..." wrapText="true" VBox.vgrow="ALWAYS" styleClass="text-content"/>
+            <TextArea fx:id="txtEditContenu" styleClass="text-area-custom" prefHeight="150" visible="false" managed="false"/>
+        </VBox>
+
+        <Label text="Commentaires" styleClass="header-title-sm"/>
+
+        <!-- list Commentaire  -->
+        <ListView fx:id="listCommentaires" VBox.vgrow="ALWAYS" styleClass="list-view-comments"/>
+
+        <!-- Add Commentaire -->
+        <HBox spacing="10" alignment="BOTTOM_CENTER" styleClass="card-footer">
+            <TextArea fx:id="txtNewComment" promptText="Ajouter un commentaire..." prefHeight="50.0" HBox.hgrow="ALWAYS" styleClass="text-area-custom"/>
+            <VBox spacing="5" alignment="CENTER">
+                <Button fx:id="btnPostComment" text="Publier" onAction="#postComment" styleClass="btn-primary"/>
+                <HBox spacing="5">
+                    <Button text="Editer" onAction="#editCommentAction" styleClass="btn-secondary"/>
+                    <Button text="Supprimer" onAction="#deleteComment" styleClass="btn-danger"/>
+                </HBox>
+            </VBox>
+        </HBox>
+
+    </VBox>
+
+</AnchorPane>

@@ -13,14 +13,16 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import utils.UserSession;
 
-
-
 public class HomeController {
-    
-    @FXML private Label welcomeLabel;
-    @FXML private Button loginBtn;
-    @FXML private Button logoutBtn;
-    @FXML private VBox profileBox;
+
+    @FXML
+    private Label welcomeLabel;
+    @FXML
+    private Button loginBtn;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private VBox profileBox;
 
     @FXML
     public void initialize() {
@@ -55,5 +57,9 @@ public class HomeController {
         // Simply refresh the current page to reflect the logged-out state
         initialize();
     }
-}
 
+    @FXML
+    public void handleGoToForum(ActionEvent event) {
+        utils.NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Communauté et Forum");
+    }
+}
