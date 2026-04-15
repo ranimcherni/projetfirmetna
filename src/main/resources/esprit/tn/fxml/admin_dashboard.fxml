@@ -15,7 +15,7 @@
                             <Label text="Tableau de Bord Analytique" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #1b4332;" />
                             <Region HBox.hgrow="ALWAYS" />
                             <Button text="📥 Exporter Rapport" style="-fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10 20; -fx-cursor: hand;" />
-                            <Button text="🔄 Actualiser" onAction="#initialize" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-font-weight: bold; -fx-cursor: hand;" />
+                            <Button text="🔄 Actualiser" onAction="#initialize" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 25; -fx-font-weight: bold; -fx-cursor: hand;" />
                         </HBox>
                         <Label text="Statistiques en temps réel et indicateurs de performance de Firmetna" style="-fx-text-fill: #7f8c8d; -fx-font-size: 15;" />
                     </children>
@@ -88,17 +88,17 @@
                 <!-- ROLE SPECIFIC COUNTS -->
                 <HBox spacing="30">
                     <children>
-                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 20; -fx-border-color: #27ae60; -fx-border-width: 0 0 0 5;">
-                            <Label text="AGRICULTEURS" style="-fx-font-weight: bold; -fx-text-fill: #27ae60;" />
-                            <Label fx:id="agriculteurCountLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 25; -fx-border-color: #27ae60; -fx-border-width: 0 0 0 5;">
+                            <Label text="AGRICULTEURS" style="-fx-font-weight: bold; -fx-text-fill: #1b4332; -fx-font-size: 13;" />
+                            <Label fx:id="agriculteurCountLabel" text="0" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #1b4332;" />
                         </VBox>
-                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 20; -fx-border-color: #f1c40f; -fx-border-width: 0 0 0 5;">
-                            <Label text="CLIENTS" style="-fx-font-weight: bold; -fx-text-fill: #f39c12;" />
-                            <Label fx:id="clientCountLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 25; -fx-border-color: #f1c40f; -fx-border-width: 0 0 0 5;">
+                            <Label text="CLIENTS" style="-fx-font-weight: bold; -fx-text-fill: #1b4332; -fx-font-size: 13;" />
+                            <Label fx:id="clientCountLabel" text="0" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #1b4332;" />
                         </VBox>
-                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 20; -fx-border-color: #2ecc71; -fx-border-width: 0 0 0 5;">
-                            <Label text="DONATEURS" style="-fx-font-weight: bold; -fx-text-fill: #2ecc71;" />
-                            <Label fx:id="donateurCountLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+                        <VBox styleClass="admin-glass-card" spacing="10" alignment="CENTER" prefWidth="280" style="-fx-padding: 25; -fx-border-color: #2ecc71; -fx-border-width: 0 0 0 5;">
+                            <Label text="DONATEURS" style="-fx-font-weight: bold; -fx-text-fill: #1b4332; -fx-font-size: 13;" />
+                            <Label fx:id="donateurCountLabel" text="0" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #1b4332;" />
                         </VBox>
                     </children>
                 </HBox>
