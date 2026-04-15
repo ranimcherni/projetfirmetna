@@ -438,3 +438,84 @@
     -fx-opacity: 0.8;
 }
 
+/* ADMIN UI STYLING */
+.admin-sidebar {
+    -fx-background-color: rgba(39, 174, 96, 0.9); /* Balanced Emerald for Back-office */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 15, 0, 0, 0);
+}
+
+.admin-sidebar-logo {
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 1.5;
+}
+
+.admin-sidebar-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255,255,255,0.85);
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-cursor: hand;
+    -fx-padding: 12 20;
+    -fx-background-radius: 10;
+}
+
+.admin-sidebar-item:hover {
+    -fx-background-color: rgba(255,255,255,0.15);
+    -fx-text-fill: white;
+}
+
+.admin-sidebar-item-dropdown {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.admin-sidebar-item-dropdown .label {
+    -fx-text-fill: white;
+}
+
+.admin-sidebar-logout {
+    -fx-background-color: rgba(231, 76, 60, 0.15);
+    -fx-text-fill: #ff7675;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20;
+    -fx-background-radius: 10;
+}
+
+.admin-sidebar-logout:hover {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+.admin-top-bar {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 0, 0, 0, 2);
+}
+
+.admin-top-title {
+    -fx-text-fill: #1b4332;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+.admin-top-subtitle {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 12;
+}
+
+/* ADMIN DASHBOARD CARDS */
+.admin-glass-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 15, 0, 0, 5);
+}
+
+.stat-card-glow-green {
+    -fx-border-color: rgba(39, 174, 96, 0.2);
+    -fx-border-width: 0 0 5 0;
+    -fx-border-radius: 20;
+}
+
+
