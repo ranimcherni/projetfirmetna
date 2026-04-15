@@ -154,4 +154,11 @@ public class LoginController {
     public void goToFront(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
     }
+
+    @FXML
+    public void handleForgotPassword(ActionEvent event) {
+        // Template for redirection or alert
+        System.out.println("Mot de passe oublié cliqué.");
+    }
 }
+

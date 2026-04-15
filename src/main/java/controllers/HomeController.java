@@ -24,6 +24,9 @@ public class HomeController {
 
     @FXML
     public void initialize() {
+        // Manually link the action to be 100% sure it works even if FXML mapping fails
+        loginBtn.setOnAction(e -> handleGoToLogin(e));
+        
         String name = UserSession.getInstance().getUserName();
         if (name != null) {
             welcomeLabel.setText("Bonjour " + name);
@@ -46,6 +49,7 @@ public class HomeController {
 
     @FXML
     public void handleGoToLogin(ActionEvent event) {
+        System.out.println("DEBUG: Connection button clicked!");
         utils.NavigationService.switchScene(event, "/esprit/tn/fxml/login.fxml", "Connexion");
     }
 

@@ -18,8 +18,13 @@ import models.User;
 import services.UserService;
 import java.util.List;
 import java.util.Optional;
+import utils.AlertUtils;
 
 public class AdminUsersController {
+
+    @FXML private Label totalUsersLabel;
+    @FXML private Label activeUsersLabel;
+    @FXML private Label farmersLabel;
 
     @FXML private TextField searchField;
     @FXML private ComboBox<String> typeFilter;
@@ -162,6 +167,31 @@ public class AdminUsersController {
     private void loadUsers() {
         userList.setAll(userService.getAll());
         userTable.setItems(userList);
+        updateStatistics();
+    }
+
+    private void updateStatistics() {
+        if (userList.isEmpty()) {
+            totalUsersLabel.setText("0");
+            activeUsersLabel.setText("0%");
+            farmersLabel.setText("0");
+            return;
+        }
+
+        int total = userList.size();
+        int activeCount = 0;
+        int farmerCount = 0;
+
+        for (User u : userList) {
+            if ("Actif".equalsIgnoreCase(u.getStatus())) activeCount++;
+            if ("Agriculteur".equalsIgnoreCase(u.getRole())) farmerCount++;
+        }
+
+        int activePercent = (activeCount * 100) / total;
+
+        totalUsersLabel.setText(String.valueOf(total));
+        activeUsersLabel.setText(activePercent + "%");
+        farmersLabel.setText(String.valueOf(farmerCount));
     }
 
     private void setupFilters() {
@@ -201,13 +231,8 @@ public class AdminUsersController {
     }
 
     private void handleDelete(User u) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation de suppression");
-        alert.setHeaderText("Supprimer l'utilisateur " + u.getEmail() + " ?");
-        alert.getDialogPane().getStyleClass().add("alert-dialog");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        if (AlertUtils.showConfirmation("Confirmation de suppression", 
+                "Supprimer l'utilisateur " + u.getEmail() + " ?")) {
             userService.delete(u);
             loadUsers();
         }

@@ -8,6 +8,7 @@ import services.UserService;
 import utils.UserSession;
 import utils.NavigationService;
 import utils.InputValidator;
+import utils.AlertUtils;
 
 public class ProfileController {
 
@@ -123,18 +124,14 @@ public class ProfileController {
         currentUser.setTelephone(InputValidator.cleanPhone(phone));
 
         userService.update(currentUser);
-        showAlert(Alert.AlertType.INFORMATION, "Succès", "Votre profil a été mis à jour avec succès !");
+        AlertUtils.showSuccess("Succès", "Votre profil a été mis à jour avec succès !");
         loadUserData(); // Refresh labels
     }
 
     @FXML
     private void handleDelete(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation de suppression");
-        alert.setHeaderText("Supprimer votre compte ?");
-        alert.setContentText("Cette action est irréversible. Toutes vos données seront perdues.");
-
-        if (alert.showAndWait().get() == ButtonType.OK) {
+        if (AlertUtils.showConfirmation("Confirmation de suppression", 
+                "Supprimer votre compte ?\nCette action est irréversible. Toutes vos données seront perdues.")) {
             userService.delete(currentUser);
             UserSession.getInstance().cleanUserSession();
             handleLogout(event);
@@ -157,11 +154,4 @@ public class ProfileController {
         NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
     }
 
-    private void showAlert(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

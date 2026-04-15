@@ -10,6 +10,7 @@ import services.UserService;
 import utils.InputValidator;
 import utils.NavigationService;
 import utils.UserSession;
+import utils.AlertUtils;
 
 public class SignUpController {
 
@@ -158,18 +159,11 @@ public class SignUpController {
             userService.add(newUser);
             UserSession.getInstance().setUser(newUser);
             
-            Alert success = new Alert(Alert.AlertType.INFORMATION);
-            success.setTitle("Inscription Réussie");
-            success.setHeaderText(null);
-            success.setContentText("Bienvenue " + prenom + " ! Votre compte a été créé.");
-            success.showAndWait();
+            AlertUtils.showSuccess("Inscription Réussie", "Bienvenue " + prenom + " ! Votre compte a été créé.");
             
             NavigationService.switchScene(event, "/esprit/tn/fxml/login.fxml", "Connexion");
         } catch (Exception e) {
-            Alert error = new Alert(Alert.AlertType.ERROR);
-            error.setTitle("Erreur");
-            error.setContentText("Une erreur est survenue lors de la sauvegarde.");
-            error.show();
+            AlertUtils.showError("Erreur", "Une erreur est survenue lors de la sauvegarde.");
         }
     }
 
@@ -177,4 +171,10 @@ public class SignUpController {
     public void goToLogin(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/login.fxml", "Connexion");
     }
+
+    @FXML
+    public void goHome(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
+    }
 }
+

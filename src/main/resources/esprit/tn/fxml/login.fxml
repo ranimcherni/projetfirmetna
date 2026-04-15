@@ -6,69 +6,73 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<StackPane alignment="CENTER" prefHeight="730.0" prefWidth="1100.0" styleClass="auth-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+    <children>
+        <!-- DARK OVERLAY FOR VIBRANCE -->
+        <VBox style="-fx-background-color: rgba(0,0,0,0.15);" StackPane.alignment="CENTER" />
 
-<StackPane alignment="CENTER" stylesheets="@../css/style.css" styleClass="login-root" 
-           xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="controllers.LoginController">
-    <!-- Overlay for better contrast -->
-    <VBox style="-fx-background-color: rgba(0,0,0,0.25);" />
+        <!-- CENTERED GLASS CARD -->
+        <VBox alignment="CENTER" maxHeight="600.0" maxWidth="450.0" spacing="25" styleClass="glass-card">
+            <children>
+                <!-- LOGO & TITLES -->
+                <VBox alignment="CENTER" spacing="30" style="-fx-background-color: transparent; -fx-padding: 40;">
+                    <children>
+                        <ImageView fitHeight="70.0" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/logo1.png" />
+                            </image>
+                        </ImageView>
+                        <Label style="-fx-text-fill: #27ae60; -fx-font-size: 28; -fx-font-weight: bold; -fx-letter-spacing: 1.5;" text="CONNEXION" />
+                        <Label style="-fx-text-fill: #7f8c8d; -fx-font-size: 14;" text="Heureux de vous revoir sur Firmetna" />
+                        <Label fx:id="errorLabel" managed="false" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold; -fx-font-size: 13;" visible="false" />
+                    </children>
+                </VBox>
 
-    <VBox alignment="CENTER" spacing="25" styleClass="glass-card" maxWidth="480" maxHeight="680">
-        <padding>
-            <Insets top="50" right="60" bottom="50" left="60" />
-        </padding>
+                <!-- FORM FIELDS -->
+                <VBox spacing="18">
+                    <children>
+                        <VBox spacing="6">
+                            <children>
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2d3436; -fx-font-size: 13;" text="Email" />
+                                <TextField fx:id="emailField" promptText="votre@email.com" styleClass="auth-field" />
+                                <Label fx:id="emailError" managed="false" styleClass="error-message-label" text="Format d'email invalide" visible="false" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6">
+                            <children>
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2d3436; -fx-font-size: 13;" text="Mot de passe" />
+                                <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="auth-field" />
+                                <Label fx:id="passwordError" managed="false" styleClass="error-message-label" text="Mot de passe requis" visible="false" />
+                            </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <CheckBox style="-fx-text-fill: #636e72; -fx-font-size: 12;" text="Rester connecté" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Hyperlink onAction="#handleForgotPassword" style="-fx-text-fill: #27ae60; -fx-font-size: 12; -fx-padding: 0;" text="Oublié ?" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
 
-        <!-- Branding Header -->
-        <VBox alignment="CENTER" spacing="10">
-            <ImageView fitHeight="75" preserveRatio="true">
-                <image>
-                    <Image url="@../images/logo1.png" />
-                </image>
-            </ImageView>
-            <Label text="BIENVENUE" style="-fx-text-fill: #1b4332; -fx-font-size: 28; -fx-font-weight: bold; -fx-letter-spacing: 2;" />
-            <Label text="Accédez à votre espace Firmetna" style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
-            <Label fx:id="errorLabel" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold; -fx-font-size: 13;" visible="false" managed="false" />
+                <!-- PRIMARY ACTIONS -->
+                <VBox spacing="15">
+                    <children>
+                        <Button maxWidth="Infinity" onAction="#handleLogin" styleClass="auth-primary-btn" text="SE CONNECTER" />
+                        
+                        <HBox alignment="CENTER" spacing="5">
+                            <children>
+                                <Label style="-fx-text-fill: #b2bec3; -fx-font-size: 13;" text="Nouveau ici ?" />
+                                <Hyperlink onAction="#goToSignUp" style="-fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-font-size: 13; -fx-padding: 0;" text="Créer un compte" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <Separator maxWidth="200.0" opacity="0.3" />
+
+                <Button onAction="#goHome" style="-fx-text-fill: #7f8c8d; -fx-font-size: 13;" styleClass="link-button" text="Retour à l'accueil" />
+            </children>
         </VBox>
-
-        <VBox spacing="15">
-            <!-- Email Field -->
-            <VBox spacing="8" alignment="CENTER_LEFT">
-                <Label text="Email" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                <TextField fx:id="emailField" promptText="votre@email.com" 
-                           style="-fx-background-radius: 12; -fx-padding: 12; -fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 12;" />
-                <Label fx:id="emailError" styleClass="error-message-label" text="Email invalide" />
-            </VBox>
-
-            <!-- Password Field -->
-            <VBox spacing="8" alignment="CENTER_LEFT">
-                <Label text="Mot de passe" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                <PasswordField fx:id="passwordField" promptText="••••••••" 
-                               style="-fx-background-radius: 12; -fx-padding: 12; -fx-background-color: white; -fx-border-color: #dcdde1; -fx-border-radius: 12;" />
-                <Label fx:id="passwordError" styleClass="error-message-label" text="Mot de passe requis" />
-            </VBox>
-        </VBox>
-
-        <HBox alignment="CENTER_LEFT">
-            <CheckBox text="Se souvenir de moi" style="-fx-text-fill: #636e72;" />
-            <Region HBox.hgrow="ALWAYS" />
-            <Button text="Mot de passe oublié ?" styleClass="link-button" style="-fx-text-fill: #27ae60; -fx-font-size: 13;" />
-        </HBox>
-
-        <Button text="Se connecter" styleClass="login-header-btn" prefWidth="Infinity" onAction="#handleLogin" 
-                style="-fx-font-size: 16; -fx-padding: 14; -fx-background-radius: 15;" />
-        
-        <VBox alignment="CENTER" spacing="15">
-            <Label text="OU" style="-fx-text-fill: #b2bec3;" />
-            <Button text="Retour à l'accueil" onAction="#goHome" 
-                    style="-fx-background-color: transparent; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-text-fill: #636e72; -fx-padding: 8 20;" />
-        </VBox>
-
-        <HBox alignment="CENTER" spacing="5" style="-fx-padding: 20 0 0 0;">
-            <Label text="Pas encore de compte ?" />
-            <Button text="Inscrivez-vous" onAction="#goToSignUp" styleClass="link-button" 
-                    style="-fx-font-weight: bold; -fx-text-fill: #27ae60;" />
-        </HBox>
-    </VBox>
+    </children>
 </StackPane>

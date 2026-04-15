@@ -11,8 +11,7 @@
         <!-- Background Layer via CSS class -->
         <VBox styleClass="front-root-bg" />
         
-        <!-- Gradient Overlay for Text Readability -->
-        <VBox mouseTransparent="true" styleClass="hero-overlay" />
+
 
         <!-- Main Content Overlay -->
         <VBox spacing="60">
@@ -38,18 +37,18 @@
 
                         <HBox alignment="CENTER" spacing="15.0">
                             <children>
-                                <Button onAction="#handleAccueil" styleClass="nav-item" text="🏠 Accueil" />
-                                <MenuButton styleClass="nav-item-dropdown" text="📦 Produits">
+                                <Button onAction="#handleAccueil" styleClass="nav-item" text="🏠 ACCUEIL" />
+                                <MenuButton styleClass="nav-item-dropdown" text="📦 PRODUITS">
                                     <items>
                                         <MenuItem text="Fruits" />
                                         <MenuItem text="Légumes" />
                                     </items>
                                 </MenuButton>
-                                <Button onAction="#handleEvenements" styleClass="nav-item" text="📅 Événements" />
-                                <Button onAction="#handleForum" styleClass="nav-item" text="💬 Forum" />
-                                <Button onAction="#handleNotifications" styleClass="nav-item" text="🔔 Notifications" />
-                                <Button onAction="#handleDons" styleClass="nav-item" text="❤ Dons" />
-                                <Button onAction="#handlePartenariats" styleClass="nav-item" text="🤝 Partenariats" />
+                                <Button onAction="#handleEvenements" styleClass="nav-item" text="📅 ÉVÉNEMENTS" />
+                                <Button onAction="#handleForum" styleClass="nav-item" text="💬 FORUM" />
+                                <Button onAction="#handleNotifications" styleClass="nav-item" text="🔔 NOTIFICATIONS" />
+                                <Button onAction="#handleDons" styleClass="nav-item" text="❤ DONS" />
+                                <Button onAction="#handlePartenariats" styleClass="nav-item" text="🤝 PARTENARIATS" />
                             </children>
                         </HBox>
 
@@ -84,7 +83,7 @@
                         <HBox spacing="15" style="-fx-padding: 20 0 0 0;">
                             <children>
                                 <Button text="Découvrir nos Produits" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" />
-                                <Button text="Le Forum" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 30; -fx-text-fill: white; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" />
+                                <Button text="Le Forum" style="-fx-background-color: transparent; -fx-border-color: #27ae60; -fx-border-radius: 30; -fx-text-fill: #27ae60; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" />
                             </children>
                         </HBox>
                     </children>

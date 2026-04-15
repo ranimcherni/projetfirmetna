@@ -16,24 +16,41 @@ public class NavigationService {
 
     public static void switchScene(Event event, String fxmlPath, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(NavigationService.class.getResource(fxmlPath));
+            java.net.URL res = NavigationService.class.getResource(fxmlPath);
+            if (res == null) {
+                showError("Ressource introuvable : " + fxmlPath + "\n\nAssurez-vous que le fichier est bien dans src/main/resources/... et que Maven a bien été rafraîchi.");
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(res);
             Parent root = loader.load();
 
             Stage stage = getStageFromEvent(event);
-            if (stage == null)
+            if (stage == null) {
+                showError("Impossible de récupérer la fenêtre (Stage) depuis l'événement.");
                 return;
+            }
 
             Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT);
             stage.setTitle("Firmetna" + (title != null && !title.isEmpty() ? " - " + title : ""));
             stage.setScene(scene);
-
-            // Full screen / Maximized
             stage.setMaximized(true);
             stage.show();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            showError("Erreur lors du chargement de la page : " + e.getMessage());
         }
+    }
+
+    private static void showError(String message) {
+        javafx.application.Platform.runLater(() -> {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de Navigation");
+            alert.setHeaderText("Un problème est survenu");
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 
     private static Stage getStageFromEvent(Event event) {
