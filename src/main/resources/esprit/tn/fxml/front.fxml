@@ -11,6 +11,9 @@
         <!-- Background Layer via CSS class -->
         <VBox styleClass="front-root-bg" />
         
+        <!-- Light Green Overlay for Theme Consistency -->
+        <VBox mouseTransparent="true" styleClass="front-bg-overlay" />
+        
 
 
         <!-- Main Content Overlay -->
@@ -66,31 +69,83 @@
                     </children>
                 </HBox>
 
-                <!-- Left-Aligned Hero Section -->
-                <VBox alignment="CENTER_LEFT" spacing="15" VBox.vgrow="ALWAYS" style="-fx-padding: 0 0 0 100;">
+                <!-- Balanced Hero Section -->
+                <HBox alignment="CENTER" spacing="80" VBox.vgrow="ALWAYS" style="-fx-padding: 0 100 0 100;">
                     <children>
-                        <Label fx:id="welcomeLabel" styleClass="greeting-label" text="Bonjour, [Prénom]" />
-                        
-                        <VBox spacing="5">
+                        <!-- LEFT: HERO TEXT -->
+                        <VBox alignment="CENTER_LEFT" spacing="15" HBox.hgrow="ALWAYS">
                             <children>
-                                <Label styleClass="slogan-fr" text="Firmetna - Produits fermiers frais et de qualité" />
-                                <Label styleClass="slogan-ar" text="منتجات زراعية طازجة وعالية الجودة" />
+                                <Label fx:id="welcomeLabel" styleClass="greeting-label" text="Bonjour, [Prénom]" />
+                                
+                                <VBox spacing="5">
+                                    <children>
+                                        <Label styleClass="slogan-fr" text="Firmetna - Produits fermiers frais et de qualité" />
+                                        <Label styleClass="slogan-ar" text="منتجات زراعية طازجة وعالية الجودة" />
+                                    </children>
+                                </VBox>
+                                
+                                <Label styleClass="greeting-subtitle" text="Prêt à gérer votre ferme aujourd'hui ?" />
+                                
+                                <HBox spacing="15" style="-fx-padding: 20 0 0 0;">
+                                    <children>
+                                        <Button onAction="#handleAccueil" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Découvrir nos Produits" />
+                                        <Button onAction="#handleForum" style="-fx-background-color: transparent; -fx-border-color: #27ae60; -fx-border-radius: 30; -fx-text-fill: #27ae60; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Le Forum" />
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
-                        
-                        <Label styleClass="greeting-subtitle" text="Prêt à gérer votre ferme aujourd'hui ?" />
-                        
-                        <HBox spacing="15" style="-fx-padding: 20 0 0 0;">
+
+                        <!-- RIGHT: QUICK STATS GRID (MINIMALIST) -->
+                        <VBox alignment="CENTER" spacing="20" styleClass="stats-container">
                             <children>
-                                <Button text="Découvrir nos Produits" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" />
-                                <Button text="Le Forum" style="-fx-background-color: transparent; -fx-border-color: #27ae60; -fx-border-radius: 30; -fx-text-fill: #27ae60; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" />
+                                <!-- Stat 1: Produits -->
+                                <HBox styleClass="stat-item">
+                                    <children>
+                                        <VBox styleClass="stat-icon-bg">
+                                            <Label text="📦" style="-fx-font-size: 22;" />
+                                        </VBox>
+                                        <VBox>
+                                            <children>
+                                                <Label styleClass="stat-value" text="30+" />
+                                                <Label styleClass="stat-label" text="Produits Bio" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Stat 2: Evenements -->
+                                <HBox styleClass="stat-item">
+                                    <children>
+                                        <VBox styleClass="stat-icon-bg">
+                                            <Label text="🗓️" style="-fx-font-size: 22;" />
+                                        </VBox>
+                                        <VBox>
+                                            <children>
+                                                <Label styleClass="stat-value" text="12" />
+                                                <Label styleClass="stat-label" text="Événements" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Stat 3: Partenariats -->
+                                <HBox styleClass="stat-item">
+                                    <children>
+                                        <VBox styleClass="stat-icon-bg">
+                                            <Label text="🤝" style="-fx-font-size: 22;" />
+                                        </VBox>
+                                        <VBox>
+                                            <children>
+                                                <Label styleClass="stat-value" text="50" />
+                                                <Label styleClass="stat-label" text="Partenaires" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
                             </children>
-                        </HBox>
+                        </VBox>
                     </children>
-                    <padding>
-                        <Insets bottom="50.0" />
-                    </padding>
-                </VBox>
+                </HBox>
             </children>
         </VBox>
     </children>

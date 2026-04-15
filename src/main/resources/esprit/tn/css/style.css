@@ -285,7 +285,13 @@
 
 /* FRONT DASHBOARD STYLING */
 .front-root-bg {
-    -fx-background-color: #f1f8e9; /* Soft Light Green */
+    -fx-background-image: url('../images/mixed_farm_bg.png');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+.front-bg-overlay {
+    -fx-background-color: rgba(240, 247, 240, 0.45); /* Clearer view of the background image */
 }
 
 .hero-overlay {
@@ -293,9 +299,11 @@
 }
 
 .front-nav-bar {
-    -fx-background-color: rgba(27, 67, 50, 0.7); /* Deep Green with Transparency */
-    -fx-background-radius: 0 0 15 15;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 4);
+    -fx-background-color: rgba(39, 174, 96, 0.8); /* Refined balanced green with transparency */
+    -fx-background-radius: 0 0 25 25;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 20, 0, 0, 8);
 }
 
 .nav-brand {
@@ -331,13 +339,43 @@
 }
 
 .nav-profile-btn {
-    -fx-background-color: rgba(255,255,255,0.15);
+    -fx-background-color: rgba(255, 255, 255, 0.25); /* More visible "pill" design */
     -fx-text-fill: white;
     -fx-background-radius: 20;
     -fx-font-weight: bold;
 }
 
+.nav-profile-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.35);
+}
+
 .nav-profile-btn .label {
+    -fx-text-fill: white;
+}
+
+/* PROFILE DROPDOWN STYLING */
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 8);
+}
+
+.menu-item {
+    -fx-padding: 8 20;
+    -fx-background-radius: 5;
+}
+
+.menu-item .label {
+    -fx-text-fill: #1b4332; /* Deep Forest Green for visibility */
+    -fx-font-weight: bold;
+}
+
+.menu-item:focused {
+    -fx-background-color: #27ae60;
+}
+
+.menu-item:focused .label {
     -fx-text-fill: white;
 }
 
@@ -361,5 +399,42 @@
 .greeting-subtitle {
     -fx-text-fill: #636e72;
     -fx-font-size: 18;
+}
+
+/* ENRICHMENT: MINIMALIST STATS */
+.stats-container {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 30;
+    -fx-padding: 30;
+    -fx-spacing: 40;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 30;
+}
+
+.stat-item {
+    -fx-spacing: 12;
+    -fx-alignment: center-left;
+}
+
+.stat-icon-bg {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 15;
+    -fx-min-width: 50;
+    -fx-min-height: 50;
+    -fx-alignment: center;
+}
+
+.stat-value {
+    -fx-text-fill: #1b4332;
+    -fx-font-size: 28;
+    -fx-font-weight: bold;
+}
+
+.stat-label {
+    -fx-text-fill: #1b4332;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.8;
 }
 
