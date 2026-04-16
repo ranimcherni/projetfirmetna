@@ -13,12 +13,12 @@
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 0 10 30 10;">
                     <children>
-                        <ImageView fitHeight="30" preserveRatio="true">
+                        <ImageView fitHeight="45" preserveRatio="true">
                             <image>
                                 <Image url="@../images/logo1.png" />
                             </image>
                         </ImageView>
-                        <Label text="FIRMETNA ADMIN" styleClass="admin-sidebar-logo" />
+                        <Label text="Admin" styleClass="admin-sidebar-logo" />
                     </children>
                 </HBox>
 

@@ -3,17 +3,10 @@
 .root {
     -fx-accent: #27ae60;
     -fx-focus-color: #2ecc71;
-    -fx-background-color: white;
+    -fx-background-color: transparent; /* Permet aux images de fond de s'afficher */
     -fx-font-family: "Segoe UI", "Tahoma", sans-serif;
 }
 
-.scroll-pane {
-    -fx-background-color: white;
-}
-
-.scroll-pane .viewport {
-    -fx-background-color: white;
-}
 
 /* Header & Nav */
 .brand-label {
@@ -440,8 +433,8 @@
 
 /* ADMIN UI STYLING */
 .admin-sidebar {
-    -fx-background-color: rgba(39, 174, 96, 0.9); /* Balanced Emerald for Back-office */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 15, 0, 0, 0);
+    -fx-background-color: #2d5a27; /* Vert plus clair et plus vibrant */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 15, 0, 0, 0);
 }
 
 .admin-sidebar-logo {
@@ -474,6 +467,21 @@
 
 .admin-sidebar-item-dropdown .label {
     -fx-text-fill: white;
+}
+
+.admin-sidebar-footer-item {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.admin-sidebar-footer-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
 }
 
 .admin-sidebar-logout {
@@ -679,3 +687,127 @@
     -fx-text-fill: #e74c3c;
     -fx-font-weight: bold;
 }
+
+/* PREMIUM DASHBOARD STYLES */
+.dashboard-container {
+    -fx-background-color: #f0f2f5;
+}
+
+.premium-stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 18;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 15, 0, 0, 5);
+    -fx-border-color: rgba(0,0,0,0.03);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+}
+
+.premium-stat-card:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(39, 174, 96, 0.1), 20, 0, 0, 8);
+    -fx-translate-y: -2;
+}
+
+.stat-icon-container {
+    -fx-background-radius: 12;
+    -fx-padding: 12;
+    -fx-alignment: center;
+}
+
+.icon-blue { -fx-background-color: rgba(9, 132, 227, 0.1); -fx-text-fill: #0984e3; }
+.icon-green { -fx-background-color: rgba(39, 174, 96, 0.1); -fx-text-fill: #27ae60; }
+.icon-orange { -fx-background-color: rgba(243, 156, 18, 0.1); -fx-text-fill: #f39c12; }
+.icon-red { -fx-background-color: rgba(231, 76, 60, 0.1); -fx-text-fill: #e74c3c; }
+
+.premium-chart-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 15, 0, 0, 5);
+}
+
+.dashboard-title {
+    -fx-font-family: "Segoe UI Semibold", "System";
+    -fx-font-size: 34;
+    -fx-text-fill: #1b4332;
+    -fx-letter-spacing: -0.5px;
+}
+
+.dashboard-subtitle {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 16;
+}
+
+.btn-refresh {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+    -fx-padding: 12 28;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(39, 174, 96, 0.2), 10, 0, 0, 3);
+}
+
+.btn-export {
+    -fx-background-color: white;
+    -fx-border-color: #dfe4ea;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-text-fill: #2f3542;
+    -fx-font-weight: bold;
+    -fx-padding: 12 25;
+    -fx-cursor: hand;
+}
+
+/* HARVEST DESIGN SYSTEM - CONSOLIDATED & PROTECTED */
+.admin-sidebar {
+    -fx-background-color: #2d5a27; /* Vert vibrant */
+}
+
+.admin-sidebar-logo {
+    -fx-text-fill: #b5e48c !important; /* Mint */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-letter-spacing: 1px;
+}
+
+.admin-sidebar-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-padding: 12 20;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.admin-sidebar-item:hover {
+    -fx-background-color: rgba(181, 228, 140, 0.1);
+    -fx-text-fill: #b5e48c;
+}
+
+.harvest-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 20, 0, 0, 5);
+}
+
+/* UNIFIED CHART COLORS - ADMIN ONLY SCOPE IDEALLY */
+.chart-pie-label { -fx-fill: #2d3436; }
+
+/* Agriculture - Dark Green */
+.default-color0.chart-pie { -fx-pie-color: #2d5a27; }
+/* Clients - Pistache */
+.default-color1.chart-pie { -fx-pie-color: #93c47d; }
+/* Donateurs - Baby Pink */
+.default-color2.chart-pie { -fx-pie-color: #f4c2c2; }
+
+/* Area Chart Colors */
+.default-color0.chart-area-symbol { -fx-background-color: #2d5a27, white; }
+.default-color0.chart-series-area-line { -fx-stroke: #2d5a27; }
+.default-color0.chart-series-area-fill { -fx-fill: rgba(45, 90, 39, 0.2); }
+
+/* Progress Bar Colors */
+.agri-bar .bar { -fx-background-color: #2d5a27; }
+.client-bar .bar { -fx-background-color: #93c47d; }
+.donateur-bar .bar { -fx-background-color: #f4c2c2; }

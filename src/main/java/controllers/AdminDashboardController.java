@@ -5,9 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import services.UserService;
 import models.User;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,7 +17,6 @@ public class AdminDashboardController {
     @FXML private Label totalUsersLabel;
     @FXML private Label activeUsersLabel;
     @FXML private Label totalProductsLabel;
-    @FXML private Label totalEventsLabel;
     
     @FXML private Label agriculteurCountLabel;
     @FXML private Label clientCountLabel;
@@ -25,62 +24,80 @@ public class AdminDashboardController {
 
     @FXML private PieChart userDistributionChart;
     @FXML private AreaChart<String, Number> activityChart;
+    
+    @FXML private ProgressBar agriProgress;
+    @FXML private ProgressBar clientProgress;
+    @FXML private ProgressBar donateurProgress;
 
     private UserService userService = new UserService();
 
     @FXML
     public void initialize() {
-        loadStatistics();
+        try {
+            loadStatistics();
+        } catch (Exception e) {
+            System.err.println("Error initializing dashboard: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void loadStatistics() {
         List<User> allUsers = userService.getAll();
+        if (allUsers == null) allUsers = new ArrayList<>();
         
-        // Basic Stats
-        totalUsersLabel.setText(String.valueOf(allUsers.size()));
+        if (totalUsersLabel != null) totalUsersLabel.setText(String.valueOf(allUsers.size()));
         
         long activeCount = allUsers.stream()
-                .filter(u -> !"Inactif".equalsIgnoreCase(u.getStatus()))
+                .filter(u -> u != null && !"Inactif".equalsIgnoreCase(u.getStatus()))
                 .count();
-        activeUsersLabel.setText(String.valueOf(activeCount));
+        if (activeUsersLabel != null) activeUsersLabel.setText(String.valueOf(activeCount));
 
-        // Group by Role
         Map<String, Long> roleCounts = allUsers.stream()
-                .collect(Collectors.groupingBy(User::getRole, Collectors.counting()));
+                .filter(Objects::nonNull)
+                .collect(Collectors.groupingBy(user -> {
+                    String role = user.getRole();
+                    return role != null ? role : "Autre";
+                }, Collectors.counting()));
 
         long agriculteurs = roleCounts.getOrDefault("Agriculteur", 0L);
         long clients = roleCounts.getOrDefault("Client", 0L);
         long donateurs = roleCounts.getOrDefault("Donateur", 0L);
 
-        agriculteurCountLabel.setText(String.valueOf(agriculteurs));
-        clientCountLabel.setText(String.valueOf(clients));
-        donateurCountLabel.setText(String.valueOf(donateurs));
+        if (agriculteurCountLabel != null) agriculteurCountLabel.setText(String.valueOf(agriculteurs));
+        if (clientCountLabel != null) clientCountLabel.setText(String.valueOf(clients));
+        if (donateurCountLabel != null) donateurCountLabel.setText(String.valueOf(donateurs));
 
-        // Populate PieChart
-        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Agriculteurs", agriculteurs),
-                new PieChart.Data("Clients", clients),
-                new PieChart.Data("Donateurs", donateurs)
-        );
-        userDistributionChart.setData(pieData);
+        if (userDistributionChart != null) {
+            ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
+                    new PieChart.Data("Agriculteurs", agriculteurs),
+                    new PieChart.Data("Clients", clients),
+                    new PieChart.Data("Donateurs", donateurs)
+            );
+            userDistributionChart.setData(pieData);
+        }
 
-        // Populate Activity Chart (Registration Growth)
+        if (!allUsers.isEmpty()) {
+            double total = (double) allUsers.size();
+            if (agriProgress != null) agriProgress.setProgress(agriculteurs / total);
+            if (clientProgress != null) clientProgress.setProgress(clients / total);
+            if (donateurProgress != null) donateurProgress.setProgress(donateurs / total);
+        }
+
         setupActivityChart(allUsers);
 
-        // Placeholders for other modules (until their services are connected)
-        totalProductsLabel.setText("14");
-        totalEventsLabel.setText("4");
+        if (totalProductsLabel != null) totalProductsLabel.setText("14");
     }
 
     private void setupActivityChart(List<User> allUsers) {
+        if (activityChart == null) return;
+        
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Nouveaux Utilisateurs");
 
-        // Sort users by registration date and group by day
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
         
         Map<String, Long> dailyRegistrations = allUsers.stream()
-                .filter(u -> u.getRegistrationDate() != null)
+                .filter(u -> u != null && u.getRegistrationDate() != null)
                 .sorted(Comparator.comparing(User::getRegistrationDate))
                 .collect(Collectors.groupingBy(
                         u -> sdf.format(u.getRegistrationDate()),
@@ -88,13 +105,9 @@ public class AdminDashboardController {
                         Collectors.counting()
                 ));
 
-        // If no registration dates found, add dummy data for visual testing
         if (dailyRegistrations.isEmpty()) {
             series.getData().add(new XYChart.Data<>("01/04", 1));
-            series.getData().add(new XYChart.Data<>("03/04", 3));
-            series.getData().add(new XYChart.Data<>("05/04", 2));
-            series.getData().add(new XYChart.Data<>("08/04", 5));
-            series.getData().add(new XYChart.Data<>("10/04", allUsers.size()));
+            series.getData().add(new XYChart.Data<>("10/04", Math.max(1, allUsers.size())));
         } else {
             dailyRegistrations.forEach((day, count) -> {
                 series.getData().add(new XYChart.Data<>(day, count));
