@@ -36,7 +36,8 @@ public class AdminUsersController {
     @FXML private TableColumn<User, String> emailCol;
     @FXML private TableColumn<User, String> typeCol;
     @FXML private TableColumn<User, String> statusCol;
-    @FXML private TableColumn<User, String> dateCol;
+    @FXML private TableColumn<User, String> telCol;
+    @FXML private TableColumn<User, java.sql.Timestamp> dateCol;
     @FXML private TableColumn<User, Void> actionsCol;
 
     private UserService userService = new UserService();
@@ -51,6 +52,7 @@ public class AdminUsersController {
 
     private void setupTable() {
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         
         // Nom column with initial bubble logic
         nomCol.setCellFactory(column -> new TableCell<User, String>() {
@@ -79,6 +81,10 @@ public class AdminUsersController {
         });
 
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("role"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+        telCol.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
 
         // Type column (Badge style)
         typeCol.setCellFactory(column -> new TableCell<User, String>() {
@@ -117,19 +123,14 @@ public class AdminUsersController {
             }
         });
 
-        dateCol.setCellFactory(column -> new TableCell<User, String>() {
+        dateCol.setCellFactory(column -> new TableCell<User, java.sql.Timestamp>() {
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(java.sql.Timestamp item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                if (empty || item == null) {
                     setText(null);
                 } else {
-                    User u = getTableRow().getItem();
-                    if (u.getRegistrationDate() != null) {
-                        setText(u.getRegistrationDate().toLocalDateTime().toLocalDate().toString());
-                    } else {
-                        setText("-");
-                    }
+                    setText(item.toLocalDateTime().toLocalDate().toString());
                 }
             }
         });

@@ -56,6 +56,7 @@
                 <TableColumn fx:id="emailCol" text="Email" prefWidth="250" />
                 <TableColumn fx:id="typeCol" text="Type" prefWidth="150" />
                 <TableColumn fx:id="statusCol" text="Statut" prefWidth="150" />
+                <TableColumn fx:id="telCol" text="Téléphone" prefWidth="120" />
                 <TableColumn fx:id="dateCol" text="Date d'inscription" prefWidth="200" />
                 <TableColumn fx:id="actionsCol" text="Actions" prefWidth="120" />
             </columns>

@@ -15,8 +15,12 @@ public class UserFormController {
     @FXML private TextField prenomField;
     @FXML private TextField nomField;
     @FXML private TextField emailField;
+    @FXML private TextField telephoneField;
     @FXML private PasswordField passwordField;
     @FXML private ComboBox<String> typeCombo;
+    @FXML private TableColumn<User, String> statusCol;
+    @FXML private TableColumn<User, String> telCol;
+    @FXML private TableColumn<User, java.sql.Timestamp> dateCol;
     @FXML private ComboBox<String> statusCombo;
     @FXML private ComboBox<String> systemRoleCombo;
     @FXML private VBox passwordInfoBox;
@@ -26,6 +30,7 @@ public class UserFormController {
     @FXML private Label nomError;
     @FXML private Label prenomError;
     @FXML private Label emailError;
+    @FXML private Label telephoneError;
     @FXML private Label passwordError;
 
     private UserService userService = new UserService();
@@ -49,6 +54,7 @@ public class UserFormController {
         hideError(nomError);
         hideError(prenomError);
         hideError(emailError);
+        hideError(telephoneError);
         hideError(passwordError);
     }
 
@@ -77,6 +83,7 @@ public class UserFormController {
         prenomField.setText(user.getPrenom());
         nomField.setText(user.getNom());
         emailField.setText(user.getEmail());
+        telephoneField.setText(user.getTelephone());
         
         typeCombo.setValue(user.getRole());
         statusCombo.setValue(user.getStatus() != null ? user.getStatus() : "Actif");
@@ -96,6 +103,7 @@ public class UserFormController {
             currentUser.setPrenom(prenomField.getText().trim());
             currentUser.setNom(nomField.getText().trim());
             currentUser.setEmail(emailField.getText().trim());
+            currentUser.setTelephone(telephoneField.getText().trim());
             currentUser.setRole(typeCombo.getValue());
             currentUser.setStatus(statusCombo.getValue());
 
@@ -129,6 +137,7 @@ public class UserFormController {
         String nom = nomField.getText().trim();
         String prenom = prenomField.getText().trim();
         String email = emailField.getText().trim();
+        String tel = telephoneField.getText().trim();
         String pass = passwordField.getText();
 
         boolean hasError = false;

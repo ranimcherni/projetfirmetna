@@ -62,6 +62,13 @@
                             <Label text="Statut" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
                             <ComboBox fx:id="statusCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
                         </VBox>
+
+                        <!-- Numéro de téléphone -->
+                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                            <Label text="Numéro de téléphone" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                            <TextField fx:id="telephoneField" promptText="Ex: 55 123 456" styleClass="admin-form-input" />
+                            <Label fx:id="telephoneError" styleClass="error-message-label" text="Numéro invalide" />
+                        </VBox>
                     </children>
                 </GridPane>
 
