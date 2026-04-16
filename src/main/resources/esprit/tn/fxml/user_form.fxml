@@ -52,7 +52,7 @@
                         </VBox>
                         
                         <!-- Type d'Utilisateur -->
-                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <VBox fx:id="typeContainer" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
                             <Label text="Type d'Utilisateur" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
                             <ComboBox fx:id="typeCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
                         </VBox>

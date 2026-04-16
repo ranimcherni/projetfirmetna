@@ -23,6 +23,7 @@ public class UserFormController {
     @FXML private TableColumn<User, java.sql.Timestamp> dateCol;
     @FXML private ComboBox<String> statusCombo;
     @FXML private ComboBox<String> systemRoleCombo;
+    @FXML private VBox typeContainer;
     @FXML private VBox passwordInfoBox;
     @FXML private Button saveBtn;
 
@@ -87,6 +88,9 @@ public class UserFormController {
         
         typeCombo.setValue(user.getRole());
         statusCombo.setValue(user.getStatus() != null ? user.getStatus() : "Actif");
+        
+        typeContainer.setDisable(true);
+        typeContainer.setOpacity(0.6);
         
         passwordInfoBox.setVisible(true);
         passwordInfoBox.setManaged(true);
