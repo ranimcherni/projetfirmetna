@@ -15,7 +15,7 @@
 }
 
 .login-header-btn {
-    -fx-background-color: #27ae60;
+    -fx-background-color: #2d5a27;
     -fx-text-fill: white;
     -fx-background-radius: 25;
     -fx-padding: 10 35;
@@ -177,12 +177,12 @@
 
 .auth-field:focused {
     -fx-background-color: white;
-    -fx-border-color: #27ae60;
-    -fx-effect: dropshadow(three-pass-box, rgba(39, 174, 96, 0.2), 5, 0, 0, 0);
+    -fx-border-color: #2d5a27;
+    -fx-effect: dropshadow(three-pass-box, rgba(45, 90, 39, 0.2), 5, 0, 0, 0);
 }
 
 .auth-primary-btn {
-    -fx-background-color: #27ae60;
+    -fx-background-color: #2d5a27;
     -fx-background-radius: 30;
     -fx-text-fill: white;
     -fx-font-weight: bold;
@@ -192,7 +192,7 @@
 }
 
 .auth-primary-btn:hover {
-    -fx-background-color: #2ecc71;
+    -fx-background-color: #93c47d;
     -fx-scale-x: 1.02;
     -fx-scale-y: 1.02;
 }
@@ -200,10 +200,10 @@
 .auth-secondary-btn {
     -fx-background-color: transparent;
     -fx-background-radius: 30;
-    -fx-border-color: #27ae60;
+    -fx-border-color: #2d5a27;
     -fx-border-width: 2;
     -fx-border-radius: 30;
-    -fx-text-fill: #27ae60;
+    -fx-text-fill: #2d5a27;
     -fx-font-weight: bold;
     -fx-font-size: 14;
     -fx-padding: 12 30;
@@ -280,7 +280,7 @@
 .front-root-bg {
     -fx-background-image: url('../images/mixed_farm_bg.png');
     -fx-background-size: cover;
-    -fx-background-position: center;
+    -fx-background-position: bottom 35% center; /* Glisse la photo vers le haut pour voir davantage les pommes */
 }
 
 .front-bg-overlay {
@@ -292,7 +292,7 @@
 }
 
 .front-nav-bar {
-    -fx-background-color: rgba(39, 174, 96, 0.8); /* Refined balanced green with transparency */
+    -fx-background-color: rgba(45, 90, 39, 0.85); /* New vibrant green with transparency */
     -fx-background-radius: 0 0 25 25;
     -fx-border-color: rgba(255, 255, 255, 0.1);
     -fx-border-width: 0 0 1 0;
@@ -379,7 +379,7 @@
 }
 
 .slogan-fr {
-    -fx-text-fill: #2ecc71;
+    -fx-text-fill: #2d5a27;
     -fx-font-size: 22;
     -fx-font-weight: bold;
 }
@@ -394,41 +394,68 @@
     -fx-font-size: 18;
 }
 
-/* ENRICHMENT: MINIMALIST STATS */
-.stats-container {
-    -fx-background-color: rgba(255, 255, 255, 0.3);
-    -fx-background-radius: 30;
-    -fx-padding: 30;
-    -fx-spacing: 40;
-    -fx-border-color: rgba(255, 255, 255, 0.2);
-    -fx-border-width: 1;
-    -fx-border-radius: 30;
+/* MODERN HORIZONTAL STATS BAR */
+.stats-bar-modern {
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-background-radius: 40;
+    -fx-padding: 15 40;
+    -fx-border-color: rgba(255, 255, 255, 0.25);
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 20, 0, 0, 5);
 }
 
-.stat-item {
-    -fx-spacing: 12;
-    -fx-alignment: center-left;
-}
-
-.stat-icon-bg {
-    -fx-background-color: rgba(255, 255, 255, 0.8);
-    -fx-background-radius: 15;
-    -fx-min-width: 50;
-    -fx-min-height: 50;
+.stat-badge {
+    -fx-spacing: 15;
     -fx-alignment: center;
 }
 
-.stat-value {
+.stat-badge-icon {
+    -fx-text-fill: #2d5a27;
+    -fx-font-size: 24;
+}
+
+.stat-badge-value {
     -fx-text-fill: #1b4332;
-    -fx-font-size: 28;
+    -fx-font-size: 22;
     -fx-font-weight: bold;
 }
 
-.stat-label {
+.stat-badge-label {
+    -fx-text-fill: #2d5a27;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.8;
+}
+
+/* AUTH & PROFILE CARD MODERNIZATION */
+.profile-card-modern {
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 40, 0, 0, 10);
+    -fx-padding: 0;
+    -fx-overflow: hidden;
+}
+
+.profile-avatar-container {
+    -fx-background-color: linear-gradient(to bottom right, #2d5a27, #93c47d);
+    -fx-background-radius: 30 30 0 0;
+    -fx-padding: 40 0;
+}
+
+.profile-avatar-circle {
+    -fx-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 5);
+}
+
+.profile-input-group {
+    -fx-spacing: 5;
+}
+
+.profile-label-main {
     -fx-text-fill: #1b4332;
     -fx-font-size: 14;
     -fx-font-weight: bold;
-    -fx-opacity: 0.8;
+    -fx-padding: 0 0 5 2;
 }
 
 /* ADMIN UI STYLING */
