@@ -41,10 +41,10 @@
                 <Insets top="15" right="20" bottom="15" left="20"/>
             </padding>
             <children>
-                <TextField fx:id="searchField" prefWidth="400" promptText="🔍 Rechercher par nom ou email..." styleClass="admin-search-field" />
+                <TextField fx:id="searchField" prefWidth="550" prefHeight="45" promptText="🔍 Rechercher par nom ou email..." styleClass="admin-search-field" />
                 <Region HBox.hgrow="ALWAYS" />
-                <ComboBox fx:id="typeFilter" prefWidth="180" styleClass="admin-combo-filter" />
-                <ComboBox fx:id="statusFilter" prefWidth="180" styleClass="admin-combo-filter" />
+                <ComboBox fx:id="typeFilter" prefWidth="250" prefHeight="45" styleClass="admin-combo-filter" />
+                <ComboBox fx:id="statusFilter" prefWidth="250" prefHeight="45" styleClass="admin-combo-filter" />
             </children>
         </HBox>
 

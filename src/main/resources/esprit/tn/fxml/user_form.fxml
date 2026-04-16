@@ -4,105 +4,107 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.shape.Circle?>
 
-<VBox spacing="25" style="-fx-padding: 30; -fx-background-color: #f8f9fa;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserFormController" stylesheets="@../css/style.css">
-    <children>
-        <!-- Header / Back link -->
-        <VBox spacing="10">
-            <children>
-                <Hyperlink onAction="#handleCancel" text="⬅ Retour à la liste" style="-fx-text-fill: #27ae60; -fx-font-size: 14; -fx-underline: false; -fx-padding: 0;" />
-                <Label fx:id="titleLabel" text="Création d'un utilisateur" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                <Label fx:id="subtitleLabel" text="Remplissez les informations pour ajouter un nouveau membre." style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
-            </children>
-        </VBox>
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #f8f9fa; -fx-padding: 0; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserFormController" stylesheets="@../css/style.css">
+    <VBox spacing="25" style="-fx-padding: 30; -fx-background-color: transparent;">
+        <children>
+            <!-- Header / Back link -->
+            <VBox spacing="10">
+                <children>
+                    <Hyperlink onAction="#handleCancel" text="⬅ Retour à la liste" style="-fx-text-fill: #27ae60; -fx-font-size: 14; -fx-underline: false; -fx-padding: 0;" />
+                    <Label fx:id="titleLabel" text="Création d'un utilisateur" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label fx:id="subtitleLabel" text="Remplissez les informations pour ajouter un nouveau membre." style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                </children>
+            </VBox>
 
-        <!-- Form Card -->
-        <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 35; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" VBox.vgrow="ALWAYS">
-            <children>
-                <GridPane hgap="30" vgap="25">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
-                        <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
-                    </columnConstraints>
-                    <children>
-                        <!-- Nom -->
-                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                            <Label text="Nom" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <TextField fx:id="nomField" promptText="Entrez le nom" styleClass="admin-form-input" />
-                            <Label fx:id="nomError" styleClass="error-message-label" text="Nom invalide" />
-                        </VBox>
-                        
-                        <!-- Prénom -->
-                        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                            <Label text="Prénom" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <TextField fx:id="prenomField" promptText="Entrez le prénom" styleClass="admin-form-input" />
-                            <Label fx:id="prenomError" styleClass="error-message-label" text="Prénom invalide" />
-                        </VBox>
-                        
-                        <!-- Email -->
-                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                            <Label text="Email" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <TextField fx:id="emailField" promptText="email@exemple.com" styleClass="admin-form-input" />
-                            <Label fx:id="emailError" styleClass="error-message-label" text="Email invalide" />
-                        </VBox>
+            <!-- Form Card -->
+            <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 35; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" VBox.vgrow="ALWAYS">
+                <children>
+                    <GridPane hgap="30" vgap="25">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                        </columnConstraints>
+                        <children>
+                            <!-- Nom -->
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                <Label text="Nom" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="nomField" promptText="Entrez le nom" styleClass="admin-form-input" />
+                                <Label fx:id="nomError" styleClass="error-message-label" text="Nom invalide" />
+                            </VBox>
+                            
+                            <!-- Prénom -->
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <Label text="Prénom" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="prenomField" promptText="Entrez le prénom" styleClass="admin-form-input" />
+                                <Label fx:id="prenomError" styleClass="error-message-label" text="Prénom invalide" />
+                            </VBox>
+                            
+                            <!-- Email -->
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                <Label text="Email" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="emailField" promptText="email@exemple.com" styleClass="admin-form-input" />
+                                <Label fx:id="emailError" styleClass="error-message-label" text="Email invalide" />
+                            </VBox>
 
-                        <!-- Rôle Système (as seen in screenshot) -->
-                        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <Label text="Rôle Système" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <ComboBox fx:id="systemRoleCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
-                        </VBox>
-                        
-                        <!-- Type d'Utilisateur -->
-                        <VBox fx:id="typeContainer" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                            <Label text="Type d'Utilisateur" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <ComboBox fx:id="typeCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
-                        </VBox>
-                        
-                        <!-- Statut -->
-                        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <Label text="Statut" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <ComboBox fx:id="statusCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
-                        </VBox>
+                            <!-- Rôle Système (as seen in screenshot) -->
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Label text="Rôle Système" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <ComboBox fx:id="systemRoleCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
+                            </VBox>
+                            
+                            <!-- Type d'Utilisateur -->
+                            <VBox fx:id="typeContainer" spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                <Label text="Type d'Utilisateur" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <ComboBox fx:id="typeCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
+                            </VBox>
+                            
+                            <!-- Statut -->
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                <Label text="Statut" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <ComboBox fx:id="statusCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
+                            </VBox>
 
-                        <!-- Numéro de téléphone -->
-                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                            <Label text="Numéro de téléphone" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <TextField fx:id="telephoneField" promptText="Ex: 55 123 456" styleClass="admin-form-input" />
-                            <Label fx:id="telephoneError" styleClass="error-message-label" text="Numéro invalide" />
-                        </VBox>
-                    </children>
-                </GridPane>
+                            <!-- Numéro de téléphone -->
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                <Label text="Numéro de téléphone" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="telephoneField" promptText="Ex: 55 123 456" styleClass="admin-form-input" />
+                                <Label fx:id="telephoneError" styleClass="error-message-label" text="Numéro invalide" />
+                            </VBox>
+                        </children>
+                    </GridPane>
 
-                <!-- Password Section with dynamic info box -->
-                <VBox fx:id="passwordSection" spacing="12">
-                    <children>
-                        <VBox fx:id="passwordInfoBox" spacing="5" style="-fx-background-color: #e3f2fd; -fx-background-radius: 8; -fx-padding: 12;" visible="false" managed="false">
-                            <children>
-                                <Label text="Changer le Mot de passe" style="-fx-font-weight: bold; -fx-text-fill: #0d47a1;" />
-                                <HBox spacing="10" alignment="CENTER_LEFT">
-                                    <Label text="ℹ " style="-fx-text-fill: #0288d1; -fx-font-size: 16;" />
-                                    <Label text="Laissez vide pour conserver le mot de passe actuel." style="-fx-text-fill: #0288d1; -fx-font-size: 12;" />
-                                </HBox>
-                            </children>
-                        </VBox>
+                    <!-- Password Section with dynamic info box -->
+                    <VBox fx:id="passwordSection" spacing="12">
+                        <children>
+                            <VBox fx:id="passwordInfoBox" spacing="5" style="-fx-background-color: #e3f2fd; -fx-background-radius: 8; -fx-padding: 12;" visible="false" managed="false">
+                                <children>
+                                    <Label text="Changer le Mot de passe" style="-fx-font-weight: bold; -fx-text-fill: #0d47a1;" />
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Label text="ℹ " style="-fx-text-fill: #0288d1; -fx-font-size: 16;" />
+                                        <Label text="Laissez vide pour conserver le mot de passe actuel." style="-fx-text-fill: #0288d1; -fx-font-size: 12;" />
+                                    </HBox>
+                                </children>
+                            </VBox>
 
-                        <VBox spacing="8">
-                            <Label text="Mot de passe" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
-                            <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="admin-form-input" />
-                            <Label fx:id="passwordError" styleClass="error-message-label" text="Mot de passe trop faible" />
-                        </VBox>
-                    </children>
-                </VBox>
+                            <VBox spacing="8">
+                                <Label text="Mot de passe" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="admin-form-input" />
+                                <Label fx:id="passwordError" styleClass="error-message-label" text="Mot de passe trop faible" />
+                            </VBox>
+                        </children>
+                    </VBox>
 
-                <Separator style="-fx-padding: 20 0 10 0;" />
+                    <Separator style="-fx-padding: 20 0 10 0;" />
 
-                <!-- Footer Buttons -->
-                <HBox spacing="15" alignment="CENTER_LEFT">
-                    <children>
-                        <Button fx:id="saveBtn" onAction="#handleSave" text="💾 Créer l'utilisateur" styleClass="admin-btn-primary" prefHeight="45" prefWidth="200" />
-                        <Button onAction="#handleCancel" text="Annuler" styleClass="admin-btn-secondary" prefHeight="45" prefWidth="120" />
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </children>
-</VBox>
+                    <!-- Footer Buttons -->
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <children>
+                            <Button fx:id="saveBtn" onAction="#handleSave" text="💾 Créer l'utilisateur" styleClass="admin-btn-primary" prefHeight="45" prefWidth="200" />
+                            <Button onAction="#handleCancel" text="Annuler" styleClass="admin-btn-secondary" prefHeight="45" prefWidth="120" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
+</ScrollPane>
