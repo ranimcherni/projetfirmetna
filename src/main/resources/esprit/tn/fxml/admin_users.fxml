@@ -20,17 +20,17 @@
         <!-- Statistics Section -->
         <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
             <children>
-                <VBox styleClass="admin-stat-card" prefWidth="250">
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
                     <Label text="Total Utilisateurs" styleClass="admin-stat-label" />
                     <Label fx:id="totalUsersLabel" text="0" styleClass="admin-stat-value" />
                 </VBox>
-                <VBox styleClass="admin-stat-card" prefWidth="250" style="-fx-border-color: #27ae60; -fx-border-width: 0 0 0 4; -fx-border-radius: 5;">
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS" style="-fx-border-color: #27ae60; -fx-border-width: 0 0 0 4; -fx-border-radius: 15;">
                     <Label text="Utilisateurs Actifs" styleClass="admin-stat-label" />
                     <Label fx:id="activeUsersLabel" text="0%" styleClass="admin-stat-value" style="-fx-text-fill: #27ae60;" />
                 </VBox>
-                <VBox styleClass="admin-stat-card" prefWidth="250">
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
                     <Label text="Agriculteurs" styleClass="admin-stat-label" />
-                    <Label fx:id="farmersLabel" text="0" styleClass="admin-stat-value" />
+                    <Label fx:id="farmersLabel" text="11" styleClass="admin-stat-value" />
                 </VBox>
             </children>
         </HBox>

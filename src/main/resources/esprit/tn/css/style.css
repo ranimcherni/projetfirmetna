@@ -519,3 +519,157 @@
 }
 
 
+/* MODERN ADMIN TABLE STYLING */
+.admin-table {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-color: #f1f2f6;
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+    -fx-padding: 0;
+}
+
+.admin-table .column-header-background {
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 15 15 0 0;
+    -fx-padding: 10 0;
+}
+
+.admin-table .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 45;
+}
+
+.admin-table .column-header .label {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+}
+
+.admin-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-cell-size: 65;
+    -fx-border-color: #f1f2f6;
+    -fx-border-width: 0 0 1 0;
+}
+
+.admin-table .table-row-cell:odd {
+    -fx-background-color: #fcfdfe;
+}
+
+.admin-table .table-row-cell:hover {
+    -fx-background-color: #f1f9f4;
+}
+
+.admin-table .table-row-cell:selected {
+    -fx-background-color: #e8f5e9;
+}
+
+.user-initials-bubble {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-min-width: 35;
+    -fx-min-height: 35;
+    -fx-max-width: 35;
+    -fx-max-height: 35;
+    -fx-alignment: center;
+    -fx-background-radius: 50;
+}
+
+/* ACTION BUTTONS */
+.admin-action-btn-edit {
+    -fx-background-color: rgba(39, 174, 96, 0.1);
+    -fx-text-fill: #27ae60;
+    -fx-font-size: 16;
+    -fx-background-radius: 8;
+    -fx-min-width: 35;
+    -fx-min-height: 35;
+    -fx-cursor: hand;
+}
+
+.admin-action-btn-edit:hover {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+
+.admin-action-btn-delete {
+    -fx-background-color: rgba(231, 76, 60, 0.1);
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 16;
+    -fx-background-radius: 8;
+    -fx-min-width: 35;
+    -fx-min-height: 35;
+    -fx-cursor: hand;
+}
+
+.admin-action-btn-delete:hover {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+/* ADMIN STAT CARDS (LIST VIEW) */
+.admin-stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-spacing: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+}
+
+.admin-stat-label {
+    -fx-text-fill: #95a5a6;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-text-transform: uppercase;
+}
+
+.admin-stat-value {
+    -fx-text-fill: #2d3436;
+    -fx-font-size: 26;
+    -fx-font-weight: bold;
+}
+
+/* FORM CONTROLS */
+.admin-form-input {
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 10;
+    -fx-border-color: #e9ecef;
+    -fx-border-radius: 10;
+    -fx-padding: 12 15;
+    -fx-font-size: 14;
+}
+
+.admin-form-input:focused {
+    -fx-background-color: white;
+    -fx-border-color: #27ae60;
+    -fx-effect: dropshadow(three-pass-box, rgba(39, 174, 96, 0.15), 5, 0, 0, 0);
+}
+
+.admin-btn-primary {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.admin-btn-primary:hover {
+    -fx-background-color: #1e8449;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.admin-btn-secondary {
+    -fx-background-color: #f1f2f6;
+    -fx-text-fill: #7f8c8d;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.admin-btn-secondary:hover {
+    -fx-background-color: #dfe4ea;
+}
