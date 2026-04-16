@@ -116,8 +116,11 @@ public class AdminUsersController {
                     User u = getTableRow().getItem();
                     Label badge = new Label(u.getStatus() != null ? u.getStatus() : "Actif");
                     badge.getStyleClass().add("admin-badge-status");
-                    if ("Actif".equals(u.getStatus())) badge.getStyleClass().add("bg-success-light");
-                    else badge.getStyleClass().add("bg-danger-light");
+                    if ("Actif".equals(u.getStatus())) {
+                        badge.getStyleClass().add("bg-success-light");
+                    } else {
+                        badge.getStyleClass().add("status-inactif-red");
+                    }
                     setGraphic(badge);
                 }
             }

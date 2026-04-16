@@ -46,15 +46,11 @@ public class InputValidator {
     public static boolean isValidPhone(String phone) {
         if (phone == null) return false;
         
-        // Nettoyage : garder uniquement les chiffres et le signe +
+        // Clean spaces and hyphens
         String cleaned = phone.replaceAll("[\\s-]", "");
         
-        // Format : +216 [2579]xxxxxxx ou [2579]xxxxxxx
-        if (cleaned.startsWith("+216")) {
-            return cleaned.matches("^\\+216[2579]\\d{7}$");
-        } else {
-            return cleaned.matches("^[2579]\\d{7}$");
-        }
+        // Strict Tunisian format: Always +216 followed by exactly 8 digits
+        return cleaned.matches("^\\+216\\d{8}$");
     }
 
     /**

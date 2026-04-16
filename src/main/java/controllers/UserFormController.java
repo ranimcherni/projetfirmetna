@@ -49,6 +49,17 @@ public class UserFormController {
         systemRoleCombo.getSelectionModel().select(0);
 
         resetErrorLabels();
+        
+        // Ensure +216 is always present
+        if (telephoneField.getText().isEmpty()) {
+            telephoneField.setText("+216");
+        }
+        
+        telephoneField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.startsWith("+216")) {
+                telephoneField.setText("+216");
+            }
+        });
     }
 
     private void resetErrorLabels() {
@@ -174,6 +185,15 @@ public class UserFormController {
                 showError(emailError, "Cet email est déjà utilisé.");
                 hasError = true;
             }
+        }
+
+        // Telephone validation
+        if (tel.equals("+216")) {
+            showError(telephoneError, "Ce champ est requis");
+            hasError = true;
+        } else if (!InputValidator.isValidPhone(tel)) {
+            showError(telephoneError, "Doit contenir exactement 8 chiffres après +216");
+            hasError = true;
         }
 
         // Passwords

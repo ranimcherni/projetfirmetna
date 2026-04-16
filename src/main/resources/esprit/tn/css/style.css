@@ -673,3 +673,9 @@
 .admin-btn-secondary:hover {
     -fx-background-color: #dfe4ea;
 }
+
+.status-inactif-red {
+    -fx-background-color: rgba(231, 76, 60, 0.1);
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+}
