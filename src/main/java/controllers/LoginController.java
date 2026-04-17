@@ -11,6 +11,12 @@ import services.UserService;
 import utils.UserSession;
 import utils.NavigationService;
 import utils.InputValidator;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import utils.AlertUtils;
 
 public class LoginController {
 
@@ -21,6 +27,8 @@ public class LoginController {
     // Inline Error Labels
     @FXML private Label emailError;
     @FXML private Label passwordError;
+    
+    @FXML private Label faceLoginStatus;
 
     @FXML
     public void initialize() {
@@ -46,6 +54,56 @@ public class LoginController {
             label.setText(message);
             label.setVisible(true);
             label.setManaged(true);
+        }
+    }
+
+    @FXML
+    public void handleFaceLogin(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/tn/fxml/face_capture_dialog.fxml"));
+            Parent root = loader.load();
+            
+            FaceCaptureDialogController dialogController = loader.getController();
+            dialogController.initData(false); // false = Login Mode
+            
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setTitle("Connexion Faciale");
+            dialogStage.setResizable(false);
+            dialogStage.setScene(new Scene(root));
+            
+            dialogStage.showAndWait();
+            
+            if (dialogController.isSuccessful()) {
+                int userId = dialogController.getRecognizedUserId();
+                if (userId > 0) {
+                    UserService us = new UserService();
+                    User loggedInUser = us.getAll().stream().filter(u -> u.getId() == userId).findFirst().orElse(null);
+                    
+                    if (loggedInUser != null) {
+                        if ("Inactif".equalsIgnoreCase(loggedInUser.getStatus())) {
+                            showGeneralError("Votre compte est bloqué.");
+                        } else {
+                            UserSession.getInstance().setUser(loggedInUser);
+                            goToFront(event); // Redirect to front/dashboard
+                        }
+                    } else {
+                        showGeneralError("Utilisateur non trouvé en base.");
+                    }
+                } else {
+                    showGeneralError("Visage non reconnu.");
+                }
+            } else {
+                if (faceLoginStatus != null) {
+                    faceLoginStatus.setText("Échec ou annulation.");
+                    faceLoginStatus.setVisible(true);
+                    faceLoginStatus.setManaged(true);
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            AlertUtils.showError("Erreur Système", "Impossible de démarrer la caméra.");
         }
     }
 

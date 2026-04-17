@@ -167,6 +167,28 @@ public class UserService implements IService<User> {
         return false;
     }
 
+    public User getUserByEmail(String email) {
+        String req = "SELECT * FROM `user` WHERE `email` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setString(1, email);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setRole(rs.getString("role"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.err.println("getUserByEmail error: " + e.getMessage());
+        }
+        return null;
+    }
+
     public boolean isEmailTaken(String email, int currentUserId) {
         String req = "SELECT count(*) FROM `user` WHERE `email` = ? AND `id` != ?";
         try {

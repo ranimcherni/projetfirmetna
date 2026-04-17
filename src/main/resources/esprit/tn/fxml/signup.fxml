@@ -145,7 +145,11 @@
 
                         <VBox spacing="10" alignment="CENTER_LEFT">
                             <children>
-                                <Button maxWidth="Infinity" onAction="#handleSignUp" styleClass="auth-primary-btn" text="S'INSCRIRE DÈS MAINTENANT" prefHeight="55.0" />
+                                <HBox spacing="10">
+                                    <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#handleSignUp" styleClass="auth-primary-btn" text="S'INSCRIRE DÈS MAINTENANT" prefHeight="45.0" />
+                                    <Button onAction="#handleFaceEnrollment" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="📷 Enrôler Visage" prefHeight="45.0" />
+                                </HBox>
+                                <Label fx:id="faceEnrollStatus" text="" style="-fx-text-fill: #27ae60; -fx-font-weight: bold;" visible="false" managed="false"/>
                                 
                                 <HBox alignment="CENTER_LEFT" spacing="10">
                                     <children>

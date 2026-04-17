@@ -11,6 +11,14 @@ import utils.InputValidator;
 import utils.NavigationService;
 import utils.UserSession;
 import utils.AlertUtils;
+import org.bytedeco.opencv.opencv_core.Mat;
+import java.util.List;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import services.FaceAuthService;
 
 public class SignUpController {
 
@@ -27,6 +35,10 @@ public class SignUpController {
     @FXML private TextField captchaField;
     @FXML private Label captchaError;
     private String currentCaptchaWord = "";
+    
+    // Face Auth elements
+    @FXML private Label faceEnrollStatus;
+    private List<Mat> tempFaceImages = null;
 
     @FXML private ImageView avatarImageView;
     @FXML private Label avatarPlaceholder;
@@ -147,6 +159,36 @@ public class SignUpController {
     }
 
     @FXML
+    public void handleFaceEnrollment(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/tn/fxml/face_capture_dialog.fxml"));
+            Parent root = loader.load();
+            
+            FaceCaptureDialogController dialogController = loader.getController();
+            dialogController.initData(true); // true = Enrollment Mode
+            
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setTitle("Enrôlement Facial");
+            dialogStage.setResizable(false);
+            dialogStage.setScene(new Scene(root));
+            
+            dialogStage.showAndWait();
+            
+            if (dialogController.isSuccessful()) {
+                tempFaceImages = dialogController.getCapturedFaces();
+                faceEnrollStatus.setText("Visage capturé avec succès (" + tempFaceImages.size() + " images) ✅");
+                faceEnrollStatus.setVisible(true);
+                faceEnrollStatus.setManaged(true);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            AlertUtils.showError("Erreur", "Impossible de démarrer la caméra.");
+        }
+    }
+
+    @FXML
     public void handleSignUp(ActionEvent event) {
         resetErrorLabels();
 
@@ -231,12 +273,26 @@ public class SignUpController {
 
         try {
             userService.add(newUser);
-            UserSession.getInstance().setUser(newUser);
+            
+            // Si on a capturé un visage, on doit l'associer au nouvel ID
+            if (tempFaceImages != null && !tempFaceImages.isEmpty()) {
+                User insertedUser = userService.getUserByEmail(email);
+                if (insertedUser != null) {
+                    FaceAuthService faceService = new FaceAuthService();
+                    faceService.trainFaces(insertedUser.getId(), tempFaceImages);
+                }
+            }
+            
+            // Set session with the retrieved user so we have the ID
+            User finalUser = userService.getUserByEmail(email);
+            if (finalUser == null) finalUser = newUser; // Fallback
+            UserSession.getInstance().setUser(finalUser);
             
             AlertUtils.showSuccess("Inscription Réussie", "Bienvenue " + prenom + " ! Votre compte a été créé.");
             
             NavigationService.switchScene(event, "/esprit/tn/fxml/login.fxml", "Connexion");
         } catch (Exception e) {
+            e.printStackTrace();
             AlertUtils.showError("Erreur", "Une erreur est survenue lors de la sauvegarde.");
         }
     }
