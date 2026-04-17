@@ -112,21 +112,15 @@ public class ForgotPasswordController {
         try {
             userService.setResetCode(email, code, expiry);
             
-            // SIMULATION POUR LE TEST : On affiche le code dans la console au lieu de l'envoyer
-            System.out.println("\n--------------------------------------------------");
-            System.out.println("🔧 MODE TEST - SIMULATION D'ENVOI D'EMAIL");
-            System.out.println("📧 Destinataire : " + email);
-            System.out.println("🔑 CODE DE VÉRIFICATION : " + code);
-            System.out.println("--------------------------------------------------\n");
-            
-            // MailingService.sendVerificationCode(email, code); // Désactivé temporairement
+            // On envoie le code par VRAI email via le MailingService
+            MailingService.sendVerificationCode(email, code); 
             
             verifiedEmail = email;
-            showSuccess("Code généré ! (Regardez la console de VS Code pour le voir)");
+            showSuccess("Code envoyé ! Vérifiez votre boîte de réception Gmail.");
             showStep2();
         } catch (Exception e) {
             e.printStackTrace();
-            showError("Erreur lors de la génération du code.");
+            showError("Gmail a refusé l'accès. Vérifiez SENDER_EMAIL et APP_PASSWORD dans MailingService.java.");
         }
     }
 
