@@ -111,13 +111,22 @@ public class ForgotPasswordController {
 
         try {
             userService.setResetCode(email, code, expiry);
-            MailingService.sendVerificationCode(email, code);
+            
+            // SIMULATION POUR LE TEST : On affiche le code dans la console au lieu de l'envoyer
+            System.out.println("\n--------------------------------------------------");
+            System.out.println("🔧 MODE TEST - SIMULATION D'ENVOI D'EMAIL");
+            System.out.println("📧 Destinataire : " + email);
+            System.out.println("🔑 CODE DE VÉRIFICATION : " + code);
+            System.out.println("--------------------------------------------------\n");
+            
+            // MailingService.sendVerificationCode(email, code); // Désactivé temporairement
+            
             verifiedEmail = email;
-            showSuccess("Code envoyé avec succès !");
+            showSuccess("Code généré ! (Regardez la console de VS Code pour le voir)");
             showStep2();
         } catch (Exception e) {
             e.printStackTrace();
-            showError("Erreur lors de l'envoi de l'email. Veuillez réessayer.");
+            showError("Erreur lors de la génération du code.");
         }
     }
 
