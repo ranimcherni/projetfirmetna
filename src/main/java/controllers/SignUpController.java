@@ -21,6 +21,12 @@ public class SignUpController {
     @FXML private ComboBox<String> roleCombo;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
+    
+    // Captcha elements
+    @FXML private javafx.scene.canvas.Canvas captchaCanvas;
+    @FXML private TextField captchaField;
+    @FXML private Label captchaError;
+    private String currentCaptchaWord = "";
 
     @FXML private ImageView avatarImageView;
     @FXML private Label avatarPlaceholder;
@@ -39,6 +45,7 @@ public class SignUpController {
     @FXML
     public void initialize() {
         resetErrorLabels();
+        generateCaptcha();
     }
 
     private void resetErrorLabels() {
@@ -54,6 +61,62 @@ public class SignUpController {
         if (label != null) {
             label.setVisible(false);
             label.setManaged(false);
+        }
+    }
+
+    @FXML
+    public void handleRefreshCaptcha(javafx.scene.input.MouseEvent event) {
+        generateCaptcha();
+    }
+    
+    @FXML
+    public void handleRefreshCaptcha(ActionEvent event) {
+        generateCaptcha();
+    }
+
+    private void generateCaptcha() {
+        // Generate a random 6 character string (alphanumeric)
+        String chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Removed similar looking chars (I, 1, O, 0)
+        StringBuilder sb = new StringBuilder();
+        java.util.Random rnd = new java.util.Random();
+        while (sb.length() < 6) { 
+            int index = (int) (rnd.nextFloat() * chars.length());
+            sb.append(chars.charAt(index));
+        }
+        currentCaptchaWord = sb.toString();
+        drawCaptchaOnCanvas();
+    }
+
+    private void drawCaptchaOnCanvas() {
+        if (captchaCanvas == null) return;
+        javafx.scene.canvas.GraphicsContext gc = captchaCanvas.getGraphicsContext2D();
+        double width = captchaCanvas.getWidth();
+        double height = captchaCanvas.getHeight();
+
+        // Background
+        gc.setFill(javafx.scene.paint.Color.web("#f4f4f4"));
+        gc.fillRect(0, 0, width, height);
+
+        java.util.Random rnd = new java.util.Random();
+
+        // Draw noise lines
+        gc.setStroke(javafx.scene.paint.Color.web("#bdc3c7"));
+        gc.setLineWidth(1.5);
+        for (int i = 0; i < 6; i++) {
+            gc.strokeLine(rnd.nextDouble() * width, rnd.nextDouble() * height,
+                          rnd.nextDouble() * width, rnd.nextDouble() * height);
+        }
+
+        // Draw text
+        gc.setFont(javafx.scene.text.Font.font("Courier New", javafx.scene.text.FontWeight.BOLD, 22));
+        double xOffset = 15;
+        for (char c : currentCaptchaWord.toCharArray()) {
+            // Random color
+            gc.setFill(javafx.scene.paint.Color.color(rnd.nextDouble() * 0.5, rnd.nextDouble() * 0.5, rnd.nextDouble() * 0.5));
+            // Random rotation (simulate with y offset)
+            double yOffset = 30 + (rnd.nextDouble() * 10 - 5);
+            gc.fillText(String.valueOf(c), xOffset, yOffset);
+            xOffset += 20;
         }
     }
 
@@ -94,8 +157,19 @@ public class SignUpController {
         String role = roleCombo.getValue();
         String pass = passwordField.getText();
         String confirmPass = confirmPasswordField.getText();
+        String captchaInput = captchaField.getText().trim();
 
         boolean hasError = false;
+
+        // Captcha validation
+        if (captchaInput.isEmpty() || !captchaInput.equalsIgnoreCase(currentCaptchaWord)) {
+            showError(captchaError, "Code de sécurité incorrect.");
+            hasError = true;
+            generateCaptcha(); // Regenerate on failure
+            captchaField.clear();
+        } else {
+            hideError(captchaError);
+        }
 
         if (nom.isEmpty()) {
             showError(nomError, "Ce champ est requis");

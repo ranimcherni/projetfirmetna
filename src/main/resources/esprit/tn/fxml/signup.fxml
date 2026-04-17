@@ -5,8 +5,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.Image?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.scene.canvas.Canvas?>
 
 <GridPane alignment="CENTER" prefHeight="730.0" prefWidth="1100.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
     <columnConstraints>
@@ -125,6 +127,21 @@
                                 </VBox>
                             </children>
                         </GridPane>
+
+                        <!-- CAPTCHA SECTION -->
+                        <VBox spacing="10" alignment="CENTER" style="-fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-padding: 15; -fx-background-color: #fafafa; -fx-background-radius: 8;">
+                            <children>
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2d3436; -fx-font-size: 14;" text="Vérification de sécurité (Cliquez sur l'image pour rafraîchir)" />
+                                <HBox alignment="CENTER" spacing="15">
+                                    <children>
+                                        <Canvas fx:id="captchaCanvas" width="150" height="50" onMouseClicked="#handleRefreshCaptcha" style="-fx-cursor: hand;" />
+                                        <Button onAction="#handleRefreshCaptcha" style="-fx-background-color: transparent; -fx-text-fill: #27ae60; -fx-font-size: 24; -fx-cursor: hand; -fx-padding: 0;" text="↻" />
+                                    </children>
+                                </HBox>
+                                <TextField fx:id="captchaField" promptText="Tapez le texte de l'image" styleClass="auth-field" style="-fx-alignment: center;" maxWidth="250" prefHeight="45.0" />
+                                <Label fx:id="captchaError" managed="false" styleClass="error-message-label" text="Code incorrect" visible="false" />
+                            </children>
+                        </VBox>
 
                         <VBox spacing="20" alignment="CENTER_LEFT">
                             <children>

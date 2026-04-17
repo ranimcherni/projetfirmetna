@@ -35,4 +35,4 @@ ehthumbs.db
 Thumbs.db
 
 # Log files
-*.log
+*.logsrc/main/java/utils/MailingService.java
