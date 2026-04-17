@@ -14,6 +14,8 @@ public class User {
     private String status;
     private String image;
     private java.sql.Timestamp registrationDate;
+    private String resetCode;
+    private java.sql.Timestamp resetExpiry;
 
     public User() {
     }
@@ -172,6 +174,22 @@ public class User {
 
     public void setRegistrationDate(java.sql.Timestamp registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public String getResetCode() {
+        return resetCode;
+    }
+
+    public void setResetCode(String resetCode) {
+        this.resetCode = resetCode;
+    }
+
+    public java.sql.Timestamp getResetExpiry() {
+        return resetExpiry;
+    }
+
+    public void setResetExpiry(java.sql.Timestamp resetExpiry) {
+        this.resetExpiry = resetExpiry;
     }
 
     @Override

@@ -34,6 +34,16 @@ public class UserService implements IService<User> {
                         .execute("ALTER TABLE `user` ADD `registration_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
                 System.out.println("--- Migration: 'registration_date' column added ---");
             }
+            ResultSet rsResetCode = md.getColumns(null, null, "user", "reset_code");
+            if (!rsResetCode.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `reset_code` VARCHAR(10) DEFAULT NULL");
+                System.out.println("--- Migration: 'reset_code' column added ---");
+            }
+            ResultSet rsResetExpiry = md.getColumns(null, null, "user", "reset_expiry");
+            if (!rsResetExpiry.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `reset_expiry` TIMESTAMP DEFAULT NULL");
+                System.out.println("--- Migration: 'reset_expiry' column added ---");
+            }
         } catch (SQLException e) {
             System.err.println("Migration error: " + e.getMessage());
         }
@@ -171,5 +181,47 @@ public class UserService implements IService<User> {
             System.err.println("isEmailTaken error: " + e.getMessage());
         }
         return false;
+    }
+
+    public void setResetCode(String email, String code, Timestamp expiry) {
+        String req = "UPDATE `user` SET `reset_code` = ?, `reset_expiry` = ? WHERE `email` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setString(1, code);
+            pstm.setTimestamp(2, expiry);
+            pstm.setString(3, email);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("setResetCode error: " + e.getMessage());
+        }
+    }
+
+    public boolean validateResetCode(String email, String code) {
+        String req = "SELECT count(*) FROM `user` WHERE `email` = ? AND `reset_code` = ? AND `reset_expiry` > CURRENT_TIMESTAMP";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setString(1, email);
+            pstm.setString(2, code);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("validateResetCode error: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public void updatePasswordByEmail(String email, String newPassword) {
+        String req = "UPDATE `user` SET `password` = ?, `reset_code` = NULL, `reset_expiry` = NULL WHERE `email` = ?";
+        String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(newPassword, org.mindrot.jbcrypt.BCrypt.gensalt());
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setString(1, hashedPassword);
+            pstm.setString(2, email);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("updatePasswordByEmail error: " + e.getMessage());
+        }
     }
 }

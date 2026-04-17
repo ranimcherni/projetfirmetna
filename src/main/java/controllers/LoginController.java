@@ -157,8 +157,7 @@ public class LoginController {
 
     @FXML
     public void handleForgotPassword(ActionEvent event) {
-        // Template for redirection or alert
-        System.out.println("Mot de passe oublié cliqué.");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/forgot_password.fxml", "Récupération de mot de passe");
     }
 }
 
