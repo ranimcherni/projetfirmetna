@@ -7,9 +7,9 @@ import java.util.Properties;
 
 public class MailingService {
 
-    // IMPORTANT: Remplacez par vos identifiants Gmail
-    private static final String SENDER_EMAIL = "votre.email@gmail.com";
-    private static final String APP_PASSWORD = "votre_mot_de_passe_application";
+    // Identifiants configurés pour l'envoi
+    private static final String SENDER_EMAIL = "ranimcherni03@gmail.com";
+    private static final String APP_PASSWORD = "obwqizljfrfbkcsn";
 
     public static void sendVerificationCode(String recipientEmail, String code) throws MessagingException {
         Properties properties = new Properties();
