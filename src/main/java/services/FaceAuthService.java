@@ -112,8 +112,9 @@ public class FaceAuthService {
             
             System.out.println("Reconnaissance - ID Prédit: " + predictedId + " | Confiance (plus petite est mieux, lbph d=0..120): " + conf);
             
-            // Pour LBPH, une confiance <= 60-70 est généralement considérée comme une bonne correspondance
-            if (conf <= 75.0 && predictedId > 0) {
+            // On abaisse le seuil de 75.0 à 50.0 pour être beaucoup plus strict
+            // et différencier les visages très similaires (comme deux sœurs)
+            if (conf <= 50.0 && predictedId > 0) {
                 return predictedId;
             } else {
                 return -1; // Inconnu ou douteux

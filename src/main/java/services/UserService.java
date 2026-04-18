@@ -41,7 +41,7 @@ public class UserService implements IService<User> {
             }
             ResultSet rsResetExpiry = md.getColumns(null, null, "user", "reset_expiry");
             if (!rsResetExpiry.next()) {
-                cnx.createStatement().execute("ALTER TABLE `user` ADD `reset_expiry` TIMESTAMP DEFAULT NULL");
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `reset_expiry` TIMESTAMP NULL DEFAULT NULL");
                 System.out.println("--- Migration: 'reset_expiry' column added ---");
             }
         } catch (SQLException e) {
@@ -219,14 +219,18 @@ public class UserService implements IService<User> {
     }
 
     public boolean validateResetCode(String email, String code) {
-        String req = "SELECT count(*) FROM `user` WHERE `email` = ? AND `reset_code` = ? AND `reset_expiry` > CURRENT_TIMESTAMP";
+        String req = "SELECT `reset_expiry` FROM `user` WHERE `email` = ? AND `reset_code` = ?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
             pstm.setString(1, email);
             pstm.setString(2, code);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1) > 0;
+                Timestamp expiry = rs.getTimestamp("reset_expiry");
+                // Compare in Java to avoid timezone mismatch with MySQL CURRENT_TIMESTAMP
+                if (expiry != null && expiry.getTime() > System.currentTimeMillis()) {
+                    return true;
+                }
             }
         } catch (SQLException e) {
             System.err.println("validateResetCode error: " + e.getMessage());

@@ -165,6 +165,6 @@ public class ForgotPasswordController {
 
     @FXML
     public void goBackToLogin(ActionEvent event) {
-        NavigationService.switchScene(event, "/esprit/tn/fxml/Login.fxml", "Connexion");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/login.fxml", "Connexion");
     }
 }

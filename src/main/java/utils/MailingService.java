@@ -8,8 +8,8 @@ import java.util.Properties;
 public class MailingService {
 
     // Identifiants configurés pour l'envoi
-    private static final String SENDER_EMAIL = "ranimcherni03@gmail.com";
-    private static final String APP_PASSWORD = "obwqizljfrfbkcsn";
+    private static final String SENDER_EMAIL = "ranim.cherni@esprit.tn";
+    private static final String APP_PASSWORD = "hafnauckbshkfufr"; // Les espaces ont été retirés
 
     public static void sendVerificationCode(String recipientEmail, String code) throws MessagingException {
         Properties properties = new Properties();

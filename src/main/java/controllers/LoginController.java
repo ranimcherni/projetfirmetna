@@ -59,6 +59,30 @@ public class LoginController {
 
     @FXML
     public void handleFaceLogin(ActionEvent event) {
+        resetErrorLabels();
+        String email = emailField.getText().trim();
+        
+        if (email.isEmpty()) {
+            showGeneralError("Veuillez entrer votre email avant la connexion par visage.");
+            return;
+        } else if (!InputValidator.isValidEmail(email)) {
+            showGeneralError("Veuillez saisir un email valide.");
+            return;
+        }
+
+        UserService us = new UserService();
+        User targetUser = us.getAll().stream().filter(u -> u.getEmail().equalsIgnoreCase(email)).findFirst().orElse(null);
+
+        if (targetUser == null) {
+            showGeneralError("Cet email n'existe pas dans notre système.");
+            return;
+        }
+
+        if ("Inactif".equalsIgnoreCase(targetUser.getStatus())) {
+            showGeneralError("Désolé, votre compte est bloqué.");
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/tn/fxml/face_capture_dialog.fxml"));
             Parent root = loader.load();
@@ -75,20 +99,15 @@ public class LoginController {
             dialogStage.showAndWait();
             
             if (dialogController.isSuccessful()) {
-                int userId = dialogController.getRecognizedUserId();
-                if (userId > 0) {
-                    UserService us = new UserService();
-                    User loggedInUser = us.getAll().stream().filter(u -> u.getId() == userId).findFirst().orElse(null);
-                    
-                    if (loggedInUser != null) {
-                        if ("Inactif".equalsIgnoreCase(loggedInUser.getStatus())) {
-                            showGeneralError("Votre compte est bloqué.");
-                        } else {
-                            UserSession.getInstance().setUser(loggedInUser);
-                            goToFront(event); // Redirect to front/dashboard
-                        }
+                int recognizedUserId = dialogController.getRecognizedUserId();
+                if (recognizedUserId > 0) {
+                    // VÉRIFICATION STRICTE 1-à-1
+                    if (recognizedUserId == targetUser.getId()) {
+                        UserSession.getInstance().setUser(targetUser);
+                        goToFront(event); // Redirect to front/dashboard
                     } else {
-                        showGeneralError("Utilisateur non trouvé en base.");
+                        // Le visage reconnu ne correspond pas à l'email entré
+                        showGeneralError("Accès refusé : Ce visage ne correspond pas à l'email fourni.");
                     }
                 } else {
                     showGeneralError("Visage non reconnu.");
