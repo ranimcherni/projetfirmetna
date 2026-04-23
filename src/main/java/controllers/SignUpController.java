@@ -169,9 +169,11 @@ public class SignUpController {
             
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.setTitle("Enrôlement Facial");
-            dialogStage.setResizable(false);
-            dialogStage.setScene(new Scene(root));
+            dialogStage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+            
+            Scene scene = new Scene(root);
+            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+            dialogStage.setScene(scene);
             
             dialogStage.showAndWait();
             

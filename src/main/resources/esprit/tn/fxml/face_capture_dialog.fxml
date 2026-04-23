@@ -3,23 +3,38 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="15" prefHeight="450.0" prefWidth="500.0" style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #27ae60; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaceCaptureDialogController">
+<VBox fx:id="rootVBox" alignment="TOP_CENTER" spacing="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaceCaptureDialogController" 
+      styleClass="face-container" stylesheets="@../css/style.css">
     <children>
-        <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Reconnaissance Faciale" />
-        <Label style="-fx-text-fill: #7f8c8d;" text="Regardez la caméra et placez votre visage au centre" />
-        
-        <VBox alignment="CENTER" style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-background-radius: 5;">
-             <ImageView fx:id="webcamView" fitHeight="300.0" fitWidth="400.0" preserveRatio="true" />
-        </VBox>
-        
-        <HBox alignment="CENTER" spacing="20">
-            <Button fx:id="captureButton" onAction="#handleCapture" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 5;" text="🔍 Analyser Mon Visage" />
-            <Button onAction="#handleCancel" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 5;" text="Annuler" />
+        <!-- Custom Header -->
+        <HBox alignment="CENTER_LEFT" styleClass="face-header">
+            <Label text="Vérification Biométrique" styleClass="face-header-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#handleCancel" text="✕" styleClass="mfa-close-btn" style="-fx-text-fill: white;" />
         </HBox>
-        
-        <Label fx:id="statusLabel" text="Initialisation de la caméra..." style="-fx-text-fill: #e67e22; -fx-font-weight: bold;" />
+
+        <VBox alignment="CENTER" spacing="20" styleClass="face-body">
+            <VBox alignment="CENTER" spacing="5">
+                <Label text="Reconnaissance Faciale" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #1b4332;" />
+                <Label text="Regardez la caméra et restez immobile" styleClass="mfa-subtitle" />
+            </VBox>
+            
+            <StackPane styleClass="camera-preview-container">
+                <ImageView fx:id="webcamView" fitHeight="320.0" fitWidth="420.0" preserveRatio="true" />
+                <!-- Subtle scan line effect could be added here if desired -->
+            </StackPane>
+            
+            <VBox alignment="CENTER" spacing="15">
+                <Label fx:id="statusLabel" text="Initialisation de la caméra..." styleClass="face-status-label" />
+                
+                <HBox alignment="CENTER" spacing="15">
+                    <Button fx:id="captureButton" onAction="#handleCapture" text="Démarrer l'analyse" styleClass="face-scan-btn" />
+                    <Button onAction="#handleCancel" text="Annuler" styleClass="dialog-btn-secondary" style="-fx-padding: 13 30;" />
+                </HBox>
+            </VBox>
+        </VBox>
     </children>
 </VBox>

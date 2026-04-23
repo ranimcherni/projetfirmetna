@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.JavaFXFrameConverter;
@@ -22,9 +23,27 @@ import java.util.concurrent.TimeUnit;
 
 public class FaceCaptureDialogController {
 
+    @FXML private VBox rootVBox;
     @FXML private ImageView webcamView;
     @FXML private Button captureButton;
     @FXML private Label statusLabel;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    public void initialize() {
+        // Window dragging
+        rootVBox.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        rootVBox.setOnMouseDragged(event -> {
+            Stage stage = (Stage) rootVBox.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+    }
 
     private OpenCVFrameGrabber grabber;
     private JavaFXFrameConverter converter = new JavaFXFrameConverter();

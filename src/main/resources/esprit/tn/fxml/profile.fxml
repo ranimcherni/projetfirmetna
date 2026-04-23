@@ -117,16 +117,16 @@
 
                                                 <Separator style="-fx-opacity: 0.1;" />
 
-                                                <!-- Forum Stats Short-view -->
-                                                <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #f9fbf9; -fx-padding: 20; -fx-background-radius: 15;">
+                                                <!-- Double Security Section -->
+                                                <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #f1f8ff; -fx-padding: 20; -fx-background-radius: 15; -fx-border-color: #d1e9ff; -fx-border-radius: 15;">
                                                     <children>
-                                                        <Label text="💬" style="-fx-font-size: 24;" />
+                                                        <Label text="🛡" style="-fx-font-size: 24;" />
                                                         <VBox spacing="2">
-                                                            <Label text="Activité sur le Forum" style="-fx-font-weight: bold; -fx-text-fill: #1b4332; -fx-font-size: 15;" />
-                                                            <Label text="Vous avez créé 0 publication" style="-fx-text-fill: #7f8c8d; -fx-font-size: 13;" />
+                                                            <Label text="Double Authentification (MFA)" style="-fx-font-weight: bold; -fx-text-fill: #0056b3; -fx-font-size: 15;" />
+                                                            <Label fx:id="mfaStatusLabel" text="Désactivé - Renforcez votre sécurité" style="-fx-text-fill: #5a6268; -fx-font-size: 13;" />
                                                         </VBox>
                                                         <Region HBox.hgrow="ALWAYS" />
-                                                        <Button onAction="#handleAccueil" text="Voir mes Pubs" style="-fx-background-color: transparent; -fx-border-color: #2d5a27; -fx-border-radius: 20; -fx-text-fill: #2d5a27; -fx-padding: 8 20; -fx-cursor: hand;" />
+                                                        <Button fx:id="mfaButton" onAction="#handleMfaToggle" text="Activer" style="-fx-background-color: #0056b3; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 20; -fx-cursor: hand;" />
                                                     </children>
                                                 </HBox>
 

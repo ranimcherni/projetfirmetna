@@ -19,6 +19,9 @@ public class ProfileController {
     @FXML private TextField emailField;
     @FXML private TextField phoneField;
 
+    @FXML private Label mfaStatusLabel;
+    @FXML private Button mfaButton;
+
     // Error Labels
     @FXML private Label nomError;
     @FXML private Label prenomError;
@@ -33,6 +36,7 @@ public class ProfileController {
         currentUser = UserSession.getInstance().getUser();
         if (currentUser != null) {
             loadUserData();
+            updateMfaUI();
         }
         resetErrorLabels();
     }
@@ -152,6 +156,64 @@ public class ProfileController {
     private void handleLogout(ActionEvent event) {
         UserSession.getInstance().cleanUserSession();
         NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
+    }
+
+    private void updateMfaUI() {
+        if (currentUser.isMfaEnabled()) {
+            mfaStatusLabel.setText("Activé - Votre compte est sécurisé");
+            mfaStatusLabel.setStyle("-fx-text-fill: #27ae60;");
+            mfaButton.setText("Désactiver");
+            mfaButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 20;");
+        } else {
+            mfaStatusLabel.setText("Désactivé - Renforcez votre sécurité");
+            mfaStatusLabel.setStyle("-fx-text-fill: #5a6268;");
+            mfaButton.setText("Activer");
+            mfaButton.setStyle("-fx-background-color: #0056b3; -fx-text-fill: white; -fx-background-radius: 20;");
+        }
+    }
+
+    @FXML
+    private void handleMfaToggle(ActionEvent event) {
+        if (currentUser.isMfaEnabled()) {
+            if (AlertUtils.showConfirmation("Désactiver le MFA", "Voulez-vous vraiment désactiver la double authentification ?")) {
+                currentUser.setMfaEnabled(false);
+                currentUser.setMfaSecret(null);
+                userService.update(currentUser);
+                updateMfaUI();
+                AlertUtils.showSuccess("Sécurité", "Le MFA a été désactivé.");
+            }
+        } else {
+            try {
+                services.GoogleAuthService googleAuthService = new services.GoogleAuthService();
+                String secret = googleAuthService.generateSecretKey();
+
+                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/mfa_dialog.fxml"));
+                javafx.scene.Parent root = loader.load();
+                
+                MfaDialogController dialogController = loader.getController();
+                dialogController.initData(currentUser.getEmail(), secret, true); // Setup mode
+                
+                javafx.stage.Stage stage = new javafx.stage.Stage();
+                stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+                stage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+                
+                javafx.scene.Scene scene = new javafx.scene.Scene(root);
+                scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                stage.setScene(scene);
+                stage.showAndWait();
+
+                if (dialogController.isSuccessful()) {
+                    currentUser.setMfaEnabled(true);
+                    currentUser.setMfaSecret(secret);
+                    userService.update(currentUser);
+                    updateMfaUI();
+                    AlertUtils.showSuccess("Sécurité", "Le MFA a été activé avec succès !");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                AlertUtils.showError("Erreur", "Impossible d'ouvrir la configuration MFA.");
+            }
+        }
     }
 
 }

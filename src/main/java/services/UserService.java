@@ -44,6 +44,16 @@ public class UserService implements IService<User> {
                 cnx.createStatement().execute("ALTER TABLE `user` ADD `reset_expiry` TIMESTAMP NULL DEFAULT NULL");
                 System.out.println("--- Migration: 'reset_expiry' column added ---");
             }
+            ResultSet rsMfaSecret = md.getColumns(null, null, "user", "mfa_secret");
+            if (!rsMfaSecret.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `mfa_secret` VARCHAR(255) DEFAULT NULL");
+                System.out.println("--- Migration: 'mfa_secret' column added ---");
+            }
+            ResultSet rsMfaEnabled = md.getColumns(null, null, "user", "mfa_enabled");
+            if (!rsMfaEnabled.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `mfa_enabled` TINYINT(1) DEFAULT 0");
+                System.out.println("--- Migration: 'mfa_enabled' column added ---");
+            }
         } catch (SQLException e) {
             System.err.println("Migration error: " + e.getMessage());
         }
@@ -51,7 +61,7 @@ public class UserService implements IService<User> {
 
     @Override
     public void add(User user) {
-        String req = "INSERT INTO `user` (`email`, `password`, `role`, `nom`, `prenom`, `localisation`, `bio`, `specialite`, `telephone`, `status`, `registration_date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO `user` (`email`, `password`, `role`, `nom`, `prenom`, `localisation`, `bio`, `specialite`, `telephone`, `status`, `registration_date`, `mfa_secret`, `mfa_enabled`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         // Hachage du mot de passe
         String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(user.getPassword(), org.mindrot.jbcrypt.BCrypt.gensalt());
@@ -70,6 +80,8 @@ public class UserService implements IService<User> {
             pstm.setString(10, user.getStatus() != null ? user.getStatus() : "Actif");
             pstm.setTimestamp(11, user.getRegistrationDate() != null ? user.getRegistrationDate()
                     : new java.sql.Timestamp(System.currentTimeMillis()));
+            pstm.setString(12, user.getMfaSecret());
+            pstm.setBoolean(13, user.isMfaEnabled());
             pstm.executeUpdate();
             System.out.println("User ajouté avec succès !");
         } catch (SQLException e) {
@@ -80,7 +92,7 @@ public class UserService implements IService<User> {
     @Override
     public void update(User user) {
         String passwordPart = (user.getPassword() != null && !user.getPassword().isEmpty()) ? ", `password`=?" : "";
-        String req = "UPDATE `user` SET `email`=?, `role`=?, `nom`=?, `prenom`=?, `localisation`=?, `bio`=?, `specialite`=?, `telephone`=?, `status`=?" + passwordPart + " WHERE `id`=?";
+        String req = "UPDATE `user` SET `email`=?, `role`=?, `nom`=?, `prenom`=?, `localisation`=?, `bio`=?, `specialite`=?, `telephone`=?, `status`=?, `mfa_secret`=?, `mfa_enabled`=?" + passwordPart + " WHERE `id`=?";
         
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -93,14 +105,17 @@ public class UserService implements IService<User> {
             pstm.setString(7, user.getSpecialite());
             pstm.setString(8, user.getTelephone());
             pstm.setString(9, user.getStatus());
+            pstm.setString(10, user.getMfaSecret());
+            pstm.setBoolean(11, user.isMfaEnabled());
             
             if (!passwordPart.isEmpty()) {
-                // Hachage du nouveau mot de passe
-                String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(user.getPassword(), org.mindrot.jbcrypt.BCrypt.gensalt());
-                pstm.setString(10, hashedPassword);
-                pstm.setInt(11, user.getId());
+                // Ne hacher que si ce n'est pas déjà un hash BCrypt
+                String p = user.getPassword();
+                String hashedPassword = p.startsWith("$2a$") ? p : org.mindrot.jbcrypt.BCrypt.hashpw(p, org.mindrot.jbcrypt.BCrypt.gensalt());
+                pstm.setString(12, hashedPassword);
+                pstm.setInt(13, user.getId());
             } else {
-                pstm.setInt(10, user.getId());
+                pstm.setInt(12, user.getId());
             }
             
             pstm.executeUpdate();
@@ -144,6 +159,8 @@ public class UserService implements IService<User> {
                 u.setTelephone(rs.getString("telephone"));
                 u.setStatus(rs.getString("status"));
                 u.setRegistrationDate(rs.getTimestamp("registration_date"));
+                u.setMfaSecret(rs.getString("mfa_secret"));
+                u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -181,6 +198,8 @@ public class UserService implements IService<User> {
                 u.setRole(rs.getString("role"));
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
+                u.setMfaSecret(rs.getString("mfa_secret"));
+                u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
                 return u;
             }
         } catch (SQLException e) {

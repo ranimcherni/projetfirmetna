@@ -16,6 +16,8 @@ public class User {
     private java.sql.Timestamp registrationDate;
     private String resetCode;
     private java.sql.Timestamp resetExpiry;
+    private String mfaSecret;
+    private boolean mfaEnabled;
 
     public User() {
     }
@@ -190,6 +192,22 @@ public class User {
 
     public void setResetExpiry(java.sql.Timestamp resetExpiry) {
         this.resetExpiry = resetExpiry;
+    }
+
+    public String getMfaSecret() {
+        return mfaSecret;
+    }
+
+    public void setMfaSecret(String mfaSecret) {
+        this.mfaSecret = mfaSecret;
+    }
+
+    public boolean isMfaEnabled() {
+        return mfaEnabled;
+    }
+
+    public void setMfaEnabled(boolean mfaEnabled) {
+        this.mfaEnabled = mfaEnabled;
     }
 
     @Override
