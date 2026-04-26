@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminEvenementsController" stylesheets="@../css/style.css">
+    <children>
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <VBox>
+                    <Label text="Gestion des événements" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label text="Événements liés à un lieu" style="-fx-text-fill: #636e72; -fx-font-size: 13;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleAddEvenement" text="+ Ajouter un événement" styleClass="admin-btn-primary" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="evenementTable" VBox.vgrow="ALWAYS" styleClass="admin-table">
+            <columns>
+                <TableColumn fx:id="idCol" text="ID" prefWidth="60" />
+                <TableColumn fx:id="nomCol" text="Nom" prefWidth="200" />
+                <TableColumn fx:id="dateCol" text="Date" prefWidth="110" />
+                <TableColumn fx:id="villeCol" text="Ville" prefWidth="140" />
+                <TableColumn fx:id="adresseCol" text="Adresse lieu" prefWidth="220" />
+                <TableColumn fx:id="orgCol" text="Organisateur" prefWidth="160" />
+                <TableColumn fx:id="descCol" text="Description" prefWidth="200" />
+                <TableColumn fx:id="actionsCol" text="Actions" prefWidth="120" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</VBox>

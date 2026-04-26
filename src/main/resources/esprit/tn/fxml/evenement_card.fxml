@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox fx:id="cardRoot" spacing="15" styleClass="event-card" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <StackPane styleClass="event-card-image-container">
+            <ImageView fx:id="eventImage" fitWidth="280.0" fitHeight="160.0" preserveRatio="false" />
+        </StackPane>
+        
+        <VBox spacing="10" style="-fx-padding: 0 15 15 15;">
+            <children>
+                <Label fx:id="eventName" text="Nom de l'événement" styleClass="event-card-title" wrapText="true" />
+                
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label text="📅" />
+                    <Label fx:id="eventDate" text="19 Avril 2026" styleClass="event-card-info" />
+                </HBox>
+                
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label text="📍" />
+                    <Label fx:id="eventLocation" text="Tunis, Avenue Habib Bourguiba" styleClass="event-card-info" wrapText="true" />
+                </HBox>
+                
+                <Region VBox.vgrow="ALWAYS" />
+                
+                <Button fx:id="participerBtn" text="Participer" maxWidth="Infinity" styleClass="admin-btn-primary" />
+            </children>
+        </VBox>
+    </children>
+</VBox>

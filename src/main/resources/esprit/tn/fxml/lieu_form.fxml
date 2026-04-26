@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.web.WebView?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #f8f9fa; -fx-padding: 0; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LieuFormController" stylesheets="@../css/style.css">
+    <VBox spacing="25" style="-fx-padding: 30; -fx-background-color: transparent;">
+        <children>
+            <VBox spacing="10">
+                <children>
+                    <Hyperlink onAction="#handleCancel" text="⬅ Retour à la liste" style="-fx-text-fill: #27ae60; -fx-font-size: 14; -fx-underline: false; -fx-padding: 0;" />
+                    <Label fx:id="titleLabel" text="Création d'un lieu" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label fx:id="subtitleLabel" text="Renseignez les informations du lieu." style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                </children>
+            </VBox>
+
+            <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 35; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" VBox.vgrow="ALWAYS">
+                <children>
+                    <GridPane hgap="30" vgap="25">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                        </columnConstraints>
+                        <children>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                <Label text="Ville" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="villeField" promptText="Ex. Tunis" styleClass="admin-form-input" />
+                                <Label fx:id="villeError" styleClass="error-message-label" text=" " />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <Label text="Capacité" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="capaciteField" promptText="Nombre de places" styleClass="admin-form-input" />
+                                <Label fx:id="capaciteError" styleClass="error-message-label" text=" " />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2">
+                                <Label text="Adresse" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="adresseField" promptText="Adresse complète" styleClass="admin-form-input" />
+                                <Label fx:id="adresseError" styleClass="error-message-label" text=" " />
+                                <Label text="Ou cliquez sur la carte pour définir l'adresse :" style="-fx-font-weight: bold; -fx-text-fill: #2d3436; -fx-font-size: 12;" />
+                                <WebView fx:id="mapView" prefHeight="250" />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                <Label text="Image (chemin ou URL)" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <TextField fx:id="imageField" promptText="Optionnel" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                                    <Button onAction="#handleUploadImage" text="📂" styleClass="admin-btn-secondary" prefWidth="50" style="-fx-padding: 0;" />
+                                </HBox>
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                <Label text="Disponible" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <CheckBox fx:id="disponibiliteCheck" text="Lieu disponible" selected="true" />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+                                <Label text="Description" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextArea fx:id="descriptionArea" prefRowCount="4" wrapText="true" promptText="Description du lieu" styleClass="admin-form-input" />
+                                <Label fx:id="descriptionError" styleClass="error-message-label" text=" " />
+                            </VBox>
+                        </children>
+                    </GridPane>
+
+                    <HBox spacing="15" alignment="CENTER_RIGHT">
+                        <children>
+                            <Button onAction="#handleCancel" text="Annuler" styleClass="admin-btn-secondary" />
+                            <Button fx:id="saveBtn" onAction="#handleSave" text="Enregistrer" styleClass="admin-btn-primary" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
+</ScrollPane>
