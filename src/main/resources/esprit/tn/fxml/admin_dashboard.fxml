@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDashboardController" stylesheets="@../css/style.css">
+    <content>
+        <VBox spacing="40" style="-fx-padding: 40; -fx-background-color: #f1f8e9;">
+            <children>
+                <VBox spacing="10">
+                    <children>
+                        <Label text="Tableau de Bord Analytique" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #132a13;" />
+                        <Label text="Vue d'ensemble et statistiques de la plateforme" style="-fx-text-fill: #2d6a4f; -fx-font-size: 14;" />
+                    </children>
+                </VBox>
+
+                <HBox spacing="25" alignment="CENTER" style="-fx-background-color: #d8f3dc; -fx-background-radius: 20; -fx-padding: 30;">
+                    <children>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <Label text="👤 UTILISATEURS" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #40916c;" />
+                            <Label fx:id="totalUsersLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #132a13;" />
+                        </VBox>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <Label text="🌱 PRODUITS" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #40916c;" />
+                            <Label fx:id="totalProductsLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #132a13;" />
+                        </VBox>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <Label text="✅ ACTIFS" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #40916c;" />
+                            <Label fx:id="activeUsersLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #132a13;" />
+                        </VBox>
+                        
+                        <Region HBox.hgrow="ALWAYS" />
+                        
+                        <!-- Illustration de Récolte -->
+                        <ImageView fitHeight="120" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/farmer_header.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+
+                <HBox spacing="30">
+                    <children>
+                        <VBox styleClass="harvest-card" HBox.hgrow="ALWAYS">
+                            <Label text="Croissance Community" style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                            <AreaChart fx:id="activityChart" prefHeight="250">
+                                <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                <yAxis><NumberAxis side="LEFT" /></yAxis>
+                            </AreaChart>
+                        </VBox>
+                        <VBox styleClass="harvest-card" HBox.hgrow="ALWAYS">
+                            <Label text="Rôles" style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                            <PieChart fx:id="userDistributionChart" prefHeight="250" />
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <HBox spacing="20">
+                    <children>
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="AGRICULTEURS" style="-fx-font-size: 11; font-weight: bold;" />
+                            <ProgressBar fx:id="agriProgress" maxWidth="Infinity" styleClass="agri-bar" />
+                            <Label fx:id="agriculteurCountLabel" text="0" />
+                        </VBox>
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="CLIENTS" style="-fx-font-size: 11; font-weight: bold;" />
+                            <ProgressBar fx:id="clientProgress" maxWidth="Infinity" styleClass="client-bar" />
+                            <Label fx:id="clientCountLabel" text="0" />
+                        </VBox>
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="DONATEURS" style="-fx-font-size: 11; font-weight: bold;" />
+                            <ProgressBar fx:id="donateurProgress" maxWidth="Infinity" styleClass="donateur-bar" />
+                            <Label fx:id="donateurCountLabel" text="0" />
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
