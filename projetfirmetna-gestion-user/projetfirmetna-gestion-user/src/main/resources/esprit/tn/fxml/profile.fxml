@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+
+<StackPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProfileController">
+    <children>
+        <VBox styleClass="front-root-bg" />
+
+        <VBox spacing="20">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="front-nav-bar">
+                    <padding>
+                        <Insets bottom="12.0" left="25.0" right="25.0" top="12.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <ImageView fitHeight="35.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/logo1.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="nav-brand" text="FIRMETNA" />
+                            </children>
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <Button onAction="#handleAccueil" styleClass="nav-item" text="Accueil" />
+                                <MenuButton styleClass="nav-item-dropdown" text="Produits">
+                                    <items>
+                                        <MenuItem onAction="#handleProduits" text="Tous les produits" />
+                                        <MenuItem onAction="#handleProduitsVegetaux" text="Vegetaux" />
+                                        <MenuItem onAction="#handleProduitsAnimaux" text="Animaux" />
+                                    </items>
+                                </MenuButton>
+                                <Button styleClass="nav-item" text="Evenements" />
+                                <Button styleClass="nav-item" text="Forum" />
+                                <Button styleClass="nav-item" text="Notifications" />
+                                <Button styleClass="nav-item" text="Dons" />
+                                <Button styleClass="nav-item" text="Partenariats" />
+                            </children>
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <MenuButton styleClass="nav-profile-btn" text="Profil">
+                            <items>
+                                <MenuItem onAction="#handleBack" text="Mon Compte" />
+                                <MenuItem onAction="#handleProduits" text="Voir les produits" />
+                                <SeparatorMenuItem />
+                                <MenuItem onAction="#handleLogout" text="Deconnexion" style="-fx-text-fill: #e74c3c;" />
+                            </items>
+                        </MenuButton>
+                    </children>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox alignment="CENTER" style="-fx-padding: 60 0;">
+                            <children>
+                                <VBox maxWidth="850" minWidth="850" styleClass="profile-card-modern">
+                                    <children>
+                                        <VBox alignment="CENTER" spacing="15" styleClass="profile-avatar-container">
+                                            <children>
+                                                <StackPane>
+                                                    <Circle fill="WHITE" radius="70" styleClass="profile-avatar-circle" />
+                                                    <Label text="👤" style="-fx-font-size: 65; -fx-text-fill: #2d5a27;" />
+                                                </StackPane>
+                                                <VBox alignment="CENTER" spacing="5">
+                                                    <Label fx:id="headerNameLabel" style="-fx-text-fill: white; -fx-font-size: 34; -fx-font-weight: bold;" text="Nom Utilisateur" />
+                                                    <Label fx:id="headerRoleLabel" style="-fx-text-fill: rgba(255,255,255,0.85); -fx-font-size: 18; -fx-font-weight: bold; -fx-letter-spacing: 1px;" text="CLIENT" />
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <VBox spacing="40" style="-fx-padding: 50 80;">
+                                            <children>
+                                                <VBox spacing="25">
+                                                    <children>
+                                                        <HBox spacing="30">
+                                                            <children>
+                                                                <VBox HBox.hgrow="ALWAYS" styleClass="profile-input-group">
+                                                                    <Label text="Prenom" styleClass="profile-label-main" />
+                                                                    <TextField fx:id="prenomField" styleClass="form-field" promptText="Votre prenom" />
+                                                                    <Label fx:id="prenomError" styleClass="error-message-label" text="Prenom invalide" visible="false" />
+                                                                </VBox>
+                                                                <VBox HBox.hgrow="ALWAYS" styleClass="profile-input-group">
+                                                                    <Label text="Nom" styleClass="profile-label-main" />
+                                                                    <TextField fx:id="nomField" styleClass="form-field" promptText="Votre nom" />
+                                                                    <Label fx:id="nomError" styleClass="error-message-label" text="Nom invalide" visible="false" />
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+
+                                                        <VBox styleClass="profile-input-group">
+                                                            <Label text="Adresse Email" styleClass="profile-label-main" />
+                                                            <TextField fx:id="emailField" styleClass="form-field" promptText="nom@exemple.com" />
+                                                            <Label fx:id="emailError" styleClass="error-message-label" text="Email invalide" visible="false" />
+                                                        </VBox>
+
+                                                        <VBox styleClass="profile-input-group">
+                                                            <Label text="Numero de Telephone" styleClass="profile-label-main" />
+                                                            <TextField fx:id="phoneField" styleClass="form-field" promptText="+216 -- --- ---" />
+                                                            <Label fx:id="phoneError" styleClass="error-message-label" text="Telephone invalide" visible="false" />
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+
+                                                <Separator style="-fx-opacity: 0.1;" />
+
+                                                <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #f1f8ff; -fx-padding: 20; -fx-background-radius: 15; -fx-border-color: #d1e9ff; -fx-border-radius: 15;">
+                                                    <children>
+                                                        <Label text="Securite" style="-fx-font-size: 24;" />
+                                                        <VBox spacing="2">
+                                                            <Label text="Double Authentification (MFA)" style="-fx-font-weight: bold; -fx-text-fill: #0056b3; -fx-font-size: 15;" />
+                                                            <Label fx:id="mfaStatusLabel" text="Desactive - Renforcez votre securite" style="-fx-text-fill: #5a6268; -fx-font-size: 13;" />
+                                                        </VBox>
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Button fx:id="mfaButton" onAction="#handleMfaToggle" text="Activer" style="-fx-background-color: #0056b3; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 20; -fx-cursor: hand;" />
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox alignment="CENTER" spacing="20" style="-fx-padding: 20 0 0 0;">
+                                                    <children>
+                                                        <Button onAction="#handleUpdate" prefWidth="250" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 15 0; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(45,90,39,0.2), 10, 0, 0, 5);" text="Sauvegarder les modifications" />
+                                                        <Button onAction="#handleDelete" prefWidth="180" style="-fx-background-color: transparent; -fx-border-color: #e74c3c; -fx-border-radius: 15; -fx-text-fill: #e74c3c; -fx-padding: 14 0; -fx-font-weight: bold; -fx-cursor: hand;" text="Supprimer le compte" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDashboardController" stylesheets="@../css/style.css">
+    <children>
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <VBox>
+                    <Label text="Tableau de Bord" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label text="Vue d'ensemble de votre plateforme" style="-fx-text-fill: #636e72; -fx-font-size: 13;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+
+        <!-- Main Stats Cards Row 1 -->
+        <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+            <children>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Total Utilisateurs" styleClass="admin-stat-label" />
+                    <Label fx:id="totalUsersLabel" text="0" styleClass="admin-stat-value" />
+                </VBox>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Utilisateurs Actifs" styleClass="admin-stat-label" />
+                    <Label fx:id="activeUsersLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #27ae60;" />
+                </VBox>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Total Produits" styleClass="admin-stat-label" />
+                    <Label fx:id="totalProductsLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #e17055;" />
+                </VBox>
+            </children>
+        </HBox>
+
+        <!-- Products and Orders Stats Row -->
+        <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+            <children>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Total Commandes" styleClass="admin-stat-label" />
+                    <Label fx:id="totalCommandesLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #0984e3;" />
+                </VBox>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Commandes Validees" styleClass="admin-stat-label" />
+                    <Label fx:id="validatedCommandesLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #6c5ce7;" />
+                </VBox>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Chiffre d'affaires" styleClass="admin-stat-label" />
+                    <Label fx:id="totalRevenueLabel" text="0 TND" styleClass="admin-stat-value" style="-fx-text-fill: #00b894;" />
+                </VBox>
+            </children>
+        </HBox>
+
+        <!-- User Roles Distribution Section -->
+        <Label text="Distribution des Utilisateurs" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d3436; -fx-padding: 10 0 0 0;" />
+        
+        <HBox spacing="20" alignment="TOP_LEFT">
+            <children>
+                <!-- User Types Stats -->
+                <VBox spacing="15" HBox.hgrow="ALWAYS">
+                    <VBox styleClass="admin-stat-card" VBox.vgrow="ALWAYS">
+                        <Label text="Agriculteurs" styleClass="admin-stat-label" />
+                        <Label fx:id="agriculteurCountLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #00b894;" />
+                        <ProgressBar fx:id="agriProgress" prefWidth="200" style="-fx-accent: #00b894;" />
+                    </VBox>
+                    <VBox styleClass="admin-stat-card" VBox.vgrow="ALWAYS">
+                        <Label text="Clients" styleClass="admin-stat-label" />
+                        <Label fx:id="clientCountLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #0984e3;" />
+                        <ProgressBar fx:id="clientProgress" prefWidth="200" style="-fx-accent: #0984e3;" />
+                    </VBox>
+                    <VBox styleClass="admin-stat-card" VBox.vgrow="ALWAYS">
+                        <Label text="Donateurs" styleClass="admin-stat-label" />
+                        <Label fx:id="donateurCountLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #fdcb6e;" />
+                        <ProgressBar fx:id="donateurProgress" prefWidth="200" style="-fx-accent: #fdcb6e;" />
+                    </VBox>
+                </VBox>
+
+                <!-- User Distribution Pie Chart -->
+                <PieChart fx:id="userDistributionChart" prefWidth="300" prefHeight="300" HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+
+        <!-- Activity Chart -->
+        <Label text="Activite Recente" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d3436; -fx-padding: 20 0 10 0;" />
+        
+        <AreaChart fx:id="activityChart" prefHeight="300" VBox.vgrow="ALWAYS" style="-fx-padding: 0;">
+            <xAxis>
+                <CategoryAxis label="Date" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Nombre d'utilisateurs" />
+            </yAxis>
+        </AreaChart>
+
+        <!-- Products Stats Section -->
+        <Label text="Statistiques Produits" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d3436; -fx-padding: 20 0 10 0;" />
+        
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <children>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Produits Vegetaux" styleClass="admin-stat-label" />
+                    <Label fx:id="vegetauxCountLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #00b894;" />
+                </VBox>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Produits Animaux" styleClass="admin-stat-label" />
+                    <Label fx:id="animauxCountLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #d63031;" />
+                </VBox>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Produits Bio" styleClass="admin-stat-label" />
+                    <Label fx:id="bioCountLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #6c5ce7;" />
+                </VBox>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Stock Total" styleClass="admin-stat-label" />
+                    <Label fx:id="totalStockLabel" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #fdcb6e;" />
+                </VBox>
+            </children>
+        </HBox>
+
+        <!-- Product Distribution Chart -->
+        <PieChart fx:id="productDistributionChart" prefHeight="250" style="-fx-padding: 20 0 0 0;" />
+    </children>
+</VBox>

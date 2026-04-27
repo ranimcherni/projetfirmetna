@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CommandeCheckoutController" stylesheets="@../css/style.css">
+    <content>
+        <VBox spacing="18" style="-fx-padding: 24; -fx-background-color: white;">
+            <children>
+                <Label text="Finaliser la commande" style="-fx-font-size: 26; -fx-font-weight: bold;" />
+                <Label text="Recapitulatif du panier" style="-fx-font-weight: bold;" />
+                <Label fx:id="recapLabel" wrapText="true" text="Recap" />
+                <HBox spacing="12">
+                    <children>
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Client" />
+                            <TextField fx:id="clientField" styleClass="admin-form-input" />
+                        </VBox>
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Email" />
+                            <TextField fx:id="emailField" styleClass="admin-form-input" />
+                        </VBox>
+                    </children>
+                </HBox>
+                <VBox spacing="8">
+                    <Label text="Statut" />
+                    <TextField fx:id="statutField" styleClass="admin-form-input" />
+                </VBox>
+                <VBox spacing="8">
+                    <Label text="Adresse de livraison" />
+                    <TextArea fx:id="adresseArea" prefRowCount="3" wrapText="true" styleClass="admin-form-input" />
+                </VBox>
+                <VBox spacing="8">
+                    <Label text="Commentaire" />
+                    <TextArea fx:id="commentaireArea" prefRowCount="3" wrapText="true" styleClass="admin-form-input" />
+                </VBox>
+                <HBox alignment="CENTER_RIGHT" spacing="12">
+                    <children>
+                        <Label text="Total:" style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                        <Label fx:id="totalLabel" text="0.00 DT" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #27ae60;" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" spacing="12">
+                    <children>
+                        <Button text="Annuler" onAction="#handleCancel" styleClass="admin-btn-secondary" />
+                        <Button text="Confirmer la commande" onAction="#handleConfirm" styleClass="admin-btn-primary" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

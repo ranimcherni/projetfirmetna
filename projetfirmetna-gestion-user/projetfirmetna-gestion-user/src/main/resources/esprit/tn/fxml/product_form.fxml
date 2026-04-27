@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #f8f9fa; -fx-padding: 0; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductFormController" stylesheets="@../css/style.css">
+    <VBox spacing="25" style="-fx-padding: 30; -fx-background-color: transparent;">
+        <children>
+            <VBox spacing="10">
+                <children>
+                    <Label fx:id="titleLabel" text="Creation d'un produit" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label fx:id="subtitleLabel" text="Remplissez les informations du produit et son image." style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                </children>
+            </VBox>
+
+            <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 35; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" VBox.vgrow="ALWAYS">
+                <children>
+                    <GridPane hgap="30" vgap="25">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                        </columnConstraints>
+                        <children>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                <Label text="Nom" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="nomField" promptText="Nom du produit" styleClass="admin-form-input" />
+                                <Label fx:id="nomError" styleClass="error-message-label" text="Nom invalide" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <Label text="Type" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <ComboBox fx:id="typeCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                <Label text="Prix" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="prixField" promptText="Ex: 12.5" styleClass="admin-form-input" />
+                                <Label fx:id="prixError" styleClass="error-message-label" text="Prix invalide" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Label text="Unite" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="uniteField" promptText="kilo, boite, litre..." styleClass="admin-form-input" />
+                                <Label fx:id="uniteError" styleClass="error-message-label" text="Unite invalide" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                <Label text="Stock" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="stockField" promptText="0" styleClass="admin-form-input" />
+                                <Label fx:id="stockError" styleClass="error-message-label" text="Stock invalide" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                <Label text="Badge" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="badgeField" promptText="Bio, Frais, Nouveau..." styleClass="admin-form-input" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+                                <Label text="Description" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextArea fx:id="descriptionArea" promptText="Description du produit" prefRowCount="4" wrapText="true" styleClass="admin-form-input" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2">
+                                <Label text="Image du produit" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <HBox spacing="12">
+                                    <children>
+                                        <TextField fx:id="imageUrlField" promptText="URI fichier ou image locale" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                                        <Button text="Choisir image" onAction="#handleChooseImage" styleClass="admin-btn-secondary" />
+                                    </children>
+                                </HBox>
+                                <Label fx:id="imageError" styleClass="error-message-label" text="Image obligatoire" />
+                            </VBox>
+
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                                <Label text="Produit bio" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <CheckBox fx:id="bioCheck" text="Oui, ce produit est bio" />
+                            </VBox>
+                        </children>
+                    </GridPane>
+
+                    <Separator style="-fx-padding: 20 0 10 0;" />
+
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <children>
+                            <Button fx:id="saveBtn" onAction="#handleSave" text="Enregistrer" styleClass="admin-btn-primary" prefHeight="45" prefWidth="180" />
+                            <Button onAction="#handleCancel" text="Annuler" styleClass="admin-btn-secondary" prefHeight="45" prefWidth="120" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
+</ScrollPane>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controllers.AdminLayoutController"
+           stylesheets="@../css/style.css">
+
+    <!-- ================= MAIN LAYOUT ================= -->
+    <BorderPane>
+
+        <left>
+            <VBox prefWidth="240" styleClass="admin-sidebar" spacing="5">
+                <padding>
+                    <Insets top="20" right="10" bottom="20" left="10"/>
+                </padding>
+
+                <children>
+                    <Label text="Admin Panel" style="-fx-font-size: 20; -fx-padding: 10;" />
+
+                    <Button text="Dashboard" onAction="#showDashboard"/>
+                    <Button text="Users" onAction="#showUsers"/>
+                    <Button text="Products" onAction="#showProducts"/>
+                    <Button text="Commandes" onAction="#showCommandes"/>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <Button text="Logout" onAction="#handleLogout"/>
+                </children>
+            </VBox>
+        </left>
+
+        <center>
+            <StackPane fx:id="contentArea"/>
+        </center>
+
+    </BorderPane>
+
+    <!-- ================= CHATBOT ================= -->
+    <AnchorPane pickOnBounds="false">
+
+        <!-- CHAT WINDOW -->
+        <AnchorPane fx:id="chatbotContainer"
+                    prefWidth="300"
+                    prefHeight="400"
+                    visible="false"
+                    layoutX="900"
+                    layoutY="400"
+                    style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #ccc;">
+
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <Label text="Assistant" style="-fx-font-weight: bold;" />
+
+                <ScrollPane fx:id="chatScrollPane" prefHeight="280">
+                    <content>
+                        <VBox fx:id="chatMessages" spacing="8"/>
+                    </content>
+                </ScrollPane>
+
+                <HBox spacing="5">
+                    <TextField fx:id="chatInput" HBox.hgrow="ALWAYS"/>
+                    <Button text="➤" onAction="#handleSendChat"/>
+                </HBox>
+            </VBox>
+        </AnchorPane>
+
+        <!-- FLOAT BUTTON -->
+        <Button fx:id="chatbotToggleButton"
+                layoutX="950"
+                layoutY="500"
+                onAction="#toggleChatbot"
+                style="-fx-background-radius: 50; -fx-padding: 12;">
+
+            <graphic>
+                <ImageView fitWidth="24" fitHeight="24">
+                    <image>
+                        <Image url="@../images/chatbot.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+
+        </Button>
+
+    </AnchorPane>
+
+</StackPane>

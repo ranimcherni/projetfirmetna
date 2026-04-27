@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.QuantityDialogController"
+      spacing="20" style="-fx-background-color: #ffffff; -fx-padding: 30; -fx-alignment: center;">
+    <children>
+        <Label text="Sélectionner la quantité" styleClass="dialog-title" />
+
+        <VBox spacing="10" style="-fx-alignment: center;">
+            <Label fx:id="productNameLabel" text="Produit" styleClass="dialog-subtitle" />
+            <Label fx:id="stockLabel" text="Stock disponible: X" style="-fx-font-size: 12; -fx-text-fill: #636e72;" />
+        </VBox>
+
+        <HBox spacing="10" style="-fx-alignment: center;">
+            <Label text="Quantité:" style="-fx-font-size: 14;" />
+            <Spinner fx:id="quantitySpinner" prefWidth="80" />
+        </HBox>
+
+        <HBox spacing="15" style="-fx-alignment: center;">
+            <Button text="Annuler" onAction="#handleCancel" styleClass="marketplace-button marketplace-button-secondary" />
+            <Button text="Ajouter au panier" onAction="#handleConfirm" styleClass="marketplace-button marketplace-button-primary" />
+        </HBox>
+    </children>
+</VBox>

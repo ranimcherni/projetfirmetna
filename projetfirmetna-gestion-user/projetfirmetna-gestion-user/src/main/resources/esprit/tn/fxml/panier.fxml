@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PanierController" stylesheets="@../css/style.css">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 20 20 10 20; -fx-background-color: #f7f9fb; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+            <children>
+                <Label text="Panier" style="-fx-font-size: 22; -fx-font-weight: bold;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Fermer" onAction="#handleClose" style="-fx-background-color: transparent; -fx-text-fill: #2d3436; -fx-border-color: #2d3436; -fx-border-radius: 6; -fx-background-radius: 6;" />
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="15" style="-fx-padding: 20;">
+            <children>
+                <TableView fx:id="panierTable" VBox.vgrow="ALWAYS" styleClass="admin-table">
+                    <columns>
+                        <TableColumn fx:id="produitCol" text="Produit" prefWidth="220" />
+                        <TableColumn fx:id="quantiteCol" text="Quantité" prefWidth="100" />
+                        <TableColumn fx:id="prixCol" text="Prix unitaire" prefWidth="130" />
+                        <TableColumn fx:id="totalCol" text="Sous-total" prefWidth="130" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <Label fx:id="emptyLabel" text="Votre panier est vide." style="-fx-text-fill: #636e72; -fx-font-size: 16;" visible="false" managed="false" />
+            </children>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 15 20 20 20; -fx-background-color: #fafbfc; -fx-border-color: #e0e0e0; -fx-border-width: 1 0 0 0;">
+            <children>
+                <Label fx:id="totalLabel" style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <Button text="Supprimer" onAction="#handleRemove" styleClass="btn-secondary" />
+                <Button text="Commander" onAction="#handleCommander" styleClass="btn-primary" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
