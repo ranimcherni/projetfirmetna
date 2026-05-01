@@ -16,10 +16,15 @@ import models.Partner;
 import services.PartnerService;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.util.regex.Pattern;
+
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Color;
 
 public class PartnerController {
 
@@ -59,8 +64,8 @@ public class PartnerController {
     public void initialize() {
         partnerService = new PartnerService();
 
-        // Initialize ComboBox
-        cmbType.setItems(FXCollections.observableArrayList("Supplier", "Distributor", "Donor"));
+        // Initialize ComboBox with 4 professional types
+        cmbType.setItems(FXCollections.observableArrayList("Producteur", "Distributeur", "Transformateur", "Investisseur"));
 
         // Set up columns in the table
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -197,12 +202,19 @@ public class PartnerController {
     void handleGenerateQR(ActionEvent event) {
         if (selectedPartner != null) {
             try {
-                String data = "Nom: " + selectedPartner.getName() + "\n" +
-                              "Email: " + selectedPartner.getEmail() + "\n" +
-                              "Tel: " + selectedPartner.getPhone();
+                // Professional vCard 3.0 Format
+                String vCard = "BEGIN:VCARD\n" +
+                               "VERSION:3.0\n" +
+                               "FN:" + selectedPartner.getName() + "\n" +
+                               "ORG:Firmetna Partner\n" +
+                               "EMAIL:" + selectedPartner.getEmail() + "\n" +
+                               "TEL:" + selectedPartner.getPhone() + "\n" +
+                               "ADR:;;" + selectedPartner.getAddress() + ";;;;\n" +
+                               "NOTE:Partenaire Firmetna (" + selectedPartner.getType() + ")\n" +
+                               "END:VCARD";
                 
-                String encodedData = URLEncoder.encode(data, "UTF-8");
-                String apiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodedData;
+                String encodedData = URLEncoder.encode(vCard, "UTF-8");
+                String apiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodedData;
 
                 Image qrImage = new Image(apiUrl);
                 ImageView imageView = new ImageView(qrImage);
@@ -223,6 +235,70 @@ public class PartnerController {
             }
         } else {
             showAlert(Alert.AlertType.WARNING, "Erreur", "Veuillez sélectionner un partenaire d'abord.");
+        }
+    }
+
+    @FXML
+    void handleExportPDF(ActionEvent event) {
+        if (selectedPartner == null) {
+            showAlert(Alert.AlertType.WARNING, "Erreur", "Veuillez sélectionner un partenaire.");
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Enregistrer le rapport PDF");
+        fileChooser.setInitialFileName("Rapport_Partenaire_" + selectedPartner.getName().replace(" ", "_") + ".pdf");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"));
+        File file = fileChooser.showSaveDialog(tablePartners.getScene().getWindow());
+
+        if (file != null) {
+            try {
+                Document document = new Document(PageSize.A4);
+                PdfWriter.getInstance(document, new FileOutputStream(file));
+                document.open();
+
+                // Header
+                Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 24, Color.GREEN);
+                Paragraph title = new Paragraph("FIRMETNA - Fiche Partenaire", headerFont);
+                title.setAlignment(Element.ALIGN_CENTER);
+                document.add(title);
+                document.add(new Paragraph(" "));
+
+                // Info Section
+                Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+                document.add(new Paragraph("Nom: " + selectedPartner.getName(), normalFont));
+                document.add(new Paragraph("Type: " + selectedPartner.getType(), normalFont));
+                document.add(new Paragraph("Email: " + selectedPartner.getEmail(), normalFont));
+                document.add(new Paragraph("Téléphone: " + selectedPartner.getPhone(), normalFont));
+                document.add(new Paragraph("Adresse: " + selectedPartner.getAddress(), normalFont));
+                document.add(new Paragraph("Date d'adhésion: " + selectedPartner.getCreatedAt(), normalFont));
+                document.add(new Paragraph(" "));
+
+                // QR Code Section
+                String vCard = "BEGIN:VCARD\n" +
+                               "VERSION:3.0\n" +
+                               "FN:" + selectedPartner.getName() + "\n" +
+                               "EMAIL:" + selectedPartner.getEmail() + "\n" +
+                               "TEL:" + selectedPartner.getPhone() + "\n" +
+                               "END:VCARD";
+                String encodedData = URLEncoder.encode(vCard, "UTF-8");
+                String apiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodedData;
+                
+                com.lowagie.text.Image qrImg = com.lowagie.text.Image.getInstance(new java.net.URL(apiUrl));
+                qrImg.setAlignment(Element.ALIGN_CENTER);
+                document.add(qrImg);
+
+                Paragraph footer = new Paragraph("\nCe document est généré automatiquement par le système de gestion Firmetna.", 
+                        FontFactory.getFont(FontFactory.HELVETICA_OBLIQUE, 10));
+                footer.setAlignment(Element.ALIGN_CENTER);
+                document.add(footer);
+
+                document.close();
+                showAlert(Alert.AlertType.INFORMATION, "Succès", "Rapport PDF généré avec succès !");
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erreur PDF", "Impossible de générer le PDF: " + e.getMessage());
+            }
         }
     }
 

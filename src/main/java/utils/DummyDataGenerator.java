@@ -18,15 +18,18 @@ public class DummyDataGenerator {
         ContractService contractService = new ContractService();
 
         // 1. Création des Partenaires
+        // 1. Création des Partenaires avec les nouveaux types IA
         System.out.println("Création des partenaires...");
-        Partner p1 = new Partner("AgriBio Tunisie", "Supplier", "contact@agribio.tn", "22334455", "Sfax, Tunisie");
-        Partner p2 = new Partner("Carrefour Market", "Distributor", "achats@carrefour.tn", "71889900", "Tunis, Tunisie");
-        Partner p3 = new Partner("GreenTech Solutions", "Donor", "invest@greentech.com", "55667788", "Sousse, Tunisie");
+        Partner p1 = new Partner("AgriBio Tunisie", "Producteur", "contact@agribio.tn", "22334455", "Sfax, Tunisie");
+        Partner p2 = new Partner("Carrefour Market", "Distributeur", "achats@carrefour.tn", "71889900", "Tunis, Tunisie");
+        Partner p3 = new Partner("Fruitify Transformation", "Transformateur", "usine@fruitify.tn", "55667788", "Sousse, Tunisie");
+        Partner p4 = new Partner("InvestAgri Fund", "Investisseur", "invest@agrifund.tn", "99887766", "Tunis, Tunisie");
 
         // Insert partners
         if (partnerService.getPartnerByEmail(p1.getEmail()) == null) partnerService.add(p1);
         if (partnerService.getPartnerByEmail(p2.getEmail()) == null) partnerService.add(p2);
         if (partnerService.getPartnerByEmail(p3.getEmail()) == null) partnerService.add(p3);
+        if (partnerService.getPartnerByEmail(p4.getEmail()) == null) partnerService.add(p4);
 
         System.out.println("✅ Partenaires ajoutés avec succès !");
 

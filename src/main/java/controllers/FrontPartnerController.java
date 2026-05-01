@@ -12,6 +12,7 @@ import models.Contract;
 import models.Partner;
 import services.ContractService;
 import services.PartnerService;
+import services.AIRecommendationService;
 import utils.NavigationService;
 
 import java.sql.Date;
@@ -49,14 +50,22 @@ public class FrontPartnerController {
     @FXML private TableColumn<Contract, String> colStatus;
     @FXML private TableColumn<Contract, String> colTimeLeft;
 
+    // AI Recommendations
+    @FXML private VBox aiContainer;
+    @FXML private Label lblAiRec1;
+    @FXML private Label lblAiRec2;
+    @FXML private Label lblAiRec3;
+
     private PartnerService partnerService;
     private ContractService contractService;
+    private AIRecommendationService aiService;
     private Partner currentPartner;
 
     @FXML
     public void initialize() {
         partnerService = new PartnerService();
         contractService = new ContractService();
+        aiService = new AIRecommendationService();
 
         // Initially show public, hide dashboard
         publicSection.setVisible(true);
@@ -140,14 +149,44 @@ public class FrontPartnerController {
         
         // Fetch Weather API
         fetchWeather();
+        
+        // Load AI Recommendations
+        loadAIRecommendations();
+    }
+
+    private void loadAIRecommendations() {
+        List<Partner> allPartners = partnerService.getAll();
+        List<Partner> recs = aiService.getRecommendations(currentPartner, allPartners);
+
+        Label[] labels = {lblAiRec1, lblAiRec2, lblAiRec3};
+        for (int i = 0; i < labels.length; i++) {
+            if (i < recs.size()) {
+                Partner p = recs.get(i);
+                labels[i].setText("✨ " + p.getName() + " (" + p.getType() + ") - " + extractCity(p.getAddress()));
+                labels[i].setVisible(true);
+            } else {
+                labels[i].setVisible(false);
+            }
+        }
+    }
+
+    private String extractCity(String address) {
+        if (address == null || address.isEmpty()) return "N/A";
+        if (address.contains(",")) return address.split(",")[0].trim();
+        return address.trim();
     }
 
     private void fetchWeather() {
+        lblWeather.setText("Loading..."); 
         new Thread(() -> {
             try {
+                // Using HTTPS with a robust approach
                 URL url = new URL("https://api.open-meteo.com/v1/forecast?latitude=36.8065&longitude=10.1815&current_weather=true");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
+                conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+                conn.setConnectTimeout(10000);
+                
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -157,25 +196,37 @@ public class FrontPartnerController {
                 reader.close();
                 
                 String json = response.toString();
+                // Regex to find temperature in current_weather block
+                java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\"temperature\":\\s*([0-9.-]+)");
+                java.util.regex.Matcher matcher = pattern.matcher(json);
+                
                 String tempStr = "";
-                int tempIndex = json.indexOf("\"temperature\":");
-                if (tempIndex != -1) {
-                    int commaIndex = json.indexOf(",", tempIndex);
-                    if (commaIndex == -1) commaIndex = json.indexOf("}", tempIndex);
-                    tempStr = json.substring(tempIndex + 14, commaIndex).trim();
+                if (matcher.find()) {
+                    tempStr = matcher.group(1);
                 }
+
                 final String finalTemp = tempStr;
                 javafx.application.Platform.runLater(() -> {
                     if (!finalTemp.isEmpty()) {
                         lblWeather.setText(finalTemp + " °C");
                     } else {
-                        lblWeather.setText("Indisponible");
+                        lblWeather.setText("N/A");
                     }
                 });
             } catch (Exception e) {
-                javafx.application.Platform.runLater(() -> lblWeather.setText("Erreur API"));
+                javafx.application.Platform.runLater(() -> {
+                    lblWeather.setText("Offline");
+                });
             }
         }).start();
+    }
+
+    @FXML
+    void handleLogout(ActionEvent event) {
+        currentPartner = null;
+        dashboardSection.setVisible(false);
+        publicSection.setVisible(true);
+        txtLoginEmail.clear();
     }
 
     @FXML

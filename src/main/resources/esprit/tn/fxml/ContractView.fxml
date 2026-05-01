@@ -9,76 +9,84 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #f5f6fa; -fx-padding: 30;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ContractController">
+<VBox prefHeight="750.0" prefWidth="950.0" spacing="15.0" style="-fx-background-color: linear-gradient(to bottom right, #f0f7f0, #d5e8d5); -fx-padding: 20;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ContractController">
     
-    <Label style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #1b4332;" text="Gestion des Contrats &amp; Offres" />
+    <Label styleClass="dashboard-title" text="Gestion des Contrats &amp; Offres" />
+    <Label styleClass="dashboard-subtitle" text="Suivez vos investissements et convertissez les valeurs en temps réel." style="-fx-padding: 0 0 5 0;" />
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="15" style="-fx-padding: 5;">
 
     <!-- Form Section -->
-    <HBox spacing="20">
-        <VBox spacing="15" HBox.hgrow="ALWAYS">
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Partenaire:" />
-                <ComboBox fx:id="cmbPartner" promptText="Sélectionner le partenaire" prefWidth="250.0" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Titre:" />
-                <TextField fx:id="txtTitle" promptText="Titre du contrat" HBox.hgrow="ALWAYS" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Valeur (TND):" />
-                <TextField fx:id="txtValue" promptText="Ex: 1500.50" HBox.hgrow="ALWAYS" />
-                <Button onAction="#handleConvertCurrency" text="🔄 Convertir EUR" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 5;" />
-                <Label fx:id="lblEurValue" text="0.00 €" style="-fx-font-weight: bold; -fx-text-fill: #e67e22;" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Statut:" />
-                <ComboBox fx:id="cmbStatus" promptText="Statut actuel" prefWidth="250.0" />
-            </HBox>
-        </VBox>
-        <VBox spacing="15" HBox.hgrow="ALWAYS">
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Date Début:" />
-                <DatePicker fx:id="dpStartDate" prefWidth="200.0" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Date Fin:" />
-                <DatePicker fx:id="dpEndDate" prefWidth="200.0" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Durée estimée:" />
-                <Label fx:id="lblDuration" text="0 jours" style="-fx-font-weight: bold; -fx-text-fill: #2980b9;" />
-            </HBox>
-            <HBox spacing="15">
-                <Label prefWidth="100.0" text="Description:" />
-                <TextArea fx:id="txtDescription" prefHeight="60.0" promptText="Détails du contrat..." HBox.hgrow="ALWAYS" />
-            </HBox>
-            
-            <!-- Buttons Section -->
-            <HBox alignment="CENTER_RIGHT" spacing="15">
-                <padding>
-                    <Insets top="5" />
-                </padding>
-                <Button onAction="#handleAdd" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Ajouter" />
-                <Button onAction="#handleUpdate" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;" text="Modifier" />
-                <Button onAction="#handleDelete" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" text="Supprimer" />
-                <Button onAction="#handleClear" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;" text="Vider" />
-            </HBox>
-        </VBox>
-    </HBox>
+    <VBox styleClass="admin-glass-card" spacing="20" style="-fx-padding: 25;">
+        <HBox spacing="30">
+            <VBox spacing="15" HBox.hgrow="ALWAYS">
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Partenaire:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <ComboBox fx:id="cmbPartner" promptText="Sélectionner le partenaire" styleClass="admin-form-input" prefWidth="250.0" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Titre:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <TextField fx:id="txtTitle" promptText="Titre du contrat" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Valeur (TND):" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <TextField fx:id="txtValue" promptText="Ex: 1500.50" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                    <Button onAction="#handleConvertCurrency" text="🔄 Convertir EUR" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 10; -fx-padding: 8 12;" />
+                    <Label fx:id="lblEurValue" text="0.00 €" style="-fx-font-weight: bold; -fx-text-fill: #e67e22; -fx-font-size: 15;" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Statut:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <ComboBox fx:id="cmbStatus" promptText="Statut actuel" styleClass="admin-form-input" prefWidth="250.0" />
+                </HBox>
+            </VBox>
+            <VBox spacing="15" HBox.hgrow="ALWAYS">
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Date Début:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <DatePicker fx:id="dpStartDate" style="-fx-background-radius: 10;" prefWidth="200.0" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Date Fin:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <DatePicker fx:id="dpEndDate" style="-fx-background-radius: 10;" prefWidth="200.0" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Durée estimée:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label fx:id="lblDuration" text="0 jours" style="-fx-font-weight: bold; -fx-text-fill: #2980b9; -fx-font-size: 14;" />
+                </HBox>
+                <HBox spacing="15">
+                    <Label prefWidth="100.0" text="Description:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <TextArea fx:id="txtDescription" prefHeight="60.0" promptText="Détails du contrat..." style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #e9ecef;" HBox.hgrow="ALWAYS" />
+                </HBox>
+            </VBox>
+        </HBox>
+        
+        <!-- Buttons Section -->
+        <HBox alignment="CENTER_RIGHT" spacing="15">
+            <padding>
+                <Insets top="5" />
+            </padding>
+            <Button onAction="#handleAdd" styleClass="admin-btn-primary" text="➕ Ajouter" style="-fx-padding: 8 20;" />
+            <Button onAction="#handleUpdate" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 20;" text="✏ Modifier" />
+            <Button onAction="#handleDelete" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 20;" text="🗑 Supprimer" />
+            <Button onAction="#handleClear" styleClass="admin-btn-secondary" text="🧹 Vider" style="-fx-padding: 8 20;" />
+        </HBox>
+    </VBox>
 
     <!-- Search and Actions Section -->
-    <HBox spacing="15" alignment="CENTER_LEFT">
-        <TextField fx:id="txtSearch" promptText="🔍 Rechercher par titre..." prefWidth="300.0" />
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="admin-glass-card" style="-fx-padding: 15 25;">
+        <TextField fx:id="txtSearch" promptText="🔍 Rechercher par titre..." styleClass="admin-form-input" prefWidth="350.0" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button onAction="#handleExportCSV" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold;" text="📥 Exporter CSV" />
+        <Button onAction="#handleExportCSV" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 15;" text="📥 Exporter CSV" />
     </HBox>
 
     <!-- Table Section -->
-    <TableView fx:id="tableContracts" VBox.vgrow="ALWAYS">
+    <TableView fx:id="tableContracts" VBox.vgrow="ALWAYS" styleClass="admin-table" minHeight="300">
         <columns>
             <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
             <TableColumn fx:id="colPartnerId" prefWidth="100.0" text="ID Partenaire" />
@@ -92,5 +100,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
-
+            </VBox>
+        </content>
+    </ScrollPane>
 </VBox>

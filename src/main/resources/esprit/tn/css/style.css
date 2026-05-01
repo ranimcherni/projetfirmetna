@@ -156,13 +156,18 @@
 }
 
 .glass-card {
-    -fx-background-color: rgba(255, 255, 255, 0.9);
-    -fx-background-radius: 20;
+    -fx-background-color: rgba(255, 255, 255, 0.85);
+    -fx-background-radius: 25;
+    -fx-border-color: rgba(255, 255, 255, 0.4);
+    -fx-border-width: 1.5;
+    -fx-border-radius: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 30, 0, 0, 15);
+    -fx-padding: 35;
+}
+
+.glass-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
     -fx-border-color: rgba(39, 174, 96, 0.3);
-    -fx-border-width: 2;
-    -fx-border-radius: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 10);
-    -fx-padding: 40;
 }
 
 .auth-field {
@@ -556,48 +561,62 @@
 
 /* MODERN ADMIN TABLE STYLING */
 .admin-table {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
     -fx-background-radius: 15;
-    -fx-border-color: #f1f2f6;
+    -fx-border-color: rgba(45, 90, 39, 0.1);
     -fx-border-width: 1;
     -fx-border-radius: 15;
     -fx-padding: 0;
 }
 
 .admin-table .column-header-background {
-    -fx-background-color: #f8f9fa;
+    -fx-background-color: linear-gradient(to bottom, #f8f9fa, #e9ecef);
     -fx-background-radius: 15 15 0 0;
-    -fx-padding: 10 0;
+    -fx-padding: 12 0;
+    -fx-border-color: transparent transparent #dee2e6 transparent;
 }
 
 .admin-table .column-header {
     -fx-background-color: transparent;
-    -fx-size: 45;
+    -fx-size: 50;
+    -fx-border-color: transparent #dee2e6 transparent transparent;
 }
 
 .admin-table .column-header .label {
-    -fx-text-fill: #7f8c8d;
+    -fx-text-fill: #1b4332;
     -fx-font-weight: bold;
-    -fx-font-size: 13;
+    -fx-font-size: 14;
+    -fx-text-transform: uppercase;
 }
 
 .admin-table .table-row-cell {
     -fx-background-color: white;
-    -fx-cell-size: 65;
+    -fx-cell-size: 55;
     -fx-border-color: #f1f2f6;
     -fx-border-width: 0 0 1 0;
+    -fx-text-fill: #2d3436;
+    -fx-font-size: 14;
 }
 
 .admin-table .table-row-cell:odd {
-    -fx-background-color: #fcfdfe;
+    -fx-background-color: #fafbfc;
 }
 
 .admin-table .table-row-cell:hover {
-    -fx-background-color: #f1f9f4;
+    -fx-background-color: #e8f5e9;
+    -fx-cursor: hand;
 }
 
 .admin-table .table-row-cell:selected {
-    -fx-background-color: #e8f5e9;
+    -fx-background-color: #c8e6c9;
+    -fx-text-fill: #1b4332;
+    -fx-font-weight: bold;
+}
+
+.admin-table .placeholder .label {
+    -fx-text-fill: #95a5a6;
+    -fx-font-size: 16;
+    -fx-font-style: italic;
 }
 
 .user-initials-bubble {

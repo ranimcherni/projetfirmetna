@@ -8,63 +8,72 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #f5f6fa; -fx-padding: 30;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PartnerController">
+<VBox prefHeight="750.0" prefWidth="950.0" spacing="15.0" style="-fx-background-color: linear-gradient(to bottom right, #f0f7f0, #d5e8d5); -fx-padding: 20;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PartnerController">
     
-    <Label style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #1b4332;" text="Gestion des Partenaires" />
+    <Label styleClass="dashboard-title" text="Gestion des Partenaires" />
+    <Label styleClass="dashboard-subtitle" text="Gérez vos partenaires, leurs informations et générez leurs QR Codes." style="-fx-padding: 0 0 5 0;" />
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+        <content>
+            <VBox spacing="15" style="-fx-padding: 5;">
 
     <!-- Form Section -->
-    <HBox spacing="20">
-        <VBox spacing="15" HBox.hgrow="ALWAYS">
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Nom:" />
-                <TextField fx:id="txtName" promptText="Nom du partenaire" HBox.hgrow="ALWAYS" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Type:" />
-                <ComboBox fx:id="cmbType" promptText="Sélectionner le type" prefWidth="250.0" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Email:" />
-                <TextField fx:id="txtEmail" promptText="email@exemple.com" HBox.hgrow="ALWAYS" />
-            </HBox>
-            <HBox spacing="15" alignment="CENTER_LEFT">
-                <Label prefWidth="100.0" text="Téléphone:" />
-                <TextField fx:id="txtPhone" promptText="Numéro de téléphone" HBox.hgrow="ALWAYS" />
-            </HBox>
-        </VBox>
-        <VBox spacing="15" HBox.hgrow="ALWAYS">
-            <HBox spacing="15">
-                <Label prefWidth="80.0" text="Adresse:" />
-                <TextArea fx:id="txtAddress" prefHeight="100.0" promptText="Adresse complète..." HBox.hgrow="ALWAYS" />
-            </HBox>
-            
-            <!-- Buttons Section -->
-            <HBox alignment="CENTER_RIGHT" spacing="15">
-                <padding>
-                    <Insets top="10" />
-                </padding>
-                <Button onAction="#handleAdd" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Ajouter" />
-                <Button onAction="#handleUpdate" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;" text="Modifier" />
-                <Button onAction="#handleDelete" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" text="Supprimer" />
-                <Button onAction="#handleClear" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;" text="Vider" />
-            </HBox>
-        </VBox>
-    </HBox>
+    <VBox styleClass="admin-glass-card" spacing="20" style="-fx-padding: 25;">
+        <HBox spacing="30">
+            <VBox spacing="15" HBox.hgrow="ALWAYS">
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Nom:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <TextField fx:id="txtName" promptText="Nom du partenaire" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Type:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <ComboBox fx:id="cmbType" promptText="Sélectionner le type" styleClass="admin-form-input" prefWidth="250.0" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Email:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <TextField fx:id="txtEmail" promptText="email@exemple.com" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label prefWidth="100.0" text="Téléphone:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <TextField fx:id="txtPhone" promptText="Numéro de téléphone" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                </HBox>
+            </VBox>
+            <VBox spacing="15" HBox.hgrow="ALWAYS">
+                <HBox spacing="15">
+                    <Label prefWidth="80.0" text="Adresse:" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <TextArea fx:id="txtAddress" prefHeight="100.0" promptText="Adresse complète..." style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #e9ecef;" HBox.hgrow="ALWAYS" />
+                </HBox>
+            </VBox>
+        </HBox>
+        
+        <!-- Buttons Section -->
+        <HBox alignment="CENTER_RIGHT" spacing="15">
+            <padding>
+                <Insets top="10" />
+            </padding>
+            <Button onAction="#handleAdd" styleClass="admin-btn-primary" text="➕ Ajouter" style="-fx-padding: 8 20;" />
+            <Button onAction="#handleUpdate" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 20;" text="✏ Modifier" />
+            <Button onAction="#handleDelete" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 20;" text="🗑 Supprimer" />
+            <Button onAction="#handleClear" styleClass="admin-btn-secondary" text="🧹 Vider" style="-fx-padding: 8 20;" />
+        </HBox>
+    </VBox>
 
     <!-- Search and Actions Section -->
-    <HBox spacing="15" alignment="CENTER_LEFT">
-        <TextField fx:id="txtSearch" promptText="🔍 Rechercher par nom ou email..." prefWidth="300.0" />
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="admin-glass-card" style="-fx-padding: 15 25;">
+        <TextField fx:id="txtSearch" promptText="🔍 Rechercher par nom ou email..." styleClass="admin-form-input" prefWidth="350.0" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button onAction="#handleGenerateQR" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="📱 Générer QR" />
-        <Button onAction="#handleExportCSV" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold;" text="📥 Exporter CSV" />
+        <Button onAction="#handleGenerateQR" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 15;" text="📱 Générer QR" />
+        <Button onAction="#handleExportPDF" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 15;" text="📄 Rapport PDF" />
+        <Button onAction="#handleExportCSV" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-padding: 8 15;" text="📥 Exporter CSV" />
     </HBox>
 
     <!-- Table Section -->
-    <TableView fx:id="tablePartners" VBox.vgrow="ALWAYS">
+    <TableView fx:id="tablePartners" VBox.vgrow="ALWAYS" styleClass="admin-table" minHeight="300">
         <columns>
             <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
             <TableColumn fx:id="colName" prefWidth="150.0" text="Nom" />
@@ -77,5 +86,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
         </columnResizePolicy>
     </TableView>
-
+            </VBox>
+        </content>
+    </ScrollPane>
 </VBox>
