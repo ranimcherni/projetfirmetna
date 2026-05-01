@@ -113,6 +113,28 @@ public class UserService implements IService<User> {
         }
     }
 
+    public User getUserById(int id) {
+        String req = "SELECT * FROM `user` WHERE `id` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setEmail(rs.getString("email"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                u.setRole(rs.getString("role"));
+                u.setStatus(rs.getString("status"));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getUserById: " + e.getMessage());
+        }
+        return null;
+    }
+
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();

@@ -13,12 +13,13 @@ public class ServicePublication implements IService<Publication> {
     private Connection cnx;
 
     public ServicePublication() {
+        utils.DatabaseInitializer.initialize();
         cnx = MyDataBase.getInstance().getCnx();
     }
 
     @Override
     public void add(Publication p) {
-        String qry = "INSERT INTO `publication`(`titre`, `contenu`, `type`, `auteur_id`, `image_path`) VALUES (?,?,?,?,?)";
+        String qry = "INSERT INTO `publication`(`titre`, `contenu`, `type`, `auteur_id`, `image_path`, `pdf_path`) VALUES (?,?,?,?,?,?)";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
             pstm.setString(1, p.getTitre());
@@ -26,24 +27,27 @@ public class ServicePublication implements IService<Publication> {
             pstm.setString(3, p.getType() != null ? p.getType() : "Discussion");
             pstm.setInt(4, p.getAuteurId());
             pstm.setString(5, p.getImagePath());
+            pstm.setString(6, p.getPdfPath());
 
             pstm.executeUpdate();
             System.out.println("Publication added successfully!");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Database Error (add): " + e.getMessage());
+            throw new RuntimeException("Erreur lors de l'ajout : " + e.getMessage());
         }
     }
 
     @Override
     public void update(Publication p) {
-        String qry = "UPDATE `publication` SET `titre`=?,`contenu`=?,`type`=?,`image_path`=? WHERE `id`=?";
+        String qry = "UPDATE `publication` SET `titre`=?,`contenu`=?,`type`=?,`image_path`=?,`pdf_path`=? WHERE `id`=?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(qry);
             pstm.setString(1, p.getTitre());
             pstm.setString(2, p.getContenu());
             pstm.setString(3, p.getType());
             pstm.setString(4, p.getImagePath());
-            pstm.setInt(5, p.getId());
+            pstm.setString(5, p.getPdfPath());
+            pstm.setInt(6, p.getId());
 
             pstm.executeUpdate();
             System.out.println("Publication updated successfully!");
@@ -84,6 +88,7 @@ public class ServicePublication implements IService<Publication> {
                 p.setDateCreation(rs.getTimestamp("date_creation"));
                 p.setAuteurId(rs.getInt("auteur_id"));
                 p.setImagePath(rs.getString("image_path"));
+                p.setPdfPath(rs.getString("pdf_path"));
 
                 publications.add(p);
             }
@@ -113,6 +118,7 @@ public class ServicePublication implements IService<Publication> {
                 p.setDateCreation(rs.getTimestamp("date_creation"));
                 p.setAuteurId(rs.getInt("auteur_id"));
                 p.setImagePath(rs.getString("image_path"));
+                p.setPdfPath(rs.getString("pdf_path"));
 
                 publications.add(p);
             }

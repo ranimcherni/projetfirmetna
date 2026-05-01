@@ -24,12 +24,12 @@
                 <Button styleClass="admin-sidebar-item" text="📅 Événements" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                 <Button styleClass="admin-sidebar-item" text="📍 Lieux" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                 
-                <MenuButton styleClass="admin-sidebar-item-dropdown" text="💬 Gestion Forum" maxWidth="Infinity" alignment="BASELINE_LEFT">
-                    <items>
-                        <MenuItem text="Sujets" />
-                        <MenuItem text="Commentaires" />
-                    </items>
-                </MenuButton>
+                <VBox spacing="2" style="-fx-background-color: rgba(0,0,0,0.1); -fx-background-radius: 8; -fx-padding: 5;">
+                    <Label text="💬 Gestion Forum" styleClass="admin-sidebar-section" maxWidth="Infinity" />
+                    <Button onAction="#showForumPublications" styleClass="admin-sidebar-subitem" text="↳ Sujets" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                    <Button onAction="#showForumComments" styleClass="admin-sidebar-subitem" text="↳ Commentaires" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                    <Button onAction="#showForumStats" styleClass="admin-sidebar-subitem" text="↳ Statistiques" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                </VBox>
 
                 <Button styleClass="admin-sidebar-item" text="❤ Donations (Offres)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                 <Button styleClass="admin-sidebar-item" text="🤝 Donations (Demandes)" maxWidth="Infinity" alignment="BASELINE_LEFT" />

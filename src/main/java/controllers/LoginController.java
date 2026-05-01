@@ -82,6 +82,7 @@ public class LoginController {
             admin.setPrenom("Système");
             admin.setRole("ADMIN");
             admin.setStatus("Actif");
+            admin.setId(1); // Set ID 1 for database consistency
             UserSession.getInstance().setUser(admin);
             goToAdmin(event);
             return;

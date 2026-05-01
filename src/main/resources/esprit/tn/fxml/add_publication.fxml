@@ -9,25 +9,33 @@
             prefHeight="600.0" prefWidth="900.0"
             stylesheets="@../css/forum.css" styleClass="main-bg">
 
-    <VBox spacing="15" alignment="CENTER" maxWidth="600"
-          AnchorPane.topAnchor="40" AnchorPane.bottomAnchor="40"
-          AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150"
+    <VBox spacing="25" alignment="CENTER" maxWidth="700"
+          AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50"
+          AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100"
           styleClass="card">
 
-        <Label text="Nouvelle Publication" styleClass="header-title-lg"/>
+        <VBox spacing="5" alignment="CENTER">
+            <Label text="Partager une Publication" styleClass="header-title-lg"/>
+            <Label text="Contribuez à la connaissance collective de Firmetna" styleClass="text-muted"/>
+        </VBox>
 
-        <TextField fx:id="txtTitre" promptText="Titre de la publication" styleClass="text-field-custom"/>
-        <ComboBox fx:id="comboType" promptText="Type" prefWidth="600.0" styleClass="combo-box"/>
-        <TextArea fx:id="txtContenu" promptText="Rédigez votre contenu ici..." VBox.vgrow="ALWAYS" styleClass="text-area-custom"/>
+        <VBox spacing="15" VBox.vgrow="ALWAYS">
+            <TextField fx:id="txtTitre" promptText="Titre accrocheur..." styleClass="text-field-custom"/>
+            <ComboBox fx:id="comboType" promptText="Choisir un type" prefWidth="700.0" styleClass="combo-box"/>
+            <TextArea fx:id="txtContenu" promptText="Rédigez votre contenu ici... Soyez précis et utile !" VBox.vgrow="ALWAYS" styleClass="text-area-custom"/>
+        </VBox>
 
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Button text="Parcourir Image" onAction="#chooseImage" styleClass="btn-secondary"/>
+        <HBox spacing="15" alignment="CENTER_LEFT">
+            <Button text="📁 Attacher une Image" onAction="#chooseImage" styleClass="btn-secondary"/>
             <Label fx:id="labelImage" text="Aucune image sélectionnée" styleClass="text-muted"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="📄 Importer un PDF" onAction="#choosePdf" styleClass="btn-secondary"/>
+            <Label fx:id="labelPdf" text="Aucun PDF sélectionné" styleClass="text-muted"/>
         </HBox>
 
-        <HBox spacing="15" alignment="CENTER_RIGHT">
+        <HBox spacing="20" alignment="CENTER_RIGHT">
             <Button text="Annuler" onAction="#goBack" styleClass="btn-secondary"/>
-            <Button text="Publier" onAction="#savePublication" styleClass="btn-success"/>
+            <Button fx:id="btnSave" text="🔍 Publier Maintenant" onAction="#savePublication" styleClass="btn-primary"/>
         </HBox>
 
     </VBox>

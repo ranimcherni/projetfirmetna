@@ -13,6 +13,7 @@ public class ServiceCommentaire implements IService<Commentaire> {
     private Connection cnx;
 
     public ServiceCommentaire() {
+        utils.DatabaseInitializer.initialize();
         cnx = MyDataBase.getInstance().getCnx();
     }
 
@@ -33,7 +34,8 @@ public class ServiceCommentaire implements IService<Commentaire> {
             pstm.executeUpdate();
             System.out.println("Commentaire added successfully!");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Database Error (comment add): " + e.getMessage());
+            throw new RuntimeException("Erreur lors de l'ajout du commentaire : " + e.getMessage());
         }
     }
 

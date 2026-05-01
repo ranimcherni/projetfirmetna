@@ -9,28 +9,31 @@
             prefHeight="600.0" prefWidth="900.0"
             stylesheets="@../css/forum.css" styleClass="main-bg">
 
-    <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20"
-          AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40">
+    <VBox spacing="25" AnchorPane.topAnchor="30" AnchorPane.bottomAnchor="30"
+          AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
 
-        <!-- Header Controls -->
-        <HBox spacing="15" alignment="CENTER_LEFT">
-            <Button text="Retour" onAction="#returnToHome" styleClass="btn-secondary"/>
-            <Label text="Communauté et Forum" styleClass="header-title"/>
+        <!-- Enhanced Header Area -->
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <Button text="← Retour" onAction="#returnToHome" styleClass="btn-secondary"/>
+            <VBox>
+                <Label text="Communauté Firmetna" styleClass="header-title"/>
+                <Label text="Partagez votre passion pour l'agriculture" styleClass="text-muted"/>
+            </VBox>
         </HBox>
 
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <TextField fx:id="searchField" promptText="Rechercher une publication..." HBox.hgrow="ALWAYS" prefWidth="400.0" styleClass="search-box"/>
-            <ComboBox fx:id="comboFilter" prefWidth="150.0" styleClass="combo-box"/>
-            <Button text="Nouvelle Publication" onAction="#switchToAddPublication" styleClass="btn-primary"/>
+        <!-- Search & Filter Bar -->
+        <HBox spacing="15" alignment="CENTER_LEFT" styleClass="card" style="-fx-padding: 15;">
+            <TextField fx:id="searchField" promptText="Rechercher une publication..." HBox.hgrow="ALWAYS" styleClass="search-box"/>
+            <ComboBox fx:id="comboFilter" prefWidth="180.0" styleClass="combo-box"/>
+            <Button text="+ Nouvelle Publication" onAction="#switchToAddPublication" styleClass="btn-primary"/>
         </HBox>
 
-        <!-- List Content -->
+        <!-- Main Content Area -->
         <ListView fx:id="listPublications" VBox.vgrow="ALWAYS" styleClass="list-view-forum"/>
 
-        <!-- Actions -->
-        <HBox spacing="10" alignment="CENTER_RIGHT">
+        <!-- Bottom Actions -->
+        <HBox spacing="15" alignment="CENTER_RIGHT">
             <Button text="Supprimer" onAction="#deletePublicationAction" styleClass="btn-danger"/>
-            <Button text="Ouvrir la Publication" onAction="#viewPublicationAction" styleClass="btn-primary"/>
         </HBox>
 
     </VBox>

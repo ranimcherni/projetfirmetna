@@ -39,6 +39,21 @@ public class AdminLayoutController {
     }
 
     @FXML
+    private void showForumPublications(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_forum_publications.fxml");
+    }
+
+    @FXML
+    private void showForumComments(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_forum_comments.fxml");
+    }
+
+    @FXML
+    private void showForumStats(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_forum_stats.fxml");
+    }
+
+    @FXML
     private void handleLogout(ActionEvent event) {
         utils.NavigationService.navigateFromNode(contentArea, "/esprit/tn/fxml/home.fxml", "Bienvenue");
     }

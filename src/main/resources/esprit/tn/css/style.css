@@ -441,13 +441,25 @@
     -fx-text-fill: white;
 }
 
-.admin-sidebar-item-dropdown {
+.admin-sidebar-subitem {
     -fx-background-color: transparent;
-    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-font-size: 13px;
+    -fx-padding: 8 15 8 35;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
 }
 
-.admin-sidebar-item-dropdown .label {
-    -fx-text-fill: rgba(255, 255, 255, 0.7);
+.admin-sidebar-subitem:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-text-fill: white;
+}
+
+.admin-sidebar-section {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
 }
 
 .admin-sidebar-logout {
@@ -658,6 +670,9 @@
 .default-color0.chart-pie { -fx-pie-color: #27ae60; } /* Forest Green */
 .default-color1.chart-pie { -fx-pie-color: #f1c40f; } /* Golden Wheat */
 .default-color2.chart-pie { -fx-pie-color: #2ecc71; } /* Leaf Green */
+.default-color3.chart-pie { -fx-pie-color: #1b4332; } /* Deep Green */
+
+.default-color0.chart-bar { -fx-bar-fill: #27ae60; }
 
 .chart-series-area {
     -fx-stroke: #27ae60;
@@ -669,4 +684,61 @@
     -fx-background-insets: 0, 2;
     -fx-background-radius: 5px;
     -fx-padding: 5px;
+}
+
+/* --- MODERN ADMIN EXTRAS --- */
+.admin-table-modern {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.admin-table-modern .column-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #e0e6ed;
+}
+.admin-table-modern .column-header, .admin-table-modern .column-header .label {
+    -fx-background-color: transparent;
+    -fx-padding: 8 0;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #636e72;
+}
+.admin-table-modern .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #f1f2f6;
+}
+.admin-table-modern .table-row-cell:hover {
+    -fx-background-color: #f8fafc;
+}
+.admin-table-modern .table-cell {
+    -fx-text-fill: #2d3436;
+    -fx-font-size: 14px;
+    -fx-alignment: center-left;
+    -fx-border-color: transparent;
+}
+.admin-action-btn {
+    -fx-background-color: #fff5f5;
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+}
+.admin-action-btn:hover {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+.admin-hero-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1b4332;
+}
+.admin-hero-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #636e72;
 }

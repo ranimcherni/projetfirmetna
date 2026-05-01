@@ -36,3 +36,7 @@ Thumbs.db
 
 # Log files
 *.log
+
+# Java class files
+*.class
+bin/
