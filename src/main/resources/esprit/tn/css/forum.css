@@ -1,0 +1,65 @@
+/* Firmetna Forum Styling - Harmonized with Profile/Front */
+
+.main-bg {
+    -fx-background-color: transparent;
+}
+
+/* Forum Specific Card Styling */
+.forum-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 30, 0, 0, 10);
+    -fx-padding: 30;
+}
+
+/* List View Customization */
+.list-view-forum {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.list-view-forum .list-cell {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-border-color: #f1f2f6;
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: #2d3436;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+}
+
+.list-view-forum .list-cell:hover {
+    -fx-background-color: #f9fdf9;
+}
+
+.list-view-forum .list-cell:selected {
+    -fx-background-color: #edf7ed;
+    -fx-text-fill: #2d5a27;
+    -fx-font-weight: bold;
+}
+
+.list-view-forum .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+/* Specific item styles */
+.pub-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1b4332;
+}
+
+.pub-meta {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7f8c8d;
+}
+
+.pub-type-badge {
+    -fx-background-color: #e8f5e9;
+    -fx-text-fill: #2d5a27;
+    -fx-padding: 4 10;
+    -fx-background-radius: 15;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}

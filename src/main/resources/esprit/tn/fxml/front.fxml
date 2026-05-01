@@ -43,13 +43,13 @@
                                 <Button onAction="#handleAccueil" styleClass="nav-item" text="🏠 ACCUEIL" />
                                 <MenuButton styleClass="nav-item-dropdown" text="📦 PRODUITS">
                                     <items>
-                                        <MenuItem text="Fruits" />
-                                        <MenuItem text="Légumes" />
+                                        <MenuItem onAction="#handleProduits" text="Tous les produits" />
+                                        <MenuItem onAction="#handleProduitsVegetaux" text="Végétaux" />
+                                        <MenuItem onAction="#handleProduitsAnimaux" text="Animaux" />
                                     </items>
                                 </MenuButton>
                                 <Button onAction="#handleEvenements" styleClass="nav-item" text="📅 ÉVÉNEMENTS" />
                                 <Button onAction="#handleForum" styleClass="nav-item" text="💬 FORUM" />
-                                <Button onAction="#handleNotifications" styleClass="nav-item" text="🔔 NOTIFICATIONS" />
                                 <Button onAction="#handleDons" styleClass="nav-item" text="❤ DONS" />
                                 <Button onAction="#handlePartenariats" styleClass="nav-item" text="🤝 PARTENARIATS" />
                             </children>
@@ -87,7 +87,7 @@
                                 
                                 <HBox spacing="15" style="-fx-padding: 20 0 0 0;">
                                     <children>
-                                        <Button onAction="#handleAccueil" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Découvrir nos Produits" />
+                                        <Button onAction="#handleProduits" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Découvrir nos Produits" />
                                         <Button onAction="#handleForum" style="-fx-background-color: transparent; -fx-border-color: #2d5a27; -fx-border-radius: 30; -fx-text-fill: #2d5a27; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Le Forum" />
                                     </children>
                                 </HBox>
@@ -145,5 +145,44 @@
                 </VBox>
             </children>
         </VBox>
+        <!-- ================= CHATBOT LAYER ================= -->
+        <AnchorPane pickOnBounds="false">
+            <children>
+                <!-- CHAT WINDOW -->
+                <AnchorPane fx:id="chatbotContainer"
+                            prefWidth="300.0" prefHeight="400.0"
+                            visible="false" managed="false"
+                            layoutX="850.0" layoutY="300.0"
+                            style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #eee; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 6);">
+                    <children>
+                        <HBox fx:id="chatHeader" prefWidth="300.0" prefHeight="50.0" alignment="CENTER_LEFT" style="-fx-background-color: #f9f9f9; -fx-background-radius: 20 20 0 0; -fx-padding: 0 15;">
+                            <children>
+                                <Label text="Assistant Firmetna" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2d5a27;" />
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button text="✖" onAction="#toggleChatbot" style="-fx-background-color: transparent; -fx-text-fill: #999; -fx-font-size: 16; -fx-cursor: hand;" />
+                            </children>
+                        </HBox>
+                        <ScrollPane fx:id="chatScrollPane" layoutY="50.0" prefWidth="300.0" prefHeight="290.0" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background: white; -fx-background-color: white; -fx-border-color: transparent;">
+                            <content>
+                                <VBox fx:id="chatMessages" spacing="10" style="-fx-padding: 15; -fx-background-color: white;" prefWidth="285.0" />
+                            </content>
+                        </ScrollPane>
+                        <HBox layoutX="10.0" layoutY="350.0" prefWidth="280.0" spacing="10" alignment="CENTER">
+                            <children>
+                                <TextField fx:id="chatInput" onAction="#handleSendChat" promptText="Écrivez votre message..." HBox.hgrow="ALWAYS" style="-fx-background-radius: 20; -fx-padding: 8 15; -fx-border-color: #ddd; -fx-border-radius: 20;" />
+                                <Button text="➤" onAction="#handleSendChat" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 50; -fx-min-width: 40; -fx-min-height: 40; -fx-cursor: hand;" />
+                            </children>
+                        </HBox>
+                    </children>
+                </AnchorPane>
+
+                <!-- FLOAT BUTTON -->
+                <Button fx:id="chatbotToggleButton"
+                        text="💬"
+                        onAction="#toggleChatbot"
+                        layoutX="900.0" layoutY="550.0"
+                        style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 50; -fx-min-width: 60; -fx-min-height: 60; -fx-font-size: 24; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);" />
+            </children>
+        </AnchorPane>
     </children>
 </StackPane>

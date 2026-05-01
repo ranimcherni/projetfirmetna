@@ -8,16 +8,21 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * Service for Google Authenticator (TOTP) - Pure Java Implementation
+ * Ce service gère l'authentification à deux facteurs (MFA) via l'algorithme TOTP.
+ * Il permet de générer des secrets sécurisés et de valider les codes à 6 chiffres des utilisateurs.
  */
 public class GoogleAuthService {
 
+    /** Taille du secret cryptographique fixée à 160 bits pour une sécurité maximale. */
     private static final int SECRET_SIZE = 20; // 160 bits
+    /** Nombre de chiffres requis pour le code de validation (standard à 6 chiffres). */
     private static final int CODE_DIGITS = 6;
+    /** Intervalle de temps de 30 secondes pour la validité de chaque code généré. */
     private static final int TIME_STEP = 30; // 30 seconds
 
     /**
-     * Generates a random Base32 secret key.
+     * Cette fonction génère une clé secrète aléatoire de 160 bits pour l'utilisateur.
+     * Elle convertit ensuite cette clé en format Base32 pour qu'elle soit lisible par l'humain et les applications.
      */
     public String generateSecretKey() {
         SecureRandom random = new SecureRandom();
@@ -27,7 +32,8 @@ public class GoogleAuthService {
     }
 
     /**
-     * Validates the 6-digit code provided by the user.
+     * Cette fonction vérifie si le code à 6 chiffres saisi par l'utilisateur est valide.
+     * Elle compare le code avec les valeurs attendues sur une plage de 5 minutes pour tolérer les décalages horaires.
      */
     public boolean authorize(String secretKey, int code) {
         if (secretKey == null || secretKey.trim().isEmpty()) return false;
@@ -45,12 +51,17 @@ public class GoogleAuthService {
     }
 
     /**
-     * Generates a URI for the QR Code.
+     * Cette fonction génère l'URL spécifique nécessaire pour créer le QR Code.
+     * Ce format standard permet à Google Authenticator d'importer automatiquement le compte et le secret.
      */
     public String getOtpAuthURL(String userEmail, String secretKey) {
         return String.format("otpauth://totp/Firmetna:%s?secret=%s&issuer=Firmetna", userEmail, secretKey);
     }
 
+    /**
+     * Cette fonction effectue le calcul mathématique HMAC-SHA1 pour transformer le secret et le temps en code.
+     * Elle applique ensuite un tronçonnage binaire pour obtenir exactement les 6 chiffres requis par le standard.
+     */
     private int calculateCode(String secretKey, long interval) {
         byte[] key = decodeBase32(secretKey);
         byte[] data = ByteBuffer.allocate(8).putLong(interval).array();
@@ -81,6 +92,10 @@ public class GoogleAuthService {
 
     private static final String BASE32_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
+    /**
+     * Cette fonction convertit des données binaires brutes en une chaîne de texte Base32 sécurisée.
+     * Elle est indispensable pour transformer le secret cryptographique en un texte affichable à l'écran.
+     */
     private String encodeBase32(byte[] bytes) {
         StringBuilder sb = new StringBuilder((bytes.length + 7) * 8 / 5);
         int bitBuffer = 0;
@@ -99,6 +114,10 @@ public class GoogleAuthService {
         return sb.toString();
     }
 
+    /**
+     * Cette fonction transforme une chaîne Base32 en données binaires compréhensibles par l'ordinateur.
+     * Elle permet à l'algorithme de calcul de traiter la clé secrète qui a été stockée sous forme de texte.
+     */
     private byte[] decodeBase32(String base32) {
         base32 = base32.toUpperCase().replaceAll("[^A-Z2-7]", "");
         byte[] bytes = new byte[base32.length() * 5 / 8];

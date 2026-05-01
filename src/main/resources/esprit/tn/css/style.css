@@ -156,7 +156,7 @@
 }
 
 .glass-card {
-    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-color: rgba(255, 255, 255, 0.75);
     -fx-background-radius: 20;
     -fx-border-color: rgba(39, 174, 96, 0.3);
     -fx-border-width: 2;
@@ -980,3 +980,138 @@
 .agri-bar .bar { -fx-background-color: #2d5a27; }
 .client-bar .bar { -fx-background-color: #93c47d; }
 .donateur-bar .bar { -fx-background-color: #f4c2c2; }
+
+/* Marketplace Styles */
+.marketplace-topbar {
+    -fx-padding: 8 0 4 0;
+}
+
+.marketplace-filter-bar {
+    -fx-padding: 16;
+    -fx-background-color: #f4f8f3;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(45, 90, 39, 0.12);
+    -fx-border-radius: 20;
+}
+
+.marketplace-button {
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 14;
+    -fx-padding: 11 18;
+}
+
+.marketplace-button-primary {
+    -fx-background-color: #2d5a27;
+    -fx-text-fill: white;
+}
+
+.marketplace-button-primary:hover {
+    -fx-background-color: #244d1f;
+}
+
+.marketplace-button-secondary {
+    -fx-background-color: white;
+    -fx-text-fill: #2d5a27;
+    -fx-border-color: #d0e2ca;
+    -fx-border-width: 1;
+}
+
+.marketplace-button-secondary:hover {
+    -fx-background-color: #f4fbf5;
+}
+
+.marketplace-search-field {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(45, 90, 39, 0.12);
+    -fx-border-radius: 16;
+    -fx-padding: 12 16;
+    -fx-pref-width: 380;
+}
+
+.marketplace-combo-filter {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(45, 90, 39, 0.12);
+    -fx-border-radius: 16;
+    -fx-padding: 0 12;
+}
+
+.marketplace-pagebar {
+    -fx-padding: 10 0 0 0;
+    -fx-alignment: center-left;
+}
+
+.product-card {
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 18, 0, 0, 8);
+    -fx-border-color: rgba(0,0,0,0.04);
+    -fx-border-width: 1;
+}
+
+.product-card:hover {
+    -fx-translate-y: -2;
+    -fx-effect: dropshadow(three-pass-box, rgba(39,174,96,0.16), 22, 0, 0, 10);
+}
+
+.product-card-image {
+    -fx-background-radius: 18;
+}
+
+.product-card-type {
+    -fx-padding: 6 12;
+    -fx-background-color: rgba(39,174,96,0.13);
+    -fx-text-fill: #27ae60;
+    -fx-background-radius: 14;
+    -fx-font-weight: bold;
+}
+
+.product-card-title {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1b4332;
+}
+
+.product-card-description {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 13;
+}
+
+.product-card-footer {
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+/* Admin Badges */
+.admin-badge-type {
+    -fx-padding: 4 10;
+    -fx-background-radius: 20;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+.admin-badge-status {
+    -fx-padding: 4 10;
+    -fx-background-radius: 6;
+    -fx-font-weight: bold;
+    -fx-font-size: 11;
+}
+
+.bg-blue-light { -fx-background-color: #e3f2fd; -fx-text-fill: #1976d2; }
+.bg-green-light { -fx-background-color: #e8f5e9; -fx-text-fill: #2e7d32; }
+.bg-success-light { -fx-background-color: #e8f5e9; -fx-text-fill: #2e7d32; }
+.bg-purple-light { -fx-background-color: #f3e5f5; -fx-text-fill: #7b1fa2; }
+
+/* Password Strength Bar Styling */
+.strength-bar .bar {
+    -fx-background-color: -fx-accent;
+    -fx-background-radius: 5;
+}
+.strength-bar .track {
+    -fx-background-color: #ecf0f1;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+}

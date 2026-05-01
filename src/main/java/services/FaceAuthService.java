@@ -23,6 +23,10 @@ public class FaceAuthService {
     private static final String CASCADE_PATH = "src/main/resources/models/haarcascade_frontalface_default.xml";
     private static final String MODEL_PATH = "src/main/resources/models/face_model.yml";
 
+    /**
+     * Le constructeur initialise le détecteur Haar Cascade et l'algorithme de reconnaissance LBPH.
+     * Il charge également automatiquement le modèle existant depuis le disque s'il a déjà été créé.
+     */
     public FaceAuthService() {
         // Validation stricte du modèle Haar Cascade
         File cascadeFile = new File(CASCADE_PATH);
@@ -41,8 +45,8 @@ public class FaceAuthService {
     }
 
     /**
-     * Extracts the face from a raw frame and converts it to Grayscale 
-     * resized to a standard 200x200 (important for LBPH).
+     * Cette fonction détecte un visage dans une image brute et le convertit en niveaux de gris.
+     * Elle redimensionne ensuite le visage en 200x200 pixels pour garantir une analyse uniforme par l'algorithme.
      */
     public Mat extractFace(Mat rawFrame) {
         Mat grayFrame = new Mat();
@@ -64,7 +68,8 @@ public class FaceAuthService {
     }
 
     /**
-     * Trains the model with a list of face images for a specific User ID.
+     * Cette fonction lie une liste d'images capturées à un identifiant d'utilisateur spécifique.
+     * Elle entraîne ensuite le modèle et sauvegarde les résultats dans le fichier .yml pour une utilisation future.
      */
     public void trainFaces(int userId, List<Mat> faceImages) {
         if (faceImages == null || faceImages.isEmpty()) return;
@@ -94,7 +99,8 @@ public class FaceAuthService {
     }
 
     /**
-     * Attempts to recognize a face. Returns the predicted User ID, or -1 if unknown.
+     * Cette fonction compare un visage capturé en direct avec tous les visages enregistrés dans le modèle.
+     * Elle retourne l'ID de l'utilisateur si la ressemblance est forte, ou -1 si le visage est inconnu.
      */
     public int recognizeFace(Mat faceImage) {
         if (!new File(MODEL_PATH).exists()) {

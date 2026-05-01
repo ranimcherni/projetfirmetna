@@ -42,7 +42,6 @@
                                 </MenuButton>
                                 <Button styleClass="nav-item" text="📅 Événements" />
                                 <Button styleClass="nav-item" text="💬 Forum" />
-                                <Button styleClass="nav-item" text="🔔 Notifications" />
                                 <Button styleClass="nav-item" text="❤ Dons" />
                                 <Button styleClass="nav-item" text="🤝 Partenariats" />
                             </children>
@@ -86,32 +85,32 @@
                                             <children>
                                                 <VBox spacing="25">
                                                     <children>
-                                                        <HBox spacing="30">
-                                                            <children>
-                                                                <VBox HBox.hgrow="ALWAYS" styleClass="profile-input-group">
-                                                                    <Label text="Prénom" styleClass="profile-label-main" />
-                                                                    <TextField fx:id="prenomField" styleClass="form-field" promptText="Votre prénom" />
-                                                                    <Label fx:id="prenomError" styleClass="error-message-label" text="Prénom invalide" visible="false" />
-                                                                </VBox>
-                                                                <VBox HBox.hgrow="ALWAYS" styleClass="profile-input-group">
-                                                                    <Label text="Nom" styleClass="profile-label-main" />
-                                                                    <TextField fx:id="nomField" styleClass="form-field" promptText="Votre nom" />
-                                                                    <Label fx:id="nomError" styleClass="error-message-label" text="Nom invalide" visible="false" />
-                                                                </VBox>
-                                                            </children>
-                                                        </HBox>
+                                                         <HBox spacing="30">
+                                                             <children>
+                                                                 <VBox HBox.hgrow="ALWAYS" styleClass="profile-input-group">
+                                                                     <Label text="Prénom" styleClass="profile-label-main" />
+                                                                     <TextField fx:id="prenomField" styleClass="form-field" promptText="Votre prénom" />
+                                                                     <Label fx:id="prenomError" styleClass="error-message-label" text="Prénom invalide" visible="false" />
+                                                                 </VBox>
+                                                                 <VBox HBox.hgrow="ALWAYS" styleClass="profile-input-group">
+                                                                     <Label text="Nom" styleClass="profile-label-main" />
+                                                                     <TextField fx:id="nomField" styleClass="form-field" promptText="Votre nom" />
+                                                                     <Label fx:id="nomError" styleClass="error-message-label" text="Nom invalide" visible="false" />
+                                                                 </VBox>
+                                                             </children>
+                                                         </HBox>
 
-                                                        <VBox styleClass="profile-input-group">
-                                                            <Label text="Adresse Email" styleClass="profile-label-main" />
-                                                            <TextField fx:id="emailField" styleClass="form-field" promptText="nom@exemple.com" />
-                                                            <Label fx:id="emailError" styleClass="error-message-label" text="Email invalide" visible="false" />
-                                                        </VBox>
+                                                         <VBox styleClass="profile-input-group">
+                                                             <Label text="Adresse Email" styleClass="profile-label-main" />
+                                                             <TextField fx:id="emailField" styleClass="form-field" promptText="nom@exemple.com" />
+                                                             <Label fx:id="emailError" styleClass="error-message-label" text="Email invalide" visible="false" />
+                                                         </VBox>
 
-                                                        <VBox styleClass="profile-input-group">
-                                                            <Label text="Numéro de Téléphone" styleClass="profile-label-main" />
-                                                            <TextField fx:id="phoneField" styleClass="form-field" promptText="+216 -- --- ---" />
-                                                            <Label fx:id="phoneError" styleClass="error-message-label" text="Téléphone invalide" visible="false" />
-                                                        </VBox>
+                                                         <VBox styleClass="profile-input-group">
+                                                             <Label text="Numéro de Téléphone" styleClass="profile-label-main" />
+                                                             <TextField fx:id="phoneField" styleClass="form-field" promptText="+216 -- --- ---" />
+                                                             <Label fx:id="phoneError" styleClass="error-message-label" text="Téléphone invalide" visible="false" />
+                                                         </VBox>
                                                     </children>
                                                 </VBox>
 
