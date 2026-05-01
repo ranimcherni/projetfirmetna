@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #f8f9fa; -fx-padding: 0; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EvenementFormController" stylesheets="@../css/style.css">
+    <VBox spacing="25" style="-fx-padding: 30; -fx-background-color: transparent;">
+        <children>
+            <VBox spacing="10">
+                <children>
+                    <Hyperlink onAction="#handleCancel" text="⬅ Retour à la liste" style="-fx-text-fill: #27ae60; -fx-font-size: 14; -fx-underline: false; -fx-padding: 0;" />
+                    <Label fx:id="titleLabel" text="Création d'un événement" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label fx:id="subtitleLabel" text="Choisissez un lieu et renseignez l'événement." style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+                </children>
+            </VBox>
+
+            <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 35; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" VBox.vgrow="ALWAYS">
+                <children>
+                    <GridPane hgap="30" vgap="25">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                            <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+                        </columnConstraints>
+                        <children>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+                                <Label text="Lieu" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <ComboBox fx:id="lieuCombo" maxWidth="Infinity" styleClass="admin-form-combo" />
+                                <Label fx:id="lieuError" style="-fx-text-fill: red;" visible="false" text="" />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                <Label text="Nom" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="nomField" promptText="Nom de l'événement" styleClass="admin-form-input" />
+                                <Label fx:id="nomError" style="-fx-text-fill: red;" visible="false" text="" />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Label text="Date" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <DatePicker fx:id="datePicker" maxWidth="Infinity" styleClass="admin-form-combo" />
+                                <Label fx:id="dateError" style="-fx-text-fill: red;" visible="false" text="" />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+                                <Label text="Organisateur" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextField fx:id="organisateurField" promptText="Nom de l'organisateur" styleClass="admin-form-input" />
+                                <Label fx:id="orgError" style="-fx-text-fill: red;" visible="false" text="" />
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2">
+                                <Label text="Image de l'événement" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <TextField fx:id="imageField" promptText="URL ou chemin du fichier" styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                                    <Button onAction="#handleUploadImage" text="📂" styleClass="admin-btn-secondary" prefWidth="50" style="-fx-padding: 0;" />
+                                </HBox>
+                            </VBox>
+                            <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2">
+                                <Label text="Description" style="-fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                                <TextArea fx:id="descriptionArea" prefRowCount="4" wrapText="true" promptText="Description" styleClass="admin-form-input" />
+                                <HBox spacing="10" alignment="CENTER_LEFT">
+                                    <Button fx:id="generateDescriptionBtn" onAction="#handleGenerateDescription" text="Generer description" styleClass="admin-btn-secondary" />
+                                    <Label fx:id="generationStatusLabel" text="Generation en cours..." style="-fx-text-fill: #636e72;" visible="false" managed="false" />
+                                </HBox>
+                                <Label fx:id="descError" style="-fx-text-fill: red;" visible="false" text="" />
+                            </VBox>
+                        </children>
+                    </GridPane>
+
+                    <HBox spacing="15" alignment="CENTER_RIGHT">
+                        <children>
+                            <Button onAction="#handleCancel" text="Annuler" styleClass="admin-btn-secondary" />
+                            <Button fx:id="saveBtn" onAction="#handleSave" text="Enregistrer" styleClass="admin-btn-primary" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
+</ScrollPane>

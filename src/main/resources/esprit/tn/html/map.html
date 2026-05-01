@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { margin: 0; padding: 0; font-family: sans-serif; }
+        #map { width: 100%; height: 100vh; }
+        .leaflet-container { cursor: crosshair; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map, centered on Tunisia
+        var map = L.map('map').setView([33.8869, 9.5375], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        var marker;
+
+        map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            // Remove existing marker if any
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            // Add new marker
+            marker = L.marker([lat, lng]).addTo(map);
+
+            // Fetch address using Nominatim reverse geocoding API
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&accept-language=fr`)
+                .then(response => response.json())
+                .then(data => {
+                    var address = (data && data.display_name)
+                        ? data.display_name
+                        : `Latitude: ${lat.toFixed(6)}, Longitude: ${lng.toFixed(6)}`;
+
+                    marker.bindPopup(address).openPopup();
+
+                    // Call Java method if javaConnector is injected
+                    if (typeof javaConnector !== 'undefined') {
+                        javaConnector.updateAddress(address);
+                    } else {
+                        console.log("Adresse selectionnée : " + address);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur reverse geocoding:', error);
+                    var fallbackAddress = `Latitude: ${lat.toFixed(6)}, Longitude: ${lng.toFixed(6)}`;
+                    marker.bindPopup(fallbackAddress).openPopup();
+                    if (typeof javaConnector !== 'undefined') {
+                        javaConnector.updateAddress(fallbackAddress);
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
