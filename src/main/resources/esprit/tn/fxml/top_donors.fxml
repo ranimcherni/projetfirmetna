@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-padding: 30; -fx-background-color: #f4f6f8;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TopDonorsController">
+    <children>
+        <Label text="🏆 Top Donateurs" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+        <Label text="Classement des donateurs selon le volume d'articles donnés" style="-fx-text-fill: #636e72; -fx-font-size: 14;" />
+
+        <BarChart fx:id="barChart" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); -fx-background-radius: 8;">
+            <xAxis>
+                <CategoryAxis label="Téléphone (Donateur)" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Quantité Totale" />
+            </yAxis>
+        </BarChart>
+
+        <TableView fx:id="statTable" prefHeight="250.0" prefWidth="600.0" style="-fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <columns>
+                <TableColumn fx:id="rankCol" prefWidth="150.0" text="Classement" style="-fx-alignment: CENTER;"/>
+                <TableColumn fx:id="phoneCol" prefWidth="250.0" text="Téléphone du Donateur" style="-fx-alignment: CENTER;"/>
+                <TableColumn fx:id="totalCol" prefWidth="200.0" text="Quantité Totale" style="-fx-alignment: CENTER;"/>
+            </columns>
+             <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</VBox>

@@ -69,9 +69,19 @@ public class NavigationService {
 
     public static void navigateFromNode(Node anchor, String fxmlPath, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(NavigationService.class.getResource(fxmlPath));
+            java.net.URL res = NavigationService.class.getResource(fxmlPath);
+            if (res == null) {
+                showError("Ressource introuvable : " + fxmlPath);
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(res);
             Parent root = loader.load();
 
+            if (anchor == null || anchor.getScene() == null || anchor.getScene().getWindow() == null) {
+                showError("Impossible de recuperer la fenetre pour naviguer vers : " + fxmlPath);
+                return;
+            }
             Stage stage = (Stage) anchor.getScene().getWindow();
             Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
@@ -82,6 +92,7 @@ public class NavigationService {
 
         } catch (IOException e) {
             e.printStackTrace();
+            showError("Erreur lors du chargement de la page : " + e.getMessage());
         }
     }
 }

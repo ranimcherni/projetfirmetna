@@ -200,6 +200,34 @@ public class UserService implements IService<User> {
         return null;
     }
 
+    public User getById(int id) {
+        if (cnx == null) return null;
+        String req = "SELECT * FROM `user` WHERE `id` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setRole(rs.getString("role"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                u.setLocalisation(rs.getString("localisation"));
+                u.setBio(rs.getString("bio"));
+                u.setSpecialite(rs.getString("specialite"));
+                u.setTelephone(rs.getString("telephone"));
+                u.setStatus(rs.getString("status"));
+                u.setRegistrationDate(rs.getTimestamp("registration_date"));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.err.println("getById user error: " + e.getMessage());
+        }
+        return null;
+    }
     public boolean isEmailTaken(String email, int currentUserId) {
         if (cnx == null) return false;
         String req = "SELECT count(*) FROM `user` WHERE `email` = ? AND `id` != ?";

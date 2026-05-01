@@ -14,6 +14,16 @@
             <children>
                 <Label fx:id="eventName" text="Nom de l'événement" styleClass="event-card-title" wrapText="true" />
                 
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label text="📅" />
+                    <Label fx:id="eventDate" text="19 Avril 2026" styleClass="event-card-info" />
+                </HBox>
+                
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label text="📍" />
+                    <Label fx:id="eventLocation" text="Tunis, Avenue Habib Bourguiba" styleClass="event-card-info" wrapText="true" />
+                </HBox>
+
                 <HBox alignment="CENTER" style="-fx-padding: 10 0 10 0;">
                     <ImageView fx:id="qrCodeImage" fitWidth="120.0" fitHeight="120.0" preserveRatio="true" />
                 </HBox>

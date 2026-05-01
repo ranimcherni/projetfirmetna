@@ -145,5 +145,11 @@
                 </VBox>
             </children>
         </VBox>
+        <!-- Chatbot Floating Button -->
+        <Button onAction="#handleOpenChatbot" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 30; -fx-font-size: 24; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5); -fx-cursor: hand;" text="💬" StackPane.alignment="BOTTOM_RIGHT">
+            <StackPane.margin>
+                <Insets bottom="30.0" right="30.0" />
+            </StackPane.margin>
+        </Button>
     </children>
 </StackPane>

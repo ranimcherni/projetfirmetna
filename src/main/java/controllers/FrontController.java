@@ -38,6 +38,24 @@ public class FrontController {
     }
     @FXML private void handleForum(ActionEvent event) { System.out.println("Opening Forum"); }
     @FXML private void handleNotifications(ActionEvent event) { System.out.println("Opening Notifications"); }
-    @FXML private void handleDons(ActionEvent event) { System.out.println("Opening Dons"); }
+    @FXML private void handleDons(ActionEvent event) { 
+        NavigationService.switchScene(event, "/esprit/tn/fxml/admin_donations_offres.fxml", "Dons");
+    }
     @FXML private void handlePartenariats(ActionEvent event) { System.out.println("Opening Partenariats"); }
+
+    @FXML
+    private void handleOpenChatbot(ActionEvent event) {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/chatbot.fxml"));
+            javafx.scene.Parent root = loader.load();
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setTitle("Assistant Intelligent");
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.initModality(javafx.stage.Modality.NONE); // Non-modal so they can use the app while chatting
+            stage.show();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+            System.err.println("Impossible de charger le Chatbot : " + e.getMessage());
+        }
+    }
 }

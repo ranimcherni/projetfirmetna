@@ -107,9 +107,13 @@ public class FrontEvenementsController {
             ImageView qrCodeView = (ImageView) card.lookup("#qrCodeImage");
             Button btn = (Button) card.lookup("#participerBtn");
             Button detailsBtn = (Button) card.lookup("#detailsBtn");
+            Label dateLabel = (Label) card.lookup("#eventDate");
+            Label locLabel = (Label) card.lookup("#eventLocation");
 
             // Set data
             nameLabel.setText(ev.getNom());
+            dateLabel.setText(ev.getDateEvenement().toLocalDate().toString());
+            locLabel.setText(ev.getLieuVille() + ", " + ev.getLieuAdresse());
 
             // Prepare QR Code Content with UTF-8 BOM (\uFEFF) to force correct encoding on mobile scanners
             String qrText = "\uFEFF" + String.format("Événement : %s\nDate : %s\nLieu : %s, %s\nOrganisateur : %s\n\nDescription :\n%s",
@@ -158,7 +162,6 @@ public class FrontEvenementsController {
                 alert.getDialogPane().setContent(textArea);
                 alert.showAndWait();
             });
-
             eventContainer.getChildren().add(card);
         } catch (IOException e) {
             e.printStackTrace();

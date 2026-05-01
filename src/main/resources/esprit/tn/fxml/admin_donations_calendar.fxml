@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="20.0" style="-fx-padding: 30;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDonationsCalendarController">
+    <children>
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <VBox>
+                    <Label text="Calendrier des recuperations" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label text="Demandes planifiees avec date de recuperation valide" style="-fx-text-fill: #636e72; -fx-font-size: 13;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleRefresh" prefHeight="40.0" styleClass="admin-btn-primary" text="Rafraichir" />
+            </children>
+        </HBox>
+
+        <HBox spacing="20.0" style="-fx-padding: 0 0 10 0;">
+            <children>
+                <VBox styleClass="admin-stat-card" HBox.hgrow="ALWAYS">
+                    <Label text="Recuperations a venir" styleClass="admin-stat-label" />
+                    <Label fx:id="totalLabel" text="0" styleClass="admin-stat-value" />
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox spacing="12.0" alignment="CENTER_LEFT">
+            <children>
+                <TextField fx:id="searchField" prefHeight="42.0" promptText="Recherche titre/statut..." styleClass="admin-form-input" HBox.hgrow="ALWAYS" />
+                <DatePicker fx:id="dateFilter" prefHeight="42.0" styleClass="admin-form-input" />
+                <Button onAction="#handleClearFilters" prefHeight="40.0" styleClass="admin-btn-secondary" text="Effacer filtres" />
+            </children>
+        </HBox>
+
+        <StackPane fx:id="calendarContainer" styleClass="admin-table" VBox.vgrow="ALWAYS" />
+    </children>
+</VBox>

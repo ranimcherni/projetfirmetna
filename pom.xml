@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Une seule version pour tous les modules JavaFX (évite conflits IDE / runtime) -->
         <javafx.version>22.0.2</javafx.version>
+        <javacv.version>1.5.9</javacv.version>
+        <native.platform>windows-x86_64</native.platform>
     </properties>
 
     <dependencies>
@@ -29,26 +31,31 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>${javafx.version}</version>
+            <classifier>win</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
+            <classifier>win</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
+            <classifier>win</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
+            <classifier>win</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
             <version>${javafx.version}</version>
+            <classifier>win</classifier>
         </dependency>
 
         <!-- Testing Dependencies -->
@@ -77,7 +84,6 @@
             <artifactId>core</artifactId>
             <version>3.5.3</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
         <dependency>
             <groupId>org.mindrot</groupId>
@@ -91,12 +97,45 @@
             <version>1.6.2</version>
         </dependency>
 
-        <!-- JavaCV (OpenCV) for Facial Recognition -->
+        <!-- SLF4J provider (CalendarFX and others) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+
+        <!-- JavaCV API (sans plateforme complète) -->
         <dependency>
             <groupId>org.bytedeco</groupId>
-            <artifactId>javacv-platform</artifactId>
-            <version>1.5.9</version>
-            <scope>compile</scope>
+            <artifactId>javacv</artifactId>
+            <version>${javacv.version}</version>
+        </dependency>
+        <!-- OpenCV Java bindings -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>opencv</artifactId>
+            <version>4.7.0-1.5.9</version>
+        </dependency>
+        <!-- OpenCV natif Windows uniquement -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>opencv</artifactId>
+            <version>4.7.0-1.5.9</version>
+            <classifier>${native.platform}</classifier>
+        </dependency>
+
+        <!-- Calendar bundle JavaFX -->
+        <dependency>
+            <groupId>com.calendarfx</groupId>
+            <artifactId>view</artifactId>
+            <version>11.12.7</version>
+        </dependency>
+
+        <!-- JSON Library for API communication -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
         </dependency>
     </dependencies>
 
@@ -117,6 +156,7 @@
                 <configuration>
                     <!-- Point d'entrée : classe sans package -->
                     <mainClass>FirmetnaLauncher</mainClass>
+                    <jvmArgs>--enable-native-access=javafx.graphics</jvmArgs>
                 </configuration>
             </plugin>
             <!-- Exec Plugin to run Main -->

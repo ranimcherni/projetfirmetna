@@ -36,8 +36,9 @@
                     </items>
                 </MenuButton>
 
-                <Button styleClass="admin-sidebar-item" text="❤ Donations (Offres)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
-                <Button styleClass="admin-sidebar-item" text="🤝 Donations (Demandes)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                <Button onAction="#showDonationOffres" styleClass="admin-sidebar-item" text="❤ Donations (Offres)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                <Button onAction="#showDonationDemandes" styleClass="admin-sidebar-item" text="🤝 Donations (Demandes)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                <Button onAction="#showDonationCalendar" styleClass="admin-sidebar-item" text="🗓 Calendrier donations" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                 <Button styleClass="admin-sidebar-item" text="🤝 Partenariats" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                 <Button styleClass="admin-sidebar-item" text="📄 Offres partenaires" maxWidth="Infinity" alignment="BASELINE_LEFT" />
 

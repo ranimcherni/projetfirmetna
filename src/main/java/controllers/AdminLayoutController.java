@@ -49,6 +49,21 @@ public class AdminLayoutController {
     }
 
     @FXML
+    private void showDonationOffres(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_donations_offres.fxml");
+    }
+
+    @FXML
+    private void showDonationDemandes(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_donations_demandes.fxml");
+    }
+
+    @FXML
+    private void showDonationCalendar(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_donations_calendar.fxml");
+    }
+
+    @FXML
     private void handleLogout(ActionEvent event) {
         utils.NavigationService.navigateFromNode(contentArea, "/esprit/tn/fxml/home.fxml", "Bienvenue");
     }
