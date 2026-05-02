@@ -14,15 +14,91 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Offre;
+<<<<<<< HEAD
 import services.OffreService;
+=======
+import models.User;
+import services.OffreService;
+import services.UserService;
+import utils.NavigationService;
+import utils.UserSession;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+>>>>>>> gestion-user
 import java.util.Map;
 
 public class AdminDonationsOffresController {
 
     @FXML
+<<<<<<< HEAD
     private TableView<Offre> offreTable;
     @FXML
     private TableColumn<Offre, Integer> colId;
+=======
+    private void handlePartenariats(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
+    }
+
+    @FXML
+    private void handleAccueil(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
+    }
+
+    @FXML
+    private void handleProduits(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Produits");
+    }
+
+    @FXML
+    private void handleProduitsVegetaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("vegetale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Vegetaux");
+    }
+
+    @FXML
+    private void handleProduitsAnimaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("animale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Animaux");
+    }
+
+    @FXML
+    private void handleForum(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Forum");
+    }
+
+    @FXML
+    private void handleEvenements(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_evenements.fxml", "Événements");
+    }
+
+    @FXML
+    private void handleDons(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_offres.fxml", "Donations & Solidarité");
+    }
+
+    @FXML
+    private void handleSwitchToDemandes(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_demandes.fxml", "Demandes de Dons");
+    }
+
+    @FXML
+    private void handleProfil(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/profile.fxml", "Mon Profil");
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        UserSession.getInstance().cleanUserSession();
+        NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
+    }
+
+    @FXML
+    private TableView<Offre> offreTable;
+>>>>>>> gestion-user
     @FXML
     private TableColumn<Offre, String> colTelephone;
     @FXML
@@ -65,7 +141,10 @@ public class AdminDonationsOffresController {
 
     @FXML
     public void initialize() {
+<<<<<<< HEAD
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+=======
+>>>>>>> gestion-user
         colTelephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         colCategorie.setCellValueFactory(new PropertyValueFactory<>("categorie"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -142,6 +221,16 @@ public class AdminDonationsOffresController {
                 quantite
         );
         offreService.add(offre);
+<<<<<<< HEAD
+=======
+        
+        // Gamification: Increment user actions for donation offer
+        User currentUser = UserSession.getInstance().getUser();
+        if (currentUser != null) {
+            new UserService().incrementActionsCount(currentUser.getId());
+        }
+        
+>>>>>>> gestion-user
         refreshTable();
         clearForm();
     }
@@ -201,7 +290,11 @@ public class AdminDonationsOffresController {
     }
 
     @FXML
+<<<<<<< HEAD
     private void handleOpenChatbot() {
+=======
+    private void handleOpenChatbot(ActionEvent event) {
+>>>>>>> gestion-user
         try {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/chatbot.fxml"));
             javafx.scene.Parent root = loader.load();

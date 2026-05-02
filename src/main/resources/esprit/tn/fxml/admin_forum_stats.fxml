@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="30" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminForumStatsController" style="-fx-background-color: transparent;">
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <children>
+            <VBox spacing="5">
+                <Label text="Statistiques du Forum" styleClass="admin-hero-title"/>
+                <Label text="Analyse approfondie de l'engagement communautaire" styleClass="admin-hero-subtitle"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="🔄 Rafraîchir les données" onAction="#refreshStats" styleClass="admin-btn-secondary"/>
+        </children>
+    </HBox>
+
+    <HBox spacing="25">
+        <!-- Summary Cards -->
+        <VBox styleClass="admin-glass-card, stat-card-glow-green" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10" style="-fx-padding: 25;">
+            <Label text="📝" style="-fx-font-size: 24;"/>
+            <Label text="Total Publications" styleClass="admin-stat-label"/>
+            <Label fx:id="lblTotalPubs" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #1B4332;"/>
+        </VBox>
+        <VBox styleClass="admin-glass-card, stat-card-glow-blue" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10" style="-fx-padding: 25;">
+            <Label text="💬" style="-fx-font-size: 24;"/>
+            <Label text="Total Commentaires" styleClass="admin-stat-label"/>
+            <Label fx:id="lblTotalComments" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #27ae60;"/>
+        </VBox>
+        <VBox styleClass="admin-glass-card, stat-card-glow-orange" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="10" style="-fx-padding: 25;">
+            <Label text="✨" style="-fx-font-size: 24;"/>
+            <Label text="Total Réactions" styleClass="admin-stat-label"/>
+            <Label fx:id="lblTotalReactions" text="0" styleClass="admin-stat-value" style="-fx-text-fill: #f39c12;"/>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="25" VBox.vgrow="ALWAYS">
+        <!-- Bar Chart -->
+        <VBox styleClass="admin-glass-card" HBox.hgrow="ALWAYS" spacing="15" style="-fx-padding: 25;">
+            <Label text="Top 10 Utilisateurs les plus actifs" style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #2d3436;"/>
+            <BarChart fx:id="barChartUsers" legendVisible="false" VBox.vgrow="ALWAYS" animated="true">
+                <xAxis>
+                    <CategoryAxis label="Utilisateurs" side="BOTTOM" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Interactions cumulées" side="LEFT" />
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <!-- Pie Chart -->
+        <VBox styleClass="admin-glass-card" prefWidth="450" spacing="15" style="-fx-padding: 25;">
+            <Label text="Répartition de l'Activité" style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #2d3436;"/>
+            <PieChart fx:id="pieChartActivity" VBox.vgrow="ALWAYS" labelsVisible="true" clockwise="true" />
+        </VBox>
+    </HBox>
+</VBox>

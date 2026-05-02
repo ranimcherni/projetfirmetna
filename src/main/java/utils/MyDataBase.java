@@ -6,7 +6,11 @@ import java.sql.SQLException;
 
 public class MyDataBase {
 
+<<<<<<< HEAD
     private final String URL = "jdbc:mysql://localhost:3306/firmetna_new_db";
+=======
+    private final String URL = "jdbc:mysql://localhost:3307/firmetna_new_db";
+>>>>>>> gestion-user
     private final String USER = "root";
     private final String PASSWORD = "";
 
@@ -15,6 +19,7 @@ public class MyDataBase {
 
     private MyDataBase() {
         try {
+<<<<<<< HEAD
             // Chargement explicite du pilote (peut aider dans certains environnements)
             Class.forName("com.mysql.cj.jdbc.Driver");
             cnx = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -27,6 +32,13 @@ public class MyDataBase {
             if (e.getMessage().contains("Unknown database")) {
                 System.err.println("TIP: Ensure the database 'firmetna_new_db' exists in your MySQL server.");
             }
+=======
+            cnx = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("--- Connection Successful to firmetna_db! ---");
+        } catch (SQLException e) {
+            System.err.println("--- Connection Failed! Check if MySQL is running on port 3307 ---");
+            System.err.println(e.getMessage());
+>>>>>>> gestion-user
         }
     }
 

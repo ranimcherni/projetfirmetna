@@ -29,6 +29,10 @@ public class SignUpController {
     @FXML private ComboBox<String> roleCombo;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
+<<<<<<< HEAD
+=======
+    @FXML private ProgressBar passwordStrengthBar;
+>>>>>>> gestion-user
     
     // Captcha elements
     @FXML private javafx.scene.canvas.Canvas captchaCanvas;
@@ -58,6 +62,40 @@ public class SignUpController {
     public void initialize() {
         resetErrorLabels();
         generateCaptcha();
+<<<<<<< HEAD
+=======
+        setupPasswordStrengthListener();
+    }
+
+    private void setupPasswordStrengthListener() {
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updatePasswordStrength(newValue);
+        });
+    }
+
+    private void updatePasswordStrength(String password) {
+        if (password == null || password.isEmpty()) {
+            passwordStrengthBar.setProgress(0);
+            return;
+        }
+
+        double strength = 0.1; // Base progress to show color
+        if (password.length() >= 8) strength += 0.25;
+        if (password.matches(".*[A-Z].*")) strength += 0.25;
+        if (password.matches(".*[0-9].*")) strength += 0.25;
+        if (password.matches(".*[^a-zA-Z0-9].*")) strength += 0.15;
+
+        passwordStrengthBar.setProgress(strength);
+
+        // Change color based on strength
+        String color;
+        if (strength <= 0.35) color = "-fx-accent: #ff4757;"; // Red
+        else if (strength <= 0.60) color = "-fx-accent: #ffa502;"; // Orange
+        else if (strength <= 0.85) color = "-fx-accent: #eccc68;"; // Yellow
+        else color = "-fx-accent: #2ed573;"; // Green
+        
+        passwordStrengthBar.setStyle(color);
+>>>>>>> gestion-user
     }
 
     private void resetErrorLabels() {
@@ -169,9 +207,17 @@ public class SignUpController {
             
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
+<<<<<<< HEAD
             dialogStage.setTitle("Enrôlement Facial");
             dialogStage.setResizable(false);
             dialogStage.setScene(new Scene(root));
+=======
+            dialogStage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+            
+            Scene scene = new Scene(root);
+            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+            dialogStage.setScene(scene);
+>>>>>>> gestion-user
             
             dialogStage.showAndWait();
             

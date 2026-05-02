@@ -19,10 +19,77 @@ import models.User;
 import services.DemandeService;
 import services.OffreService;
 import services.UserService;
+<<<<<<< HEAD
+=======
+import utils.NavigationService;
+import utils.UserSession;
+import javafx.event.ActionEvent;
+>>>>>>> gestion-user
 
 public class AdminDonationsDemandesController {
 
     @FXML
+<<<<<<< HEAD
+=======
+    private void handlePartenariats(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
+    }
+
+    @FXML
+    private void handleAccueil(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
+    }
+
+    @FXML
+    private void handleProduits(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Produits");
+    }
+
+    @FXML
+    private void handleProduitsVegetaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("vegetale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Vegetaux");
+    }
+
+    @FXML
+    private void handleProduitsAnimaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("animale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Animaux");
+    }
+
+    @FXML
+    private void handleForum(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Forum");
+    }
+
+    @FXML
+    private void handleEvenements(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_evenements.fxml", "Événements");
+    }
+
+    @FXML
+    private void handleDons(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_offres.fxml", "Donations & Solidarité");
+    }
+
+    @FXML
+    private void handleSwitchToOffres(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_offres.fxml", "Donations & Solidarité");
+    }
+
+    @FXML
+    private void handleProfil(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/profile.fxml", "Mon Profil");
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        UserSession.getInstance().cleanUserSession();
+        NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
+    }
+
+    @FXML
+>>>>>>> gestion-user
     private TableView<Demande> demandeTable;
     @FXML
     private TableColumn<Demande, Integer> colId;
@@ -180,7 +247,11 @@ public class AdminDonationsDemandesController {
         Integer quantite = Integer.parseInt(quantiteField.getText().trim());
 
         Offre offre = offreService.getById(offreId);
+<<<<<<< HEAD
         User user = userService.getById(userId);
+=======
+        User user = userService.getUserById(userId);
+>>>>>>> gestion-user
         if (offre == null || user == null) {
             showError("Mise a jour echouee. Offre/User introuvable.");
             return;
@@ -219,6 +290,25 @@ public class AdminDonationsDemandesController {
         demandeTable.getSelectionModel().clearSelection();
     }
 
+<<<<<<< HEAD
+=======
+    @FXML
+    private void handleOpenChatbot(ActionEvent event) {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/chatbot.fxml"));
+            javafx.scene.Parent root = loader.load();
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setTitle("Assistant Intelligent");
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.initModality(javafx.stage.Modality.NONE);
+            stage.show();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+            showError("Impossible de charger le Chatbot : " + e.getMessage());
+        }
+    }
+
+>>>>>>> gestion-user
     private void refreshTable() {
         masterData.setAll(demandeService.getAll());
         applyFilters();

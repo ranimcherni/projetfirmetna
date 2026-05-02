@@ -43,13 +43,13 @@
                                 <Button onAction="#handleAccueil" styleClass="nav-item" text="🏠 ACCUEIL" />
                                 <MenuButton styleClass="nav-item-dropdown" text="📦 PRODUITS">
                                     <items>
-                                        <MenuItem text="Fruits" />
-                                        <MenuItem text="Légumes" />
+                                        <MenuItem onAction="#handleProduits" text="Tous les produits" />
+                                        <MenuItem onAction="#handleProduitsVegetaux" text="Végétaux" />
+                                        <MenuItem onAction="#handleProduitsAnimaux" text="Animaux" />
                                     </items>
                                 </MenuButton>
                                 <Button onAction="#handleEvenements" styleClass="nav-item" text="📅 ÉVÉNEMENTS" />
                                 <Button onAction="#handleForum" styleClass="nav-item" text="💬 FORUM" />
-                                <Button onAction="#handleNotifications" styleClass="nav-item" text="🔔 NOTIFICATIONS" />
                                 <Button onAction="#handleDons" styleClass="nav-item" text="❤ DONS" />
                                 <Button onAction="#handlePartenariats" styleClass="nav-item" text="🤝 PARTENARIATS" />
                             </children>
@@ -60,10 +60,8 @@
                         <MenuButton styleClass="nav-profile-btn" text="Profil">
                             <items>
                                 <MenuItem onAction="#handleProfil" text="Mon Compte" />
-                                <MenuItem text="Mes Publications" />
-                                <MenuItem text="Mon Panier" />
                                 <SeparatorMenuItem />
-                                <MenuItem onAction="#handleLogout" text="Deconnexion" style="-fx-text-fill: #e74c3c;" />
+                                <MenuItem onAction="#handleLogout" style="-fx-text-fill: #e74c3c;" text="Deconnexion" />
                             </items>
                         </MenuButton>
                     </children>
@@ -72,27 +70,59 @@
                 <!-- Balanced Hero Section -->
                 <VBox alignment="CENTER_LEFT" spacing="40" VBox.vgrow="ALWAYS" style="-fx-padding: 0 100 0 100;">
                     <children>
-                        <VBox spacing="15">
+                        <HBox alignment="CENTER_LEFT" spacing="50">
                             <children>
-                                <Label fx:id="welcomeLabel" styleClass="greeting-label" text="Bonjour, [Prénom]" />
-                                
-                                <VBox spacing="5">
+                                <VBox spacing="15">
                                     <children>
-                                        <Label styleClass="slogan-fr" text="Firmetna - Produits fermiers frais et de qualité" />
-                                        <Label styleClass="slogan-ar" text="منتجات زراعية طازجة وعالية الجودة" />
+                                        <Label fx:id="welcomeLabel" styleClass="greeting-label" text="Bonjour, [Prénom]" />
+                                        
+                                        <VBox spacing="5">
+                                            <children>
+                                                <Label styleClass="slogan-fr" text="Firmetna - Produits fermiers frais et de qualité" />
+                                                <Label styleClass="slogan-ar" text="منتجات زراعية طازجة وعالية الجودة" />
+                                            </children>
+                                        </VBox>
+                                        
+                                        <Label styleClass="greeting-subtitle" text="Prêt à gérer votre ferme aujourd'hui ?" />
+                                        
+                                        <HBox spacing="15" style="-fx-padding: 20 0 0 0;">
+                                            <children>
+                                                <Button onAction="#handleProduits" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Découvrir nos Produits" />
+                                                <Button onAction="#handleForum" style="-fx-background-color: transparent; -fx-border-color: #2d5a27; -fx-border-radius: 30; -fx-text-fill: #2d5a27; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Le Forum" />
+                                            </children>
+                                        </HBox>
                                     </children>
                                 </VBox>
-                                
-                                <Label styleClass="greeting-subtitle" text="Prêt à gérer votre ferme aujourd'hui ?" />
-                                
-                                <HBox spacing="15" style="-fx-padding: 20 0 0 0;">
+
+                                <Region HBox.hgrow="ALWAYS" />
+
+                                <!-- EVOLUTIVE PLANT CARD -->
+                                <VBox fx:id="plantCard" spacing="15" styleClass="plant-card" prefWidth="320">
                                     <children>
-                                        <Button onAction="#handleAccueil" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 30; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Découvrir nos Produits" />
-                                        <Button onAction="#handleForum" style="-fx-background-color: transparent; -fx-border-color: #2d5a27; -fx-border-radius: 30; -fx-text-fill: #2d5a27; -fx-padding: 15 35; -fx-font-size: 16; -fx-font-weight: bold; -fx-cursor: hand;" text="Le Forum" />
+                                        <HBox alignment="CENTER_LEFT" spacing="15">
+                                            <children>
+                                                <ImageView fx:id="imgPlant" fitHeight="70" fitWidth="70" preserveRatio="true">
+                                                    <!-- Image set by controller -->
+                                                </ImageView>
+                                                <VBox spacing="2">
+                                                    <children>
+                                                        <Label fx:id="lblPlantLevel" styleClass="plant-level-label" text="Stade : Graine" />
+                                                        <Label fx:id="lblPlantStatus" text="En pleine croissance..." style="-fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-font-size: 12;" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        
+                                        <VBox spacing="8">
+                                            <children>
+                                                <ProgressBar fx:id="progressPlant" progress="0.2" maxWidth="Infinity" styleClass="plant-progress" />
+                                                <Label fx:id="lblPlantHint" styleClass="plant-hint-label" text="Continuez vos activités pour voir votre plante grandir !" wrapText="true" />
+                                            </children>
+                                        </VBox>
                                     </children>
-                                </HBox>
+                                </VBox>
                             </children>
-                        </VBox>
+                        </HBox>
 
                         <!-- NEW HORIZONTAL STATS BAR -->
                         <HBox spacing="60" styleClass="stats-bar-modern" maxWidth="850">
@@ -103,7 +133,7 @@
                                         <Label text="📦" styleClass="stat-badge-icon" />
                                         <VBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label styleClass="stat-badge-value" text="30+" />
+                                                <Label fx:id="lblTotalProducts" styleClass="stat-badge-value" text="30+" />
                                                 <Label styleClass="stat-badge-label" text="Produits Bio" />
                                             </children>
                                         </VBox>
@@ -118,7 +148,7 @@
                                         <Label text="📅" styleClass="stat-badge-icon" />
                                         <VBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label styleClass="stat-badge-value" text="12" />
+                                                <Label fx:id="lblTotalEvents" styleClass="stat-badge-value" text="12" />
                                                 <Label styleClass="stat-badge-label" text="Événements" />
                                             </children>
                                         </VBox>
@@ -133,7 +163,7 @@
                                         <Label text="🤝" styleClass="stat-badge-icon" />
                                         <VBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label styleClass="stat-badge-value" text="50" />
+                                                <Label fx:id="lblTotalPartners" styleClass="stat-badge-value" text="50" />
                                                 <Label styleClass="stat-badge-label" text="Partenaires" />
                                             </children>
                                         </VBox>
@@ -145,11 +175,17 @@
                 </VBox>
             </children>
         </VBox>
-        <!-- Chatbot Floating Button -->
-        <Button onAction="#handleOpenChatbot" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 30; -fx-font-size: 24; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5); -fx-cursor: hand;" text="💬" StackPane.alignment="BOTTOM_RIGHT">
-            <StackPane.margin>
-                <Insets bottom="30.0" right="30.0" />
-            </StackPane.margin>
-        </Button>
+        <!-- ================= CHATBOT LAYER ================= -->
+        <AnchorPane pickOnBounds="false">
+            <children>
+                <!-- (Old chatbot removed to use new unified float button) -->
+            </children>
+        </AnchorPane>
+        <!-- FLOAT BUTTON CHATBOT -->
+        <AnchorPane pickOnBounds="false">
+            <children>
+                <Button onAction="#handleOpenChatbot" styleClass="chatbot-float-btn" text="🤖" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+            </children>
+        </AnchorPane>
     </children>
 </StackPane>

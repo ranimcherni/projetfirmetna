@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="controllers.AdminForumPublicationsController" 
+            stylesheets="@../css/style.css" styleClass="main-bg">
+    <VBox spacing="25" AnchorPane.topAnchor="30" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40">
+        
+        <!-- Hero Header -->
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <VBox>
+                <Label text="Modération des Publications" styleClass="admin-hero-title" />
+                <Label text="Supervisez les discussions et maintenez un environnement qualitatif" styleClass="admin-hero-subtitle" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <VBox styleClass="admin-stat-card" style="-fx-min-width: 150;" alignment="CENTER">
+                <Label text="Espace Forum" styleClass="admin-stat-label" />
+            </VBox>
+        </HBox>
+
+        <!-- Main Glass Card Container -->
+        <VBox VBox.vgrow="ALWAYS" styleClass="admin-glass-card" spacing="0">
+            
+            <!-- Filters Section -->
+            <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 20; -fx-border-color: transparent transparent #e0e6ed transparent; -fx-border-width: 0 0 1 0;">
+                <TextField fx:id="searchField" prefWidth="350" promptText="🔍 Rechercher par titre ou auteur..." styleClass="form-field" />
+                <Region HBox.hgrow="ALWAYS" />
+                <ComboBox fx:id="typeFilter" prefWidth="200" promptText="Filtrer par type" styleClass="admin-form-combo" />
+            </HBox>
+
+            <!-- Publications Table -->
+            <TableView fx:id="publicationTable" VBox.vgrow="ALWAYS" styleClass="admin-table-modern" style="-fx-padding: 10 20 20 20;">
+                <columns>
+                    <TableColumn fx:id="idCol" text="ID" prefWidth="70" />
+                    <TableColumn fx:id="titreCol" text="Titre de la Publication" prefWidth="320" />
+                    <TableColumn fx:id="auteurCol" text="Auteur" prefWidth="200" />
+                    <TableColumn fx:id="typeCol" text="Catégorie" prefWidth="130" />
+                    <TableColumn fx:id="dateCol" text="Date de Création" prefWidth="170" />
+                    <TableColumn fx:id="actionsCol" text="Actions" prefWidth="150" />
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
+            </TableView>
+            
+        </VBox>
+
+    </VBox>
+</AnchorPane>

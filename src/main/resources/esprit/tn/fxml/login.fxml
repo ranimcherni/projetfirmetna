@@ -6,13 +6,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<StackPane alignment="CENTER" prefHeight="730.0" prefWidth="1100.0" styleClass="auth-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<StackPane alignment="CENTER" styleClass="auth-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
     <children>
         <!-- DARK OVERLAY FOR VIBRANCE -->
-        <VBox style="-fx-background-color: rgba(0,0,0,0.15);" StackPane.alignment="CENTER" />
+        <VBox style="-fx-background-color: rgba(0,0,0,0.2);" />
 
         <!-- CENTERED GLASS CARD -->
-        <VBox alignment="CENTER" maxHeight="600.0" maxWidth="450.0" spacing="25" styleClass="glass-card">
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="450.0" spacing="20" styleClass="glass-card" StackPane.alignment="CENTER">
             <children>
                 <!-- LOGO & TITLES -->
                 <VBox alignment="CENTER" spacing="30" style="-fx-background-color: transparent; -fx-padding: 40;">

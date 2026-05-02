@@ -1,0 +1,159 @@
+/* 
+   Firmetna Harmony - Premium Glassmorphism Forum Styles 
+   Theme: Nature, Modern, High-End
+*/
+
+.root {
+    -fx-primary-green: #1B4332;
+    -fx-secondary-green: #2D6A4F;
+    -fx-accent-green: #40916C;
+    -fx-mint-light: #D8F3DC;
+    -fx-soft-white: rgba(255, 255, 255, 0.85);
+    -fx-deep-gray: #2C3E50;
+}
+
+.main-bg {
+    -fx-background-color: linear-gradient(to bottom right, #f0f7f2, #d8eada);
+}
+
+/* TYPOGRAPHY */
+.header-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1b4332; /* Deep Forest Green */
+}
+
+.text-muted {
+    -fx-font-size: 13px;
+    -fx-text-fill: #7f8c8d;
+}
+
+/* GLASS CARD EFFECT */
+.card {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 1.5;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 20, 0, 0, 10);
+}
+
+.publication-card-item {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 20;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 15, 0, 0, 5);
+    -fx-border-color: rgba(255, 255, 255, 0.5);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-cursor: hand;
+}
+
+.publication-card-item:hover {
+    -fx-background-color: white;
+    -fx-translate-y: -3;
+    -fx-effect: dropshadow(three-pass-box, rgba(45, 106, 79, 0.12), 20, 0, 0, 8);
+}
+
+/* PREMIUM BUTTONS */
+.btn-primary {
+    -fx-background-color: linear-gradient(to right, #2d6a4f, #40916c);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 30;
+    -fx-padding: 12 30;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(27,67,50,0.25), 10, 0, 0, 4);
+}
+
+.btn-primary:hover {
+    -fx-background-color: linear-gradient(to right, #40916c, #52b788);
+}
+
+.btn-secondary {
+    -fx-background-color: rgba(255,255,255,0.5);
+    -fx-text-fill: #1b4332;
+    -fx-background-radius: 30;
+    -fx-border-color: #1b4332;
+    -fx-border-radius: 30;
+    -fx-border-width: 1.2;
+    -fx-padding: 10 25;
+    -fx-cursor: hand;
+}
+
+/* SEARCH & INPUTS */
+.search-box {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 30;
+    -fx-border-color: rgba(0,0,0,0.05);
+    -fx-border-radius: 30;
+    -fx-padding: 12 25;
+    -fx-font-size: 14px;
+}
+
+.search-box:focused {
+    -fx-border-color: #2d6a4f;
+    -fx-effect: dropshadow(three-pass-box, rgba(45,106,79,0.1), 10, 0, 0, 0);
+}
+
+/* REACTION BUTTONS (LIKE/DISLIKE) */
+.btn-like {
+    -fx-background-color: #f0fdf4;
+    -fx-text-fill: #27ae60;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-border-color: #b7ebc8;
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+    -fx-padding: 6 18;
+}
+
+.btn-like-active {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+
+.btn-dislike {
+    -fx-background-color: #fff5f5;
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-border-color: #f5c6c2;
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+    -fx-padding: 6 18;
+}
+
+.btn-dislike-active {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+.reaction-count {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* COMMENT BUBBLES */
+.comment-bubble {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 3);
+    -fx-border-color: #f1f1f1;
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+}
+
+.badge-type {
+    -fx-background-color: #e8f5e9;
+    -fx-text-fill: #2e7d32;
+    -fx-padding: 4 12;
+    -fx-background-radius: 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+ 4;
+}

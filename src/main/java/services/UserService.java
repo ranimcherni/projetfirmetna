@@ -13,11 +13,15 @@ public class UserService implements IService<User> {
 
     public UserService() {
         this.cnx = MyDataBase.getInstance().getCnx();
+<<<<<<< HEAD
         if (this.cnx != null) {
             migrate();
         } else {
             System.err.println("UserService: Connection is null, skipping migration.");
         }
+=======
+        migrate();
+>>>>>>> gestion-user
     }
 
     public UserService(Connection cnx) {
@@ -25,7 +29,10 @@ public class UserService implements IService<User> {
     }
 
     private void migrate() {
+<<<<<<< HEAD
         if (cnx == null) return;
+=======
+>>>>>>> gestion-user
         try {
             DatabaseMetaData md = cnx.getMetaData();
             ResultSet rsStatus = md.getColumns(null, null, "user", "status");
@@ -49,6 +56,24 @@ public class UserService implements IService<User> {
                 cnx.createStatement().execute("ALTER TABLE `user` ADD `reset_expiry` TIMESTAMP NULL DEFAULT NULL");
                 System.out.println("--- Migration: 'reset_expiry' column added ---");
             }
+<<<<<<< HEAD
+=======
+            ResultSet rsMfaSecret = md.getColumns(null, null, "user", "mfa_secret");
+            if (!rsMfaSecret.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `mfa_secret` VARCHAR(255) DEFAULT NULL");
+                System.out.println("--- Migration: 'mfa_secret' column added ---");
+            }
+            ResultSet rsMfaEnabled = md.getColumns(null, null, "user", "mfa_enabled");
+            if (!rsMfaEnabled.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `mfa_enabled` TINYINT(1) DEFAULT 0");
+                System.out.println("--- Migration: 'mfa_enabled' column added ---");
+            }
+            ResultSet rsActions = md.getColumns(null, null, "user", "actions_count");
+            if (!rsActions.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `actions_count` INT DEFAULT 0");
+                System.out.println("--- Migration: 'actions_count' column added ---");
+            }
+>>>>>>> gestion-user
         } catch (SQLException e) {
             System.err.println("Migration error: " + e.getMessage());
         }
@@ -56,8 +81,12 @@ public class UserService implements IService<User> {
 
     @Override
     public void add(User user) {
+<<<<<<< HEAD
         if (cnx == null) return;
         String req = "INSERT INTO `user` (`email`, `password`, `role`, `nom`, `prenom`, `localisation`, `bio`, `specialite`, `telephone`, `status`, `registration_date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+=======
+        String req = "INSERT INTO `user` (`email`, `password`, `role`, `nom`, `prenom`, `localisation`, `bio`, `specialite`, `telephone`, `status`, `registration_date`, `mfa_secret`, `mfa_enabled`, `actions_count`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+>>>>>>> gestion-user
         
         // Hachage du mot de passe
         String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(user.getPassword(), org.mindrot.jbcrypt.BCrypt.gensalt());
@@ -76,6 +105,12 @@ public class UserService implements IService<User> {
             pstm.setString(10, user.getStatus() != null ? user.getStatus() : "Actif");
             pstm.setTimestamp(11, user.getRegistrationDate() != null ? user.getRegistrationDate()
                     : new java.sql.Timestamp(System.currentTimeMillis()));
+<<<<<<< HEAD
+=======
+            pstm.setString(12, user.getMfaSecret());
+            pstm.setBoolean(13, user.isMfaEnabled());
+            pstm.setInt(14, user.getActionsCount());
+>>>>>>> gestion-user
             pstm.executeUpdate();
             System.out.println("User ajouté avec succès !");
         } catch (SQLException e) {
@@ -85,9 +120,14 @@ public class UserService implements IService<User> {
 
     @Override
     public void update(User user) {
+<<<<<<< HEAD
         if (cnx == null) return;
         String passwordPart = (user.getPassword() != null && !user.getPassword().isEmpty()) ? ", `password`=?" : "";
         String req = "UPDATE `user` SET `email`=?, `role`=?, `nom`=?, `prenom`=?, `localisation`=?, `bio`=?, `specialite`=?, `telephone`=?, `status`=?" + passwordPart + " WHERE `id`=?";
+=======
+        String passwordPart = (user.getPassword() != null && !user.getPassword().isEmpty()) ? ", `password`=?" : "";
+        String req = "UPDATE `user` SET `email`=?, `role`=?, `nom`=?, `prenom`=?, `localisation`=?, `bio`=?, `specialite`=?, `telephone`=?, `status`=?, `mfa_secret`=?, `mfa_enabled`=?" + passwordPart + " WHERE `id`=?";
+>>>>>>> gestion-user
         
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -100,6 +140,7 @@ public class UserService implements IService<User> {
             pstm.setString(7, user.getSpecialite());
             pstm.setString(8, user.getTelephone());
             pstm.setString(9, user.getStatus());
+<<<<<<< HEAD
             
             if (!passwordPart.isEmpty()) {
                 // Hachage du nouveau mot de passe
@@ -108,6 +149,19 @@ public class UserService implements IService<User> {
                 pstm.setInt(11, user.getId());
             } else {
                 pstm.setInt(10, user.getId());
+=======
+            pstm.setString(10, user.getMfaSecret());
+            pstm.setBoolean(11, user.isMfaEnabled());
+            
+            if (!passwordPart.isEmpty()) {
+                // Ne hacher que si ce n'est pas déjà un hash BCrypt
+                String p = user.getPassword();
+                String hashedPassword = p.startsWith("$2a$") ? p : org.mindrot.jbcrypt.BCrypt.hashpw(p, org.mindrot.jbcrypt.BCrypt.gensalt());
+                pstm.setString(12, hashedPassword);
+                pstm.setInt(13, user.getId());
+            } else {
+                pstm.setInt(12, user.getId());
+>>>>>>> gestion-user
             }
             
             pstm.executeUpdate();
@@ -119,7 +173,10 @@ public class UserService implements IService<User> {
 
     @Override
     public void delete(User user) {
+<<<<<<< HEAD
         if (cnx == null) return;
+=======
+>>>>>>> gestion-user
         String req = "DELETE FROM `user` WHERE `id`=?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -131,10 +188,28 @@ public class UserService implements IService<User> {
         }
     }
 
+<<<<<<< HEAD
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         if (cnx == null) return users;
+=======
+    public void incrementActionsCount(int userId) {
+        String req = "UPDATE `user` SET `actions_count` = `actions_count` + 1 WHERE `id` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setInt(1, userId);
+            pstm.executeUpdate();
+            System.out.println("Actions count incrémenté pour l'utilisateur " + userId);
+        } catch (SQLException e) {
+            System.err.println("Erreur incrémentation actions : " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+>>>>>>> gestion-user
         String req = "SELECT * FROM `user` ORDER BY `registration_date` DESC";
         try {
             Statement st = cnx.createStatement();
@@ -153,6 +228,12 @@ public class UserService implements IService<User> {
                 u.setTelephone(rs.getString("telephone"));
                 u.setStatus(rs.getString("status"));
                 u.setRegistrationDate(rs.getTimestamp("registration_date"));
+<<<<<<< HEAD
+=======
+                u.setMfaSecret(rs.getString("mfa_secret"));
+                u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
+                u.setActionsCount(rs.getInt("actions_count"));
+>>>>>>> gestion-user
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -162,7 +243,10 @@ public class UserService implements IService<User> {
     }
 
     public boolean existsByEmail(String email) {
+<<<<<<< HEAD
         if (cnx == null) return false;
+=======
+>>>>>>> gestion-user
         String req = "SELECT count(*) FROM `user` WHERE `email` = ?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -178,7 +262,10 @@ public class UserService implements IService<User> {
     }
 
     public User getUserByEmail(String email) {
+<<<<<<< HEAD
         if (cnx == null) return null;
+=======
+>>>>>>> gestion-user
         String req = "SELECT * FROM `user` WHERE `email` = ?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -192,6 +279,12 @@ public class UserService implements IService<User> {
                 u.setRole(rs.getString("role"));
                 u.setNom(rs.getString("nom"));
                 u.setPrenom(rs.getString("prenom"));
+<<<<<<< HEAD
+=======
+                u.setMfaSecret(rs.getString("mfa_secret"));
+                u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
+                u.setActionsCount(rs.getInt("actions_count"));
+>>>>>>> gestion-user
                 return u;
             }
         } catch (SQLException e) {
@@ -200,6 +293,7 @@ public class UserService implements IService<User> {
         return null;
     }
 
+<<<<<<< HEAD
     public User getById(int id) {
         if (cnx == null) return null;
         String req = "SELECT * FROM `user` WHERE `id` = ?";
@@ -230,6 +324,9 @@ public class UserService implements IService<User> {
     }
     public boolean isEmailTaken(String email, int currentUserId) {
         if (cnx == null) return false;
+=======
+    public boolean isEmailTaken(String email, int currentUserId) {
+>>>>>>> gestion-user
         String req = "SELECT count(*) FROM `user` WHERE `email` = ? AND `id` != ?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -246,7 +343,10 @@ public class UserService implements IService<User> {
     }
 
     public void setResetCode(String email, String code, Timestamp expiry) {
+<<<<<<< HEAD
         if (cnx == null) return;
+=======
+>>>>>>> gestion-user
         String req = "UPDATE `user` SET `reset_code` = ?, `reset_expiry` = ? WHERE `email` = ?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -260,7 +360,10 @@ public class UserService implements IService<User> {
     }
 
     public boolean validateResetCode(String email, String code) {
+<<<<<<< HEAD
         if (cnx == null) return false;
+=======
+>>>>>>> gestion-user
         String req = "SELECT `reset_expiry` FROM `user` WHERE `email` = ? AND `reset_code` = ?";
         try {
             PreparedStatement pstm = cnx.prepareStatement(req);
@@ -281,7 +384,10 @@ public class UserService implements IService<User> {
     }
 
     public void updatePasswordByEmail(String email, String newPassword) {
+<<<<<<< HEAD
         if (cnx == null) return;
+=======
+>>>>>>> gestion-user
         String req = "UPDATE `user` SET `password` = ?, `reset_code` = NULL, `reset_expiry` = NULL WHERE `email` = ?";
         String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(newPassword, org.mindrot.jbcrypt.BCrypt.gensalt());
         try {
@@ -293,4 +399,38 @@ public class UserService implements IService<User> {
             System.err.println("updatePasswordByEmail error: " + e.getMessage());
         }
     }
+<<<<<<< HEAD
+=======
+
+    public User getUserById(int id) {
+        String req = "SELECT * FROM `user` WHERE `id` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                u.setRole(rs.getString("role"));
+                u.setLocalisation(rs.getString("localisation"));
+                u.setBio(rs.getString("bio"));
+                u.setSpecialite(rs.getString("specialite"));
+                u.setTelephone(rs.getString("telephone"));
+                u.setStatus(rs.getString("status"));
+                u.setRegistrationDate(rs.getTimestamp("registration_date"));
+                u.setMfaSecret(rs.getString("mfa_secret"));
+                u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
+                u.setActionsCount(rs.getInt("actions_count"));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.err.println("getUserById error: " + e.getMessage());
+        }
+        return null;
+    }
+>>>>>>> gestion-user
 }

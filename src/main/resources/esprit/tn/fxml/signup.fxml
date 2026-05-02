@@ -115,6 +115,7 @@
                                     <children>
                                         <Label style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #2d3436;" text="Mot de passe" />
                                         <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="auth-field" prefHeight="45.0" />
+                                        <ProgressBar fx:id="passwordStrengthBar" maxWidth="Infinity" prefHeight="10.0" progress="0.0" styleClass="strength-bar" />
                                         <Label fx:id="passwordError" managed="false" styleClass="error-message-label" text="Trop court" visible="false" />
                                     </children>
                                 </VBox>
@@ -147,7 +148,7 @@
                             <children>
                                 <HBox spacing="10">
                                     <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#handleSignUp" styleClass="auth-primary-btn" text="S'INSCRIRE DÈS MAINTENANT" prefHeight="45.0" />
-                                    <Button onAction="#handleFaceEnrollment" style="-fx-background-color: #FFB6C1; -fx-text-fill: #2d3436; -fx-font-weight: bold; -fx-background-radius: 8;" text="📷 Enrôler Visage" prefHeight="45.0" />
+                                    <Button onAction="#handleFaceEnrollment" style="-fx-background-color: #FFB6C1; -fx-text-fill: #2d3436; -fx-font-weight: bold; -fx-background-radius: 8;" text="📷 Scanner mon visage" prefHeight="45.0" />
                                 </HBox>
                                 <Label fx:id="faceEnrollStatus" text="" style="-fx-text-fill: #27ae60; -fx-font-weight: bold;" visible="false" managed="false"/>
                                 

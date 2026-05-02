@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #f4f7f6; -fx-background-radius: 30;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EvenementDetailsController">
+    <children>
+        <ScrollPane fitToWidth="true" prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: transparent; -fx-background: transparent; -fx-background-radius: 30;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox spacing="20.0" style="-fx-padding: 30;">
+                    <children>
+                        <!-- Header -->
+                        <Label style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #1b4332;" text="Détails de l'événement" />
+
+                        <!-- Main Content Glass Card -->
+                        <HBox spacing="30.0" styleClass="glass-card" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 30; -fx-padding: 40; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 20, 0, 0, 10);">
+                            <children>
+                                <!-- Left side: Image and QR Code -->
+                                <VBox spacing="25.0" alignment="TOP_CENTER">
+                                    <children>
+                                        <StackPane style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                                            <children>
+                                                <ImageView fx:id="eventImage" fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                                                    <styleClass>
+                                                        <fx:reference source="eventImage" />
+                                                    </styleClass>
+                                                </ImageView>
+                                            </children>
+                                        </StackPane>
+                                        
+                                        <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);">
+                                            <children>
+                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2d5a27;" text="QR CODE DE L'ÉVÉNEMENT" />
+                                                <ImageView fx:id="qrCodeImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+                                                <Label style="-fx-font-size: 11; -fx-text-fill: #666;" text="Scannez pour obtenir les infos" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+
+                                <!-- Right side: Details -->
+                                <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label fx:id="eventTitle" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d5a27;" text="Nom de l'événement" wrapText="true" />
+                                        
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <Label fx:id="eventDate" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1b4332; -fx-background-color: #e8f5e9; -fx-padding: 8 15; -fx-background-radius: 10;" text="📅 Date" />
+                                                <Label fx:id="participantCount" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1b4332; -fx-background-color: #f1f8e9; -fx-padding: 8 15; -fx-background-radius: 10;" text="👥 Capacité" />
+                                            </children>
+                                        </HBox>
+
+                                        <Label fx:id="eventLocation" style="-fx-font-size: 16; -fx-text-fill: #555;" text="📍 Lieu" />
+                                        <Label fx:id="eventOrganisateur" style="-fx-font-size: 16; -fx-text-fill: #555;" text="👤 Organisateur" />
+                                        
+                                        <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+                                            <children>
+                                                <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1b4332;" text="Description" />
+                                                <Label fx:id="eventDescription" style="-fx-font-size: 15; -fx-line-spacing: 1.5; -fx-text-fill: #444;" text="Description détaillée de l'événement..." wrapText="true" />
+                                            </children>
+                                        </VBox>
+
+                                        <Button maxWidth="Infinity" onAction="#handleParticiper" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold; -fx-padding: 15; -fx-background-radius: 15; -fx-cursor: hand;" text="Participer à l'événement" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

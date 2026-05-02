@@ -6,6 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+<<<<<<< HEAD
+=======
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+>>>>>>> gestion-user
 import models.User;
 import services.UserService;
 import utils.UserSession;
@@ -92,9 +97,17 @@ public class LoginController {
             
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
+<<<<<<< HEAD
             dialogStage.setTitle("Connexion Faciale");
             dialogStage.setResizable(false);
             dialogStage.setScene(new Scene(root));
+=======
+            dialogStage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+            
+            Scene scene = new Scene(root);
+            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+            dialogStage.setScene(scene);
+>>>>>>> gestion-user
             
             dialogStage.showAndWait();
             
@@ -197,6 +210,35 @@ public class LoginController {
             }
 
             if (isPasswordCorrect) {
+<<<<<<< HEAD
+=======
+                if (targetUser.isMfaEnabled()) {
+                    try {
+                        javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/mfa_dialog.fxml"));
+                        javafx.scene.Parent root = loader.load();
+                        
+                        MfaDialogController dialogController = loader.getController();
+                        dialogController.initData(targetUser.getEmail(), targetUser.getMfaSecret(), false); // Verification mode
+                        
+                        javafx.stage.Stage stage = new javafx.stage.Stage();
+                        stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+                        stage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+                        
+                        javafx.scene.Scene scene = new javafx.scene.Scene(root);
+                        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                        stage.setScene(scene);
+                        stage.showAndWait();
+
+                        if (!dialogController.isSuccessful()) {
+                            return; // Don't login if MFA failed or cancelled
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showGeneralError("Erreur lors de la vérification MFA.");
+                        return;
+                    }
+                }
+>>>>>>> gestion-user
                 UserSession.getInstance().setUser(targetUser);
                 goToFront(event);
             } else {

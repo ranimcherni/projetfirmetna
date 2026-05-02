@@ -89,4 +89,33 @@ public class ParticipationService {
             return false;
         }
     }
+<<<<<<< HEAD
+=======
+
+    public java.util.List<models.User> getParticipantsByEvenement(int evenementId) {
+        java.util.List<models.User> list = new java.util.ArrayList<>();
+        if (cnx == null) return list;
+        String req = "SELECT u.* FROM `user` u " +
+                     "JOIN `" + TABLE + "` p ON p.`user_id` = u.`id` " +
+                     "WHERE p.`evenement_id` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setInt(1, evenementId);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                models.User u = new models.User();
+                u.setId(rs.getInt("id"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                u.setEmail(rs.getString("email"));
+                u.setTelephone(rs.getString("telephone"));
+                u.setRole(rs.getString("role"));
+                list.add(u);
+            }
+        } catch (SQLException e) {
+            System.err.println("getParticipantsByEvenement error: " + e.getMessage());
+        }
+        return list;
+    }
+>>>>>>> gestion-user
 }

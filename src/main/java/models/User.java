@@ -16,6 +16,12 @@ public class User {
     private java.sql.Timestamp registrationDate;
     private String resetCode;
     private java.sql.Timestamp resetExpiry;
+<<<<<<< HEAD
+=======
+    private String mfaSecret;
+    private boolean mfaEnabled;
+    private int actionsCount;
+>>>>>>> gestion-user
 
     public User() {
     }
@@ -192,6 +198,25 @@ public class User {
         this.resetExpiry = resetExpiry;
     }
 
+<<<<<<< HEAD
+=======
+    public String getMfaSecret() {
+        return mfaSecret;
+    }
+
+    public void setMfaSecret(String mfaSecret) {
+        this.mfaSecret = mfaSecret;
+    }
+
+    public boolean isMfaEnabled() {
+        return mfaEnabled;
+    }
+
+    public void setMfaEnabled(boolean mfaEnabled) {
+        this.mfaEnabled = mfaEnabled;
+    }
+
+>>>>>>> gestion-user
     @Override
     public String toString() {
         return "User{" +
@@ -202,4 +227,15 @@ public class User {
                 ", prenom='" + prenom + '\'' +
                 '}';
     }
+<<<<<<< HEAD
+=======
+
+    public int getActionsCount() {
+        return actionsCount;
+    }
+
+    public void setActionsCount(int actionsCount) {
+        this.actionsCount = actionsCount;
+    }
+>>>>>>> gestion-user
 }

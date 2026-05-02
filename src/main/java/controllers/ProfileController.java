@@ -19,6 +19,12 @@ public class ProfileController {
     @FXML private TextField emailField;
     @FXML private TextField phoneField;
 
+<<<<<<< HEAD
+=======
+    @FXML private Label mfaStatusLabel;
+    @FXML private Button mfaButton;
+
+>>>>>>> gestion-user
     // Error Labels
     @FXML private Label nomError;
     @FXML private Label prenomError;
@@ -33,6 +39,10 @@ public class ProfileController {
         currentUser = UserSession.getInstance().getUser();
         if (currentUser != null) {
             loadUserData();
+<<<<<<< HEAD
+=======
+            updateMfaUI();
+>>>>>>> gestion-user
         }
         resetErrorLabels();
     }
@@ -139,11 +149,54 @@ public class ProfileController {
     }
 
     @FXML
+<<<<<<< HEAD
+=======
+    private void handlePartenariats(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
+    }
+
+    @FXML
+>>>>>>> gestion-user
     private void handleAccueil(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
     }
 
     @FXML
+<<<<<<< HEAD
+=======
+    private void handleForum(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Forum Communautaire");
+    }
+
+    @FXML
+    private void handleProduits(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Produits");
+    }
+
+    @FXML
+    private void handleProduitsVegetaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("vegetale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Vegetaux");
+    }
+
+    @FXML
+    private void handleProduitsAnimaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("animale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Animaux");
+    }
+
+    @FXML
+    private void handleEvenements(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_evenements.fxml", "Événements");
+    }
+
+    @FXML
+    private void handleDons(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_offres.fxml", "Donations & Solidarité");
+    }
+
+    @FXML
+>>>>>>> gestion-user
     private void handleBack(ActionEvent event) {
         handleAccueil(event);
     }
@@ -154,4 +207,65 @@ public class ProfileController {
         NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
     }
 
+<<<<<<< HEAD
+=======
+    private void updateMfaUI() {
+        if (currentUser.isMfaEnabled()) {
+            mfaStatusLabel.setText("Activé - Votre compte est sécurisé");
+            mfaStatusLabel.setStyle("-fx-text-fill: #27ae60;");
+            mfaButton.setText("Désactiver");
+            mfaButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 20;");
+        } else {
+            mfaStatusLabel.setText("Désactivé - Renforcez votre sécurité");
+            mfaStatusLabel.setStyle("-fx-text-fill: #5a6268;");
+            mfaButton.setText("Activer");
+            mfaButton.setStyle("-fx-background-color: #0056b3; -fx-text-fill: white; -fx-background-radius: 20;");
+        }
+    }
+
+    @FXML
+    private void handleMfaToggle(ActionEvent event) {
+        if (currentUser.isMfaEnabled()) {
+            if (AlertUtils.showConfirmation("Désactiver le MFA", "Voulez-vous vraiment désactiver la double authentification ?")) {
+                currentUser.setMfaEnabled(false);
+                currentUser.setMfaSecret(null);
+                userService.update(currentUser);
+                updateMfaUI();
+                AlertUtils.showSuccess("Sécurité", "Le MFA a été désactivé.");
+            }
+        } else {
+            try {
+                services.GoogleAuthService googleAuthService = new services.GoogleAuthService();
+                String secret = googleAuthService.generateSecretKey();
+
+                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/mfa_dialog.fxml"));
+                javafx.scene.Parent root = loader.load();
+                
+                MfaDialogController dialogController = loader.getController();
+                dialogController.initData(currentUser.getEmail(), secret, true); // Setup mode
+                
+                javafx.stage.Stage stage = new javafx.stage.Stage();
+                stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+                stage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
+                
+                javafx.scene.Scene scene = new javafx.scene.Scene(root);
+                scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                stage.setScene(scene);
+                stage.showAndWait();
+
+                if (dialogController.isSuccessful()) {
+                    currentUser.setMfaEnabled(true);
+                    currentUser.setMfaSecret(secret);
+                    userService.update(currentUser);
+                    updateMfaUI();
+                    AlertUtils.showSuccess("Sécurité", "Le MFA a été activé avec succès !");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                AlertUtils.showError("Erreur", "Impossible d'ouvrir la configuration MFA.");
+            }
+        }
+    }
+
+>>>>>>> gestion-user
 }

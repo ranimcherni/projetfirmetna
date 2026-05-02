@@ -18,7 +18,11 @@ public class NavigationService {
         try {
             java.net.URL res = NavigationService.class.getResource(fxmlPath);
             if (res == null) {
+<<<<<<< HEAD
                 showError("Ressource introuvable : " + fxmlPath + "\n\nAssurez-vous que le fichier est bien dans src/main/resources/... et que Maven a bien été rafraîchi.");
+=======
+                showError("Ressource introuvable : " + fxmlPath);
+>>>>>>> gestion-user
                 return;
             }
 
@@ -26,6 +30,7 @@ public class NavigationService {
             Parent root = loader.load();
 
             Stage stage = getStageFromEvent(event);
+<<<<<<< HEAD
             if (stage == null) {
                 showError("Impossible de récupérer la fenêtre (Stage) depuis l'événement.");
                 return;
@@ -35,6 +40,22 @@ public class NavigationService {
             stage.setTitle("Firmetna" + (title != null && !title.isEmpty() ? " - " + title : ""));
             stage.setScene(scene);
             stage.setMaximized(true);
+=======
+            if (stage == null) return;
+
+            // Preserve current stage state
+            boolean wasMaximized = stage.isMaximized();
+            double width = stage.getScene() != null ? stage.getScene().getWidth() : DEFAULT_WIDTH;
+            double height = stage.getScene() != null ? stage.getScene().getHeight() : DEFAULT_HEIGHT;
+
+            Scene scene = new Scene(root, width, height);
+            stage.setTitle("Firmetna" + (title != null && !title.isEmpty() ? " - " + title : ""));
+            stage.setScene(scene);
+            
+            if (wasMaximized) {
+                stage.setMaximized(true);
+            }
+>>>>>>> gestion-user
             stage.show();
 
         } catch (Exception e) {
@@ -69,6 +90,7 @@ public class NavigationService {
 
     public static void navigateFromNode(Node anchor, String fxmlPath, String title) {
         try {
+<<<<<<< HEAD
             java.net.URL res = NavigationService.class.getResource(fxmlPath);
             if (res == null) {
                 showError("Ressource introuvable : " + fxmlPath);
@@ -88,11 +110,33 @@ public class NavigationService {
             stage.setTitle("Firmetna" + (title != null && !title.isEmpty() ? " - " + title : ""));
             stage.setScene(scene);
             stage.setMaximized(true);
+=======
+            FXMLLoader loader = new FXMLLoader(NavigationService.class.getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) anchor.getScene().getWindow();
+            
+            // Preserve current stage state
+            boolean wasMaximized = stage.isMaximized();
+            double width = stage.getScene() != null ? stage.getScene().getWidth() : DEFAULT_WIDTH;
+            double height = stage.getScene() != null ? stage.getScene().getHeight() : DEFAULT_HEIGHT;
+
+            Scene scene = new Scene(root, width, height);
+            stage.setTitle("Firmetna" + (title != null && !title.isEmpty() ? " - " + title : ""));
+            stage.setScene(scene);
+            
+            if (wasMaximized) {
+                stage.setMaximized(true);
+            }
+>>>>>>> gestion-user
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
+<<<<<<< HEAD
             showError("Erreur lors du chargement de la page : " + e.getMessage());
+=======
+>>>>>>> gestion-user
         }
     }
 }

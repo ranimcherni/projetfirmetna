@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductDetailController" style="-fx-background-color: rgba(0,0,0,0.32);">
+    <children>
+        <VBox fx:id="rootBox" maxWidth="760" spacing="18" style="-fx-background-color: white; -fx-background-radius: 24; -fx-padding: 24; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.22), 20, 0, 0, 8);">
+            <children>
+                <HBox alignment="CENTER_RIGHT">
+                    <children>
+                        <Button text="Fermer" onAction="#handleClose" style="-fx-background-color: transparent; -fx-text-fill: #6b7280; -fx-font-weight: bold;" />
+                    </children>
+                </HBox>
+                <HBox spacing="24">
+                    <children>
+                        <ImageView fx:id="productImageView" fitWidth="300" fitHeight="240" preserveRatio="false" />
+                        <VBox spacing="12" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label fx:id="typeLabel" style="-fx-background-color: #eef6ea; -fx-text-fill: #2d5a27; -fx-padding: 4 10; -fx-background-radius: 20; -fx-font-weight: bold;" text="Type" />
+                                <Label fx:id="nomLabel" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #1f2937;" text="Nom" />
+                                <Label fx:id="prixLabel" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #27ae60;" text="0.00 DT" />
+                                <Label fx:id="descriptionLabel" wrapText="true" style="-fx-text-fill: #4b5563; -fx-font-size: 14;" text="Description" />
+                                <GridPane hgap="12" vgap="10">
+                                    <children>
+                                        <Label text="Unite:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;" />
+                                        <Label fx:id="uniteLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" text="-" />
+                                        <Label text="Stock:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;" />
+                                        <Label fx:id="stockLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" text="-" />
+                                        <Label text="Bio:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;" />
+                                        <Label fx:id="bioLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" text="-" />
+                                        <Label text="Badge:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;" />
+                                        <Label fx:id="badgeLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" text="-" />
+                                    </children>
+                                </GridPane>
+                                <Button fx:id="addToCartBtn" text="Ajouter au panier" onAction="#handleAddToCart" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 12 18; -fx-font-weight: bold;" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

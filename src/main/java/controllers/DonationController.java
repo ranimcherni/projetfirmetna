@@ -73,7 +73,11 @@ public class DonationController {
 
     public boolean createDemande(int offreId, int userId, int quantiteDemandee, String statut, boolean disponible, LocalDateTime dateRecuperation) {
         Offre offre = offreService.getById(offreId);
+<<<<<<< HEAD
         User user = userService.getById(userId);
+=======
+        User user = userService.getUserById(userId);
+>>>>>>> gestion-user
         if (offre == null || user == null) {
             return false;
         }

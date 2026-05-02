@@ -12,10 +12,14 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<<<<<<< HEAD
         <!-- Une seule version pour tous les modules JavaFX (évite conflits IDE / runtime) -->
         <javafx.version>22.0.2</javafx.version>
         <javacv.version>1.5.9</javacv.version>
         <native.platform>windows-x86_64</native.platform>
+=======
+        <javafx.version>17.0.2</javafx.version>
+>>>>>>> gestion-user
     </properties>
 
     <dependencies>
@@ -26,6 +30,7 @@
             <scope>compile</scope>
         </dependency>
 
+<<<<<<< HEAD
         <!-- JavaFX (controls + fxml + base + graphics : nécessaire au runtime hors JDK) -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -44,18 +49,36 @@
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
             <classifier>win</classifier>
+=======
+        <!-- JavaFX -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>22.0.2</version>
+            <scope>compile</scope>
+>>>>>>> gestion-user
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
+<<<<<<< HEAD
             <version>${javafx.version}</version>
             <classifier>win</classifier>
+=======
+            <version>22.0.2</version>
+            <scope>compile</scope>
+>>>>>>> gestion-user
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
+<<<<<<< HEAD
             <version>${javafx.version}</version>
             <classifier>win</classifier>
+=======
+            <version>22.0.2</version>
+            <scope>compile</scope>
+>>>>>>> gestion-user
         </dependency>
 
         <!-- Testing Dependencies -->
@@ -78,12 +101,15 @@
             <scope>test</scope>
         </dependency>
 
+<<<<<<< HEAD
         <!-- ZXing for QR Code generation -->
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
             <version>3.5.3</version>
         </dependency>
+=======
+>>>>>>> gestion-user
         <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
         <dependency>
             <groupId>org.mindrot</groupId>
@@ -97,6 +123,7 @@
             <version>1.6.2</version>
         </dependency>
 
+<<<<<<< HEAD
         <!-- SLF4J provider (CalendarFX and others) -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -122,6 +149,27 @@
             <artifactId>opencv</artifactId>
             <version>4.7.0-1.5.9</version>
             <classifier>${native.platform}</classifier>
+=======
+        <!-- ZXing for QR Code generation -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+        
+        <!-- Google Authenticator (MFA) -->
+        <dependency>
+            <groupId>com.warrenstrange</groupId>
+            <artifactId>googleauth</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        
+        <!-- JSON support -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
+>>>>>>> gestion-user
         </dependency>
 
         <!-- Calendar bundle JavaFX -->
@@ -131,11 +179,26 @@
             <version>11.12.7</version>
         </dependency>
 
+<<<<<<< HEAD
         <!-- JSON Library for API communication -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20231013</version>
+=======
+        <!-- SLF4J provider (CalendarFX and others) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+        <!-- JavaCV (OpenCV) for Facial Recognition -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.5.9</version>
+            <scope>compile</scope>
+>>>>>>> gestion-user
         </dependency>
     </dependencies>
 
@@ -154,9 +217,13 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
+<<<<<<< HEAD
                     <!-- Point d'entrée : classe sans package -->
                     <mainClass>FirmetnaLauncher</mainClass>
                     <jvmArgs>--enable-native-access=javafx.graphics</jvmArgs>
+=======
+                    <mainClass>FirmetnaLauncher</mainClass>
+>>>>>>> gestion-user
                 </configuration>
             </plugin>
             <!-- Exec Plugin to run Main -->
