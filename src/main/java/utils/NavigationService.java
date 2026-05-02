@@ -18,11 +18,7 @@ public class NavigationService {
         try {
             java.net.URL res = NavigationService.class.getResource(fxmlPath);
             if (res == null) {
-<<<<<<< HEAD
-                showError("Ressource introuvable : " + fxmlPath + "\n\nAssurez-vous que le fichier est bien dans src/main/resources/... et que Maven a bien été rafraîchi.");
-=======
                 showError("Ressource introuvable : " + fxmlPath);
->>>>>>> gestion-user
                 return;
             }
 
@@ -30,17 +26,6 @@ public class NavigationService {
             Parent root = loader.load();
 
             Stage stage = getStageFromEvent(event);
-<<<<<<< HEAD
-            if (stage == null) {
-                showError("Impossible de récupérer la fenêtre (Stage) depuis l'événement.");
-                return;
-            }
-
-            Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT);
-            stage.setTitle("Firmetna" + (title != null && !title.isEmpty() ? " - " + title : ""));
-            stage.setScene(scene);
-            stage.setMaximized(true);
-=======
             if (stage == null) return;
 
             // Preserve current stage state
@@ -55,7 +40,6 @@ public class NavigationService {
             if (wasMaximized) {
                 stage.setMaximized(true);
             }
->>>>>>> gestion-user
             stage.show();
 
         } catch (Exception e) {
@@ -90,27 +74,6 @@ public class NavigationService {
 
     public static void navigateFromNode(Node anchor, String fxmlPath, String title) {
         try {
-<<<<<<< HEAD
-            java.net.URL res = NavigationService.class.getResource(fxmlPath);
-            if (res == null) {
-                showError("Ressource introuvable : " + fxmlPath);
-                return;
-            }
-
-            FXMLLoader loader = new FXMLLoader(res);
-            Parent root = loader.load();
-
-            if (anchor == null || anchor.getScene() == null || anchor.getScene().getWindow() == null) {
-                showError("Impossible de recuperer la fenetre pour naviguer vers : " + fxmlPath);
-                return;
-            }
-            Stage stage = (Stage) anchor.getScene().getWindow();
-            Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT);
-
-            stage.setTitle("Firmetna" + (title != null && !title.isEmpty() ? " - " + title : ""));
-            stage.setScene(scene);
-            stage.setMaximized(true);
-=======
             FXMLLoader loader = new FXMLLoader(NavigationService.class.getResource(fxmlPath));
             Parent root = loader.load();
 
@@ -128,15 +91,10 @@ public class NavigationService {
             if (wasMaximized) {
                 stage.setMaximized(true);
             }
->>>>>>> gestion-user
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-<<<<<<< HEAD
-            showError("Erreur lors du chargement de la page : " + e.getMessage());
-=======
->>>>>>> gestion-user
         }
     }
 }

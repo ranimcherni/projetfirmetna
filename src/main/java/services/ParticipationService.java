@@ -89,8 +89,6 @@ public class ParticipationService {
             return false;
         }
     }
-<<<<<<< HEAD
-=======
 
     public java.util.List<models.User> getParticipantsByEvenement(int evenementId) {
         java.util.List<models.User> list = new java.util.ArrayList<>();
@@ -117,5 +115,4 @@ public class ParticipationService {
         }
         return list;
     }
->>>>>>> gestion-user
 }

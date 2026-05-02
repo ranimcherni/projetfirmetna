@@ -19,18 +19,13 @@ import models.User;
 import services.DemandeService;
 import services.OffreService;
 import services.UserService;
-<<<<<<< HEAD
-=======
 import utils.NavigationService;
 import utils.UserSession;
 import javafx.event.ActionEvent;
->>>>>>> gestion-user
 
 public class AdminDonationsDemandesController {
 
     @FXML
-<<<<<<< HEAD
-=======
     private void handlePartenariats(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
     }
@@ -89,7 +84,6 @@ public class AdminDonationsDemandesController {
     }
 
     @FXML
->>>>>>> gestion-user
     private TableView<Demande> demandeTable;
     @FXML
     private TableColumn<Demande, Integer> colId;
@@ -247,11 +241,7 @@ public class AdminDonationsDemandesController {
         Integer quantite = Integer.parseInt(quantiteField.getText().trim());
 
         Offre offre = offreService.getById(offreId);
-<<<<<<< HEAD
-        User user = userService.getById(userId);
-=======
         User user = userService.getUserById(userId);
->>>>>>> gestion-user
         if (offre == null || user == null) {
             showError("Mise a jour echouee. Offre/User introuvable.");
             return;
@@ -290,8 +280,6 @@ public class AdminDonationsDemandesController {
         demandeTable.getSelectionModel().clearSelection();
     }
 
-<<<<<<< HEAD
-=======
     @FXML
     private void handleOpenChatbot(ActionEvent event) {
         try {
@@ -308,7 +296,6 @@ public class AdminDonationsDemandesController {
         }
     }
 
->>>>>>> gestion-user
     private void refreshTable() {
         masterData.setAll(demandeService.getAll());
         applyFilters();

@@ -3,25 +3,13 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-<<<<<<< HEAD
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-=======
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
->>>>>>> gestion-user
 import java.io.IOException;
 
 public class AdminLayoutController {
 
-<<<<<<< HEAD
-    @FXML
-    private StackPane contentArea;
-=======
     // ================= FXML ELEMENTS =================
     @FXML private AnchorPane chatbotContainer;
     @FXML private Button chatbotToggleButton;
@@ -33,7 +21,6 @@ public class AdminLayoutController {
     private final services.ChatbotService chatbotService = new services.ChatbotService();
     private double chatOffsetX, chatOffsetY;
     private double buttonOffsetX, buttonOffsetY;
->>>>>>> gestion-user
 
     private static AdminLayoutController instance;
 
@@ -43,13 +30,6 @@ public class AdminLayoutController {
 
     @FXML
     public void initialize() {
-<<<<<<< HEAD
-        instance = this;
-        // Load Dashboard by default
-        loadView("/esprit/tn/fxml/admin_dashboard.fxml");
-    }
-
-=======
         // ================= INSTANCE =================
         instance = this;
 
@@ -117,7 +97,6 @@ public class AdminLayoutController {
         chatMessages.getChildren().add(label);
     }
 
->>>>>>> gestion-user
     @FXML
     private void showDashboard(ActionEvent event) {
         loadView("/esprit/tn/fxml/admin_dashboard.fxml");
@@ -129,8 +108,6 @@ public class AdminLayoutController {
     }
 
     @FXML
-<<<<<<< HEAD
-=======
     private void showProducts(ActionEvent event) {
         loadView("/esprit/tn/fxml/admin_products.fxml");
     }
@@ -166,39 +143,21 @@ public class AdminLayoutController {
     }
 
     @FXML
->>>>>>> gestion-user
     private void showLieux(ActionEvent event) {
         loadView("/esprit/tn/fxml/admin_lieux.fxml");
     }
 
     @FXML
-<<<<<<< HEAD
-    private void showEvenements(ActionEvent event) {
-        loadView("/esprit/tn/fxml/admin_evenements.fxml");
-    }
-
-    @FXML
-    private void showDonationOffres(ActionEvent event) {
-=======
     private void showDonationsOffres(ActionEvent event) {
->>>>>>> gestion-user
         loadView("/esprit/tn/fxml/admin_donations_offres.fxml");
     }
 
     @FXML
-<<<<<<< HEAD
-    private void showDonationDemandes(ActionEvent event) {
-=======
     private void showDonationsDemandes(ActionEvent event) {
->>>>>>> gestion-user
         loadView("/esprit/tn/fxml/admin_donations_demandes.fxml");
     }
 
     @FXML
-<<<<<<< HEAD
-    private void showDonationCalendar(ActionEvent event) {
-        loadView("/esprit/tn/fxml/admin_donations_calendar.fxml");
-=======
     private void showPartenariats(ActionEvent event) {
         loadView("/esprit/tn/fxml/PartnerView.fxml");
     }
@@ -206,7 +165,6 @@ public class AdminLayoutController {
     @FXML
     private void showOffresPartenaires(ActionEvent event) {
         loadView("/esprit/tn/fxml/ContractView.fxml");
->>>>>>> gestion-user
     }
 
     @FXML

@@ -19,12 +19,9 @@ public class ProfileController {
     @FXML private TextField emailField;
     @FXML private TextField phoneField;
 
-<<<<<<< HEAD
-=======
     @FXML private Label mfaStatusLabel;
     @FXML private Button mfaButton;
 
->>>>>>> gestion-user
     // Error Labels
     @FXML private Label nomError;
     @FXML private Label prenomError;
@@ -39,10 +36,7 @@ public class ProfileController {
         currentUser = UserSession.getInstance().getUser();
         if (currentUser != null) {
             loadUserData();
-<<<<<<< HEAD
-=======
             updateMfaUI();
->>>>>>> gestion-user
         }
         resetErrorLabels();
     }
@@ -149,21 +143,16 @@ public class ProfileController {
     }
 
     @FXML
-<<<<<<< HEAD
-=======
     private void handlePartenariats(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
     }
 
     @FXML
->>>>>>> gestion-user
     private void handleAccueil(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
     }
 
     @FXML
-<<<<<<< HEAD
-=======
     private void handleForum(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Forum Communautaire");
     }
@@ -196,7 +185,6 @@ public class ProfileController {
     }
 
     @FXML
->>>>>>> gestion-user
     private void handleBack(ActionEvent event) {
         handleAccueil(event);
     }
@@ -207,8 +195,6 @@ public class ProfileController {
         NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
     }
 
-<<<<<<< HEAD
-=======
     private void updateMfaUI() {
         if (currentUser.isMfaEnabled()) {
             mfaStatusLabel.setText("Activé - Votre compte est sécurisé");
@@ -267,5 +253,4 @@ public class ProfileController {
         }
     }
 
->>>>>>> gestion-user
 }

@@ -73,24 +73,16 @@ public class AdminEvenementsController {
         actionsCol.setCellFactory(column -> new TableCell<Evenement, Void>() {
             private final Button editBtn = new Button("✎");
             private final Button deleteBtn = new Button("🗑");
-<<<<<<< HEAD
-            private final HBox pane = new HBox(8, editBtn, deleteBtn);
-=======
             private final Button participantsBtn = new Button("👥");
             private final HBox pane = new HBox(8, participantsBtn, editBtn, deleteBtn);
->>>>>>> gestion-user
 
             {
                 editBtn.getStyleClass().add("admin-action-btn-edit");
                 deleteBtn.getStyleClass().add("admin-action-btn-delete");
-<<<<<<< HEAD
-                pane.setAlignment(Pos.CENTER);
-=======
                 participantsBtn.getStyleClass().add("admin-action-btn-view"); // Added a general view style
                 participantsBtn.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5;");
                 pane.setAlignment(Pos.CENTER);
                 
->>>>>>> gestion-user
                 deleteBtn.setOnAction(e -> {
                     Evenement ev = getTableView().getItems().get(getIndex());
                     handleDelete(ev);
@@ -99,13 +91,10 @@ public class AdminEvenementsController {
                     Evenement ev = getTableView().getItems().get(getIndex());
                     handleEdit(ev);
                 });
-<<<<<<< HEAD
-=======
                 participantsBtn.setOnAction(e -> {
                     Evenement ev = getTableView().getItems().get(getIndex());
                     handleViewParticipants(ev);
                 });
->>>>>>> gestion-user
             }
 
             @Override
@@ -133,8 +122,6 @@ public class AdminEvenementsController {
         showEvenementForm(e);
     }
 
-<<<<<<< HEAD
-=======
     private void handleViewParticipants(Evenement e) {
         try {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/admin_participants.fxml"));
@@ -154,7 +141,6 @@ public class AdminEvenementsController {
         }
     }
 
->>>>>>> gestion-user
     @FXML
     private void handleAddEvenement() {
         showEvenementForm(null);

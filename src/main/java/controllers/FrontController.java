@@ -2,11 +2,6 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-<<<<<<< HEAD
-import javafx.scene.control.Label;
-import utils.UserSession;
-import utils.NavigationService;
-=======
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -28,18 +23,10 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 import models.User;
 import services.UserService;
->>>>>>> gestion-user
 
 public class FrontController {
 
     @FXML private Label welcomeLabel;
-<<<<<<< HEAD
-
-    @FXML
-    public void initialize() {
-        String userName = UserSession.getInstance().getUserName();
-        welcomeLabel.setText("Bonjour, " + (userName != null ? userName : "Utilisateur"));
-=======
     @FXML private Label lblTotalProducts;
     @FXML private Label lblTotalEvents;
     @FXML private Label lblTotalPartners;
@@ -136,7 +123,6 @@ public class FrontController {
         } catch (Exception e) {
             System.err.println("Error loading front statistics: " + e.getMessage());
         }
->>>>>>> gestion-user
     }
 
     @FXML
@@ -155,18 +141,6 @@ public class FrontController {
         NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
     }
     
-<<<<<<< HEAD
-    @FXML private void handleProduits(ActionEvent event) { System.out.println("Opening Produits"); }
-    @FXML private void handleEvenements(ActionEvent event) {
-        NavigationService.switchScene(event, "/esprit/tn/fxml/front_evenements.fxml", "Événements");
-    }
-    @FXML private void handleForum(ActionEvent event) { System.out.println("Opening Forum"); }
-    @FXML private void handleNotifications(ActionEvent event) { System.out.println("Opening Notifications"); }
-    @FXML private void handleDons(ActionEvent event) { 
-        NavigationService.switchScene(event, "/esprit/tn/fxml/admin_donations_offres.fxml", "Dons");
-    }
-    @FXML private void handlePartenariats(ActionEvent event) { System.out.println("Opening Partenariats"); }
-=======
     @FXML 
     private void handleProduits(ActionEvent event) { 
         NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace");
@@ -209,23 +183,10 @@ public class FrontController {
     private void handlePartenariats(ActionEvent event) { 
         NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
     }
->>>>>>> gestion-user
 
     @FXML
     private void handleOpenChatbot(ActionEvent event) {
         try {
-<<<<<<< HEAD
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/chatbot.fxml"));
-            javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = new javafx.stage.Stage();
-            stage.setTitle("Assistant Intelligent");
-            stage.setScene(new javafx.scene.Scene(root));
-            stage.initModality(javafx.stage.Modality.NONE); // Non-modal so they can use the app while chatting
-            stage.show();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-            System.err.println("Impossible de charger le Chatbot : " + e.getMessage());
-=======
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/tn/fxml/chatbot.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
@@ -234,7 +195,6 @@ public class FrontController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
->>>>>>> gestion-user
         }
     }
 }

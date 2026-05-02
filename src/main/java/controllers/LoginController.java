@@ -6,11 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-<<<<<<< HEAD
-=======
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
->>>>>>> gestion-user
 import models.User;
 import services.UserService;
 import utils.UserSession;
@@ -97,17 +94,11 @@ public class LoginController {
             
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
-<<<<<<< HEAD
-            dialogStage.setTitle("Connexion Faciale");
-            dialogStage.setResizable(false);
-            dialogStage.setScene(new Scene(root));
-=======
             dialogStage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
             
             Scene scene = new Scene(root);
             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
             dialogStage.setScene(scene);
->>>>>>> gestion-user
             
             dialogStage.showAndWait();
             
@@ -210,8 +201,6 @@ public class LoginController {
             }
 
             if (isPasswordCorrect) {
-<<<<<<< HEAD
-=======
                 if (targetUser.isMfaEnabled()) {
                     try {
                         javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/esprit/tn/fxml/mfa_dialog.fxml"));
@@ -238,7 +227,6 @@ public class LoginController {
                         return;
                     }
                 }
->>>>>>> gestion-user
                 UserSession.getInstance().setUser(targetUser);
                 goToFront(event);
             } else {

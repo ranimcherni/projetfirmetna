@@ -31,11 +31,8 @@ public class UserSession {
     public void cleanUserSession() {
         user = null;
     }
-<<<<<<< HEAD
-=======
 
     public boolean isAdmin() {
         return user != null && "ADMIN".equalsIgnoreCase(user.getRole());
     }
->>>>>>> gestion-user
 }

@@ -29,10 +29,7 @@ public class SignUpController {
     @FXML private ComboBox<String> roleCombo;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
-<<<<<<< HEAD
-=======
     @FXML private ProgressBar passwordStrengthBar;
->>>>>>> gestion-user
     
     // Captcha elements
     @FXML private javafx.scene.canvas.Canvas captchaCanvas;
@@ -62,8 +59,6 @@ public class SignUpController {
     public void initialize() {
         resetErrorLabels();
         generateCaptcha();
-<<<<<<< HEAD
-=======
         setupPasswordStrengthListener();
     }
 
@@ -95,7 +90,6 @@ public class SignUpController {
         else color = "-fx-accent: #2ed573;"; // Green
         
         passwordStrengthBar.setStyle(color);
->>>>>>> gestion-user
     }
 
     private void resetErrorLabels() {
@@ -207,17 +201,11 @@ public class SignUpController {
             
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
-<<<<<<< HEAD
-            dialogStage.setTitle("Enrôlement Facial");
-            dialogStage.setResizable(false);
-            dialogStage.setScene(new Scene(root));
-=======
             dialogStage.initStyle(javafx.stage.StageStyle.TRANSPARENT);
             
             Scene scene = new Scene(root);
             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
             dialogStage.setScene(scene);
->>>>>>> gestion-user
             
             dialogStage.showAndWait();
             
