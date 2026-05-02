@@ -1,50 +1,76 @@
 package services;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.net.ProxySelector;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 
 public class ChatbotService {
 
-    private final Map<String, String> answers = new LinkedHashMap<>();
+    private static final String API_URL = "https://text.pollinations.ai/";
+    private static final Duration TIMEOUT = Duration.ofSeconds(60);
+
+    private final HttpClient httpClient;
 
     public ChatbotService() {
-        answers.put("projet", "Firmetna est une plateforme de marché fermier. " +
-                "Les agriculteurs peuvent partager leurs produits, " +
-                "les clients peuvent acheter, et les donateurs peuvent soutenir.");
-        
-        // Gestion des accents pour "idée"
-        String responseIdee = "L'idée du projet est de créer un espace sécurisé " +
-                "pour vendre des produits fermiers locaux et faciliter la gestion des commandes.";
-        answers.put("idee", responseIdee);
-        answers.put("idée", responseIdee);
-
-        answers.put("produit", "Tu peux parcourir les produits, ajouter au panier, " +
-                "et passer commande selon la quantité disponible.");
-        answers.put("panier", "Le panier stocke tes produits sélectionnés. " +
-                "Tu peux ensuite confirmer la commande et payer.");
-        answers.put("commande", "Une commande se crée après confirmation du panier. " +
-                "Le stock est mis à jour automatiquement.");
-
-        // Gestion des accents pour "rôle"
-        String responseRole = "Il y a plusieurs rôles : Admin, Agriculteur, Client et Donateur. " +
-                "Les utilisateurs non-admin voient le frontend et le chatbot.";
-        answers.put("role", responseRole);
-        answers.put("rôle", responseRole);
-
-        answers.put("contact", "Pour plus d'informations, utilise le formulaire du site ou contacte l'administrateur.");
+        this.httpClient = HttpClient.newBuilder()
+                .connectTimeout(TIMEOUT)
+                .proxy(ProxySelector.getDefault())
+                .build();
     }
 
-    public String ask(String question) {
-        if (question == null || question.trim().isEmpty()) {
-            return "Pose-moi une question sur le projet ou l'utilisation de la plateforme.";
+    public String sendMessage(String userMessage) {
+        if (userMessage == null || userMessage.isBlank()) {
+            return "Veuillez entrer un message.";
         }
-        String lower = question.toLowerCase();
 
-        for (Map.Entry<String, String> entry : answers.entrySet()) {
-            if (lower.contains(entry.getKey())) {
-                return entry.getValue();
+        try {
+            // Contexte Firmetna + message utilisateur
+            String prompt = buildPrompt(userMessage.trim());
+            String encodedPrompt = URLEncoder.encode(prompt, StandardCharsets.UTF_8);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(API_URL + encodedPrompt))
+                    .timeout(TIMEOUT)
+                    .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(
+                request,
+                HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8)
+            );
+
+            if (response.statusCode() == 200) {
+                String result = response.body();
+                if (result != null && !result.isBlank()) {
+                    return result.trim();
+                }
+                return "L'assistant n'a pas pu générer de réponse.";
+            } else {
+                return "Erreur API (" + response.statusCode() + "). Réessayez.";
             }
+
+        } catch (java.net.http.HttpTimeoutException e) {
+            return "Délai dépassé. Veuillez réessayer.";
+        } catch (java.net.ConnectException e) {
+            return "Connexion impossible. Vérifiez votre connexion internet.";
+        } catch (IOException | InterruptedException e) {
+            return "Erreur technique : " + e.getMessage();
+        } catch (Exception e) {
+            return "Erreur inattendue : " + e.getMessage();
         }
-        return "Je suis encore en apprentissage. Pose-moi une autre question sur le projet, les produits, le panier ou les commandes.";
+    }
+
+    private String buildPrompt(String userMessage) {
+        return "Tu es l'assistant intelligent de Firmetna, une application tunisienne " +
+               "de gestion de dons et d'événements agricoles. " +
+               "Réponds toujours en français, de façon claire et concise. " +
+               "Question de l'utilisateur : " + userMessage;
     }
 }

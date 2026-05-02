@@ -5,30 +5,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-/**
- * Ce service gère l'envoi des emails via l'API JavaMail et le protocole SMTP.
- * Il est utilisé pour envoyer les codes de vérification lors de la récupération de mot de passe.
- */
 public class MailingService {
 
     // Identifiants configurés pour l'envoi
     private static final String SENDER_EMAIL = "ranim.cherni@esprit.tn";
-    private static final String APP_PASSWORD = "ltkdwchhxwsiromd"; // Mis à jour avec le nouveau code Google
+    private static final String APP_PASSWORD = "hafnauckbshkfufr"; // Les espaces ont été retirés
 
-    /**
-     * Cette fonction configure la session SMTP et envoie un email HTML contenant le code de vérification.
-     * Elle utilise le serveur Gmail avec une connexion sécurisée TLS pour garantir la délivrabilité.
-     */
     public static void sendVerificationCode(String recipientEmail, String code) throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.ssl.enable", "true"); // Connexion SSL directe
-        properties.put("mail.smtp.ssl.protocols", "TLSv1.2"); 
-
-        // Affichage du code dans la console (Utile pour le debug si l'envoi échoue)
-        System.out.println("--- DEBUG : Tentative d'envoi du code " + code + " à " + recipientEmail + " ---");
+        properties.put("mail.smtp.port", "587");
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override

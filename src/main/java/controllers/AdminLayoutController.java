@@ -85,7 +85,7 @@ public class AdminLayoutController {
         addBubble(text, true);
         chatInput.clear();
 
-        String response = chatbotService.ask(text);
+        String response = chatbotService.sendMessage(text);
         addBubble(response, false);
         chatScrollPane.setVvalue(1.0);
     }
@@ -120,6 +120,51 @@ public class AdminLayoutController {
     @FXML
     private void showForum(ActionEvent event) {
         loadView("/esprit/tn/fxml/forum.fxml");
+    }
+
+    @FXML
+    private void showForumPublications(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_forum_publications.fxml");
+    }
+
+    @FXML
+    private void showForumComments(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_forum_comments.fxml");
+    }
+
+    @FXML
+    private void showForumStats(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_forum_stats.fxml");
+    }
+
+    @FXML
+    private void showEvents(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_evenements.fxml");
+    }
+
+    @FXML
+    private void showLieux(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_lieux.fxml");
+    }
+
+    @FXML
+    private void showDonationsOffres(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_donations_offres.fxml");
+    }
+
+    @FXML
+    private void showDonationsDemandes(ActionEvent event) {
+        loadView("/esprit/tn/fxml/admin_donations_demandes.fxml");
+    }
+
+    @FXML
+    private void showPartenariats(ActionEvent event) {
+        loadView("/esprit/tn/fxml/PartnerView.fxml");
+    }
+
+    @FXML
+    private void showOffresPartenaires(ActionEvent event) {
+        loadView("/esprit/tn/fxml/ContractView.fxml");
     }
 
     @FXML

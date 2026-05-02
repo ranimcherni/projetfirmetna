@@ -18,6 +18,7 @@ public class User {
     private java.sql.Timestamp resetExpiry;
     private String mfaSecret;
     private boolean mfaEnabled;
+    private int actionsCount;
 
     public User() {
     }
@@ -219,5 +220,13 @@ public class User {
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 '}';
+    }
+
+    public int getActionsCount() {
+        return actionsCount;
+    }
+
+    public void setActionsCount(int actionsCount) {
+        this.actionsCount = actionsCount;
     }
 }

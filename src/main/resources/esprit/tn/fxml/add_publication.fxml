@@ -1,34 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.AddPublicationController"
-            prefHeight="600.0" prefWidth="900.0"
-            stylesheets="@../css/forum.css" styleClass="main-bg">
+<StackPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddPublicationController">
+    <children>
+        <!-- Background Layer -->
+        <VBox styleClass="front-root-bg" />
 
-    <VBox spacing="15" alignment="CENTER" maxWidth="600"
-          AnchorPane.topAnchor="40" AnchorPane.bottomAnchor="40"
-          AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150"
-          styleClass="card">
+        <!-- Main Content Overlay -->
+        <VBox spacing="0">
+            <children>
+                <!-- NAVIGATION BAR -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="front-nav-bar">
+                    <padding>
+                        <Insets bottom="12.0" left="25.0" right="25.0" top="12.0" />
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <ImageView fitHeight="35.0" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/logo1.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="nav-brand" text="FIRMETNA" />
+                            </children>
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <Button onAction="#handleAccueil" styleClass="nav-item" text="🏠 Accueil" />
+                                <MenuButton styleClass="nav-item-dropdown" text="📦 Produits">
+                                    <items>
+                                        <MenuItem onAction="#handleProduits" text="Tous les produits" />
+                                        <MenuItem onAction="#handleProduitsVegetaux" text="Végétaux" />
+                                        <MenuItem onAction="#handleProduitsAnimaux" text="Animaux" />
+                                    </items>
+                                </MenuButton>
+                                <Button onAction="#handleEvenements" styleClass="nav-item" text="📅 Événements" />
+                                <Button onAction="#handleForum" styleClass="nav-item-active" text="💬 Forum" />
+                                <Button onAction="#handleDons" styleClass="nav-item" text="❤ Dons" />
+                                <Button styleClass="nav-item" text="🤝 Partenariats" />
+                            </children>
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <MenuButton styleClass="nav-profile-btn" text="Profil">
+                            <items>
+                                <MenuItem onAction="#handleProfil" text="Mon Compte" />
+                                <MenuItem text="Mes Publications" />
+                                <SeparatorMenuItem />
+                                <MenuItem onAction="#handleLogout" text="Deconnexion" style="-fx-text-fill: #e74c3c;" />
+                            </items>
+                        </MenuButton>
+                    </children>
+                </HBox>
 
-        <Label text="Nouvelle Publication" styleClass="header-title-lg"/>
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox alignment="CENTER" style="-fx-padding: 60 0;">
+                            <children>
+                                <VBox maxWidth="800" spacing="30" styleClass="card" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 30; -fx-padding: 50; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 30, 0, 0, 15);">
+                                    <children>
+                                        <VBox spacing="10" alignment="CENTER">
+                                            <children>
+                                                <Label text="Partager une Publication" styleClass="header-title" style="-fx-font-size: 32px; -fx-text-fill: #1b4332;" />
+                                                <Label text="Contribuez à la connaissance collective de Firmetna" styleClass="text-muted" style="-fx-font-size: 16px; -fx-text-fill: #2d5a27; -fx-font-weight: bold;" />
+                                            </children>
+                                        </VBox>
 
-        <TextField fx:id="txtTitre" promptText="Titre de la publication" styleClass="text-field-custom"/>
-        <ComboBox fx:id="comboType" promptText="Type" prefWidth="600.0" styleClass="combo-box"/>
-        <TextArea fx:id="txtContenu" promptText="R├®digez votre contenu ici..." VBox.vgrow="ALWAYS" styleClass="text-area-custom"/>
+                                        <Separator style="-fx-opacity: 0.1;" />
 
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Button text="Parcourir Image" onAction="#chooseImage" styleClass="btn-secondary"/>
-            <Label fx:id="labelImage" text="Aucune image s├®lectionn├®e" styleClass="text-muted"/>
-        </HBox>
+                                        <VBox spacing="20">
+                                            <children>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Titre de la publication" style="-fx-font-weight: bold; -fx-text-fill: #1b4332;" />
+                                                        <TextField fx:id="txtTitre" promptText="Titre accrocheur..." styleClass="search-box" style="-fx-background-radius: 15;" />
+                                                    </children>
+                                                </VBox>
 
-        <HBox spacing="15" alignment="CENTER_RIGHT">
-            <Button text="Annuler" onAction="#goBack" styleClass="btn-secondary"/>
-            <Button text="Publier" onAction="#savePublication" styleClass="btn-success"/>
-        </HBox>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Catégorie" style="-fx-font-weight: bold; -fx-text-fill: #1b4332;" />
+                                                        <ComboBox fx:id="comboType" promptText="Choisir un type" maxWidth="Infinity" style="-fx-background-radius: 15; -fx-padding: 8;" />
+                                                    </children>
+                                                </VBox>
 
-    </VBox>
-</AnchorPane>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Contenu" style="-fx-font-weight: bold; -fx-text-fill: #1b4332;" />
+                                                        <TextArea fx:id="txtContenu" promptText="Rédigez votre contenu ici... Soyez précis et utile !" prefHeight="250" wrapText="true" style="-fx-background-radius: 15; -fx-padding: 10;" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 20;">
+                                            <children>
+                                                <Button text="📁 Attacher Image" onAction="#chooseImage" styleClass="btn-secondary" />
+                                                <Label fx:id="labelImage" text="Aucune image" styleClass="text-muted" maxWidth="150" />
+                                                <Region HBox.hgrow="ALWAYS" />
+                                                <Button text="📄 PDF" onAction="#choosePdf" styleClass="btn-secondary" />
+                                                <Label fx:id="labelPdf" text="Aucun PDF" styleClass="text-muted" maxWidth="150" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox spacing="20" alignment="CENTER">
+                                            <children>
+                                                <Button text="Annuler" onAction="#goBack" prefWidth="150" styleClass="btn-secondary" style="-fx-padding: 12 0;" />
+                                                <Button fx:id="btnSave" text="Publier Maintenant" onAction="#savePublication" prefWidth="250" styleClass="btn-primary" style="-fx-padding: 15 0; -fx-font-size: 16px;" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

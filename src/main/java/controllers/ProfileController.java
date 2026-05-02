@@ -143,8 +143,45 @@ public class ProfileController {
     }
 
     @FXML
+    private void handlePartenariats(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
+    }
+
+    @FXML
     private void handleAccueil(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
+    }
+
+    @FXML
+    private void handleForum(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Forum Communautaire");
+    }
+
+    @FXML
+    private void handleProduits(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Produits");
+    }
+
+    @FXML
+    private void handleProduitsVegetaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("vegetale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Vegetaux");
+    }
+
+    @FXML
+    private void handleProduitsAnimaux(ActionEvent event) {
+        utils.ProductNavigationState.setSelectedType("animale");
+        NavigationService.switchScene(event, "/esprit/tn/fxml/product_marketplace.fxml", "Marketplace - Animaux");
+    }
+
+    @FXML
+    private void handleEvenements(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_evenements.fxml", "Événements");
+    }
+
+    @FXML
+    private void handleDons(ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_offres.fxml", "Donations & Solidarité");
     }
 
     @FXML

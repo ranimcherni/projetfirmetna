@@ -565,9 +565,11 @@
 }
 
 .admin-table .column-header-background {
-    -fx-background-color: #f8f9fa;
+    -fx-background-color: linear-gradient(to bottom, #4b6584, #34495e); /* Premium Slate Gradient */
     -fx-background-radius: 15 15 0 0;
     -fx-padding: 10 0;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 0 1 0;
 }
 
 .admin-table .column-header {
@@ -576,7 +578,7 @@
 }
 
 .admin-table .column-header .label {
-    -fx-text-fill: #7f8c8d;
+    -fx-text-fill: #fed330; /* Harvest Gold */
     -fx-font-weight: bold;
     -fx-font-size: 13;
 }
@@ -586,6 +588,7 @@
     -fx-cell-size: 65;
     -fx-border-color: #f1f2f6;
     -fx-border-width: 0 0 1 0;
+    -fx-text-fill: #2c3e50; /* Deep Slate Blue Text */
 }
 
 .admin-table .table-row-cell:odd {
@@ -597,7 +600,7 @@
 }
 
 .admin-table .table-row-cell:selected {
-    -fx-background-color: #e8f5e9;
+    -fx-background-color: #d1d8e0; /* Light Slate Blue Tint */
 }
 
 .user-initials-bubble {
@@ -1114,4 +1117,75 @@
     -fx-background-color: #ecf0f1;
     -fx-background-radius: 5;
     -fx-border-color: transparent;
+}
+
+/* CHATBOT FLOAT BUTTON */
+.chatbot-float-btn {
+    -fx-background-color: linear-gradient(to bottom right, #2d5a27, #1b4332);
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-min-width: 70px;
+    -fx-min-height: 70px;
+    -fx-max-width: 70px;
+    -fx-max-height: 70px;
+    -fx-background-radius: 35px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 15, 0, 0, 10);
+    -fx-padding: 0;
+}
+
+.chatbot-float-btn:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-background-color: linear-gradient(to bottom right, #1b4332, #000000);
+}
+
+.chatbot-list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 5 10;
+}
+
+.chatbot-list-view .list-cell:filled:selected {
+    -fx-background-color: transparent;
+}
+
+/* EVOLUTIVE PLANT GAMIFICATION CARD */
+.plant-card {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+    -fx-background-radius: 25;
+    -fx-border-color: rgba(45, 90, 39, 0.2);
+    -fx-border-width: 1.5;
+    -fx-border-radius: 25;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 15, 0, 0, 5);
+}
+
+.plant-level-label {
+    -fx-text-fill: #1b4332;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 1;
+}
+
+.plant-hint-label {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 13;
+    -fx-font-style: italic;
+    -fx-line-spacing: 3;
+}
+
+.plant-progress {
+    -fx-min-height: 12;
+    -fx-max-height: 12;
+}
+
+.plant-progress .track {
+    -fx-background-color: rgba(45, 90, 39, 0.1);
+    -fx-background-radius: 10;
+}
+
+.plant-progress .bar {
+    -fx-background-color: linear-gradient(to right, #2ecc71, #27ae60);
+    -fx-background-radius: 10;
+    -fx-padding: 6;
 }

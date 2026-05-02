@@ -28,15 +28,20 @@
                         <Button onAction="#showUsers" styleClass="admin-sidebar-item" text="👥 Utilisateurs" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                         <Button onAction="#showProducts" styleClass="admin-sidebar-item" text="📦 Produits" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                         <Button onAction="#showCommandes" styleClass="admin-sidebar-item" text="🛒 Commandes" maxWidth="Infinity" alignment="BASELINE_LEFT" />
-                        <Button styleClass="admin-sidebar-item" text="📅 Événements" maxWidth="Infinity" alignment="BASELINE_LEFT" />
-                        <Button styleClass="admin-sidebar-item" text="📍 Lieux" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        <Button onAction="#showEvents" styleClass="admin-sidebar-item" text="📅 Événements" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        <Button onAction="#showLieux" styleClass="admin-sidebar-item" text="📍 Lieux" maxWidth="Infinity" alignment="BASELINE_LEFT" />
                         
-                        <Button onAction="#showForum" styleClass="admin-sidebar-item" text="💬 Gestion Forum" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        <VBox spacing="2" style="-fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 8; -fx-padding: 5;">
+                            <Label text="💬 GESTION FORUM" style="-fx-text-fill: rgba(255,255,255,0.5); -fx-font-size: 11; -fx-font-weight: bold; -fx-padding: 5 10;" maxWidth="Infinity" />
+                            <Button onAction="#showForumPublications" styleClass="admin-sidebar-item" text="↳ Sujets" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                            <Button onAction="#showForumComments" styleClass="admin-sidebar-item" text="↳ Commentaires" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                            <Button onAction="#showForumStats" styleClass="admin-sidebar-item" text="↳ Statistiques" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        </VBox>
 
-                        <Button styleClass="admin-sidebar-item" text="❤ Donations (Offres)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
-                        <Button styleClass="admin-sidebar-item" text="🤝 Donations (Demandes)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
-                        <Button styleClass="admin-sidebar-item" text="🤝 Partenariats" maxWidth="Infinity" alignment="BASELINE_LEFT" />
-                        <Button styleClass="admin-sidebar-item" text="📄 Offres partenaires" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        <Button onAction="#showDonationsOffres" styleClass="admin-sidebar-item" text="❤ Donations (Offres)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        <Button onAction="#showDonationsDemandes" styleClass="admin-sidebar-item" text="🤝 Donations (Demandes)" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        <Button onAction="#showPartenariats" styleClass="admin-sidebar-item" text="🤝 Partenariats" maxWidth="Infinity" alignment="BASELINE_LEFT" />
+                        <Button onAction="#showOffresPartenaires" styleClass="admin-sidebar-item" text="📄 Offres partenaires" maxWidth="Infinity" alignment="BASELINE_LEFT" />
 
                         <Region VBox.vgrow="ALWAYS" />
 

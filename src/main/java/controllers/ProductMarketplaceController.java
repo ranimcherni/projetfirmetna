@@ -29,6 +29,7 @@ import utils.PanierSession;
 import utils.ProductNavigationState;
 import utils.UserSession;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +85,37 @@ public class ProductMarketplaceController {
     @FXML
     private void handleBack(javafx.event.ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/front.fxml", "Accueil");
+    }
+
+    @FXML
+    private void handleForum(javafx.event.ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Forum Communautaire");
+    }
+
+    @FXML
+    private void handleEvenements(javafx.event.ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_evenements.fxml", "Événements");
+    }
+
+    @FXML
+    private void handleDons(javafx.event.ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_offres.fxml", "Donations & Solidarité");
+    }
+
+    @FXML
+    private void handlePartenariats(javafx.event.ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
+    }
+
+    @FXML
+    private void handleProfil(javafx.event.ActionEvent event) {
+        NavigationService.switchScene(event, "/esprit/tn/fxml/profile.fxml", "Mon Profil");
+    }
+
+    @FXML
+    private void handleLogout(javafx.event.ActionEvent event) {
+        UserSession.getInstance().cleanUserSession();
+        NavigationService.switchScene(event, "/esprit/tn/fxml/home.fxml", "Bienvenue");
     }
 
     @FXML
@@ -300,5 +332,19 @@ public class ProductMarketplaceController {
         } catch (Exception ignored) {
         }
         return new Image(getClass().getResource("/esprit/tn/images/logo1.png").toExternalForm(), true);
+    }
+
+    @FXML
+    private void handleOpenChatbot(javafx.event.ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/tn/fxml/chatbot.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Chatbot Firmetna");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

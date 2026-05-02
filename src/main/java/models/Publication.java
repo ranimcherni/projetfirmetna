@@ -10,19 +10,21 @@ public class Publication {
     private Timestamp dateCreation;
     private int auteurId;
     private String imagePath;
+    private String pdfPath;
 
     public Publication() {
     }
 
-    public Publication(String titre, String contenu, String type, int auteurId, String imagePath) {
+    public Publication(String titre, String contenu, String type, int auteurId, String imagePath, String pdfPath) {
         this.titre = titre;
         this.contenu = contenu;
         this.type = type;
         this.auteurId = auteurId;
         this.imagePath = imagePath;
+        this.pdfPath = pdfPath;
     }
 
-    public Publication(int id, String titre, String contenu, String type, Timestamp dateCreation, int auteurId, String imagePath) {
+    public Publication(int id, String titre, String contenu, String type, Timestamp dateCreation, int auteurId, String imagePath, String pdfPath) {
         this.id = id;
         this.titre = titre;
         this.contenu = contenu;
@@ -52,6 +54,9 @@ public class Publication {
 
     public String getImagePath() { return imagePath; }
     public void setImagePath(String imagePath) { this.imagePath = imagePath; }
+
+    public String getPdfPath() { return pdfPath; }
+    public void setPdfPath(String pdfPath) { this.pdfPath = pdfPath; }
 
     @Override
     public String toString() {

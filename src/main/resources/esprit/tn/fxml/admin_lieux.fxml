@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" style="-fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminLieuxController" stylesheets="@../css/style.css">
+    <children>
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <VBox>
+                    <Label text="Gestion des lieux" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2d3436;" />
+                    <Label text="Lieux disponibles pour les événements" style="-fx-text-fill: #636e72; -fx-font-size: 13;" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleAddLieu" text="+ Ajouter un lieu" styleClass="admin-btn-primary" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="lieuTable" VBox.vgrow="ALWAYS" styleClass="admin-table">
+            <columns>
+                <TableColumn fx:id="idCol" text="ID" prefWidth="60" />
+                <TableColumn fx:id="villeCol" text="Ville" prefWidth="140" />
+                <TableColumn fx:id="adresseCol" text="Adresse" prefWidth="220" />
+                <TableColumn fx:id="capaciteCol" text="Capacité" prefWidth="90" />
+                <TableColumn fx:id="dispoCol" text="Dispo." prefWidth="90" />
+                <TableColumn fx:id="imageCol" text="Image" prefWidth="160" />
+                <TableColumn fx:id="descCol" text="Description" prefWidth="200" />
+                <TableColumn fx:id="actionsCol" text="Actions" prefWidth="120" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
+</VBox>

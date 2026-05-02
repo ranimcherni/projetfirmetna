@@ -54,6 +54,11 @@ public class UserService implements IService<User> {
                 cnx.createStatement().execute("ALTER TABLE `user` ADD `mfa_enabled` TINYINT(1) DEFAULT 0");
                 System.out.println("--- Migration: 'mfa_enabled' column added ---");
             }
+            ResultSet rsActions = md.getColumns(null, null, "user", "actions_count");
+            if (!rsActions.next()) {
+                cnx.createStatement().execute("ALTER TABLE `user` ADD `actions_count` INT DEFAULT 0");
+                System.out.println("--- Migration: 'actions_count' column added ---");
+            }
         } catch (SQLException e) {
             System.err.println("Migration error: " + e.getMessage());
         }
@@ -61,7 +66,7 @@ public class UserService implements IService<User> {
 
     @Override
     public void add(User user) {
-        String req = "INSERT INTO `user` (`email`, `password`, `role`, `nom`, `prenom`, `localisation`, `bio`, `specialite`, `telephone`, `status`, `registration_date`, `mfa_secret`, `mfa_enabled`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO `user` (`email`, `password`, `role`, `nom`, `prenom`, `localisation`, `bio`, `specialite`, `telephone`, `status`, `registration_date`, `mfa_secret`, `mfa_enabled`, `actions_count`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         // Hachage du mot de passe
         String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(user.getPassword(), org.mindrot.jbcrypt.BCrypt.gensalt());
@@ -82,6 +87,7 @@ public class UserService implements IService<User> {
                     : new java.sql.Timestamp(System.currentTimeMillis()));
             pstm.setString(12, user.getMfaSecret());
             pstm.setBoolean(13, user.isMfaEnabled());
+            pstm.setInt(14, user.getActionsCount());
             pstm.executeUpdate();
             System.out.println("User ajouté avec succès !");
         } catch (SQLException e) {
@@ -138,6 +144,18 @@ public class UserService implements IService<User> {
         }
     }
 
+    public void incrementActionsCount(int userId) {
+        String req = "UPDATE `user` SET `actions_count` = `actions_count` + 1 WHERE `id` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setInt(1, userId);
+            pstm.executeUpdate();
+            System.out.println("Actions count incrémenté pour l'utilisateur " + userId);
+        } catch (SQLException e) {
+            System.err.println("Erreur incrémentation actions : " + e.getMessage());
+        }
+    }
+
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
@@ -161,6 +179,7 @@ public class UserService implements IService<User> {
                 u.setRegistrationDate(rs.getTimestamp("registration_date"));
                 u.setMfaSecret(rs.getString("mfa_secret"));
                 u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
+                u.setActionsCount(rs.getInt("actions_count"));
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -200,6 +219,7 @@ public class UserService implements IService<User> {
                 u.setPrenom(rs.getString("prenom"));
                 u.setMfaSecret(rs.getString("mfa_secret"));
                 u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
+                u.setActionsCount(rs.getInt("actions_count"));
                 return u;
             }
         } catch (SQLException e) {
@@ -268,5 +288,36 @@ public class UserService implements IService<User> {
         } catch (SQLException e) {
             System.err.println("updatePasswordByEmail error: " + e.getMessage());
         }
+    }
+
+    public User getUserById(int id) {
+        String req = "SELECT * FROM `user` WHERE `id` = ?";
+        try {
+            PreparedStatement pstm = cnx.prepareStatement(req);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                u.setRole(rs.getString("role"));
+                u.setLocalisation(rs.getString("localisation"));
+                u.setBio(rs.getString("bio"));
+                u.setSpecialite(rs.getString("specialite"));
+                u.setTelephone(rs.getString("telephone"));
+                u.setStatus(rs.getString("status"));
+                u.setRegistrationDate(rs.getTimestamp("registration_date"));
+                u.setMfaSecret(rs.getString("mfa_secret"));
+                u.setMfaEnabled(rs.getBoolean("mfa_enabled"));
+                u.setActionsCount(rs.getInt("actions_count"));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.err.println("getUserById error: " + e.getMessage());
+        }
+        return null;
     }
 }

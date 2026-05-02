@@ -11,138 +11,118 @@ import javafx.scene.layout.VBox;
 import services.ChatbotService;
 import utils.UserSession;
 import utils.NavigationService;
+import services.ProduitService;
+import services.EvenementService;
+import services.PartnerService;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.IOException;
+import models.User;
+import services.UserService;
 
 public class FrontController {
 
     @FXML private Label welcomeLabel;
+    @FXML private Label lblTotalProducts;
+    @FXML private Label lblTotalEvents;
+    @FXML private Label lblTotalPartners;
+    
+    // Plant Gamification
+    @FXML private ImageView imgPlant;
+    @FXML private Label lblPlantLevel;
+    @FXML private Label lblPlantStatus;
+    @FXML private Label lblPlantHint;
+    @FXML private ProgressBar progressPlant;
 
-    @FXML private HBox chatHeader;
-    @FXML private AnchorPane chatbotContainer;
-    @FXML private Button chatbotToggleButton;
-    @FXML private VBox chatMessages;
-    @FXML private ScrollPane chatScrollPane;
-    @FXML private TextField chatInput;
-
-    private final ChatbotService chatbotService = new ChatbotService();
-    private double chatOffsetX, chatOffsetY;
-    private double buttonOffsetX, buttonOffsetY;
+    private ProduitService produitService;
+    private EvenementService evenementService;
+    private PartnerService partnerService;
+    private UserService userService;
 
     @FXML
     public void initialize() {
+        produitService = new ProduitService();
+        evenementService = new EvenementService();
+        partnerService = new PartnerService();
+        userService = new UserService();
+
+        // Refresh user data from DB to get latest actions_count
+        User current = UserSession.getInstance().getUser();
+        if (current != null) {
+            User updated = userService.getUserById(current.getId());
+            if (updated != null) {
+                UserSession.getInstance().setUser(updated);
+            }
+        }
+
         String userName = UserSession.getInstance().getUserName();
         welcomeLabel.setText("Bonjour, " + (userName != null ? userName : "Utilisateur"));
 
-        // ================= CHATBOT INITIALIZATION =================
-        boolean isAdmin = false;
+        loadStatistics();
+        updatePlantUI();
+    }
+
+    private void updatePlantUI() {
+        User currentUser = UserSession.getInstance().getUser();
+        if (currentUser == null) return;
+
+        int actions = currentUser.getActionsCount();
+        String levelName;
+        String imagePath;
+        double progress;
+
+        if (actions <= 2) {
+            levelName = "Stade : Graine";
+            imagePath = "/esprit/tn/images/plant/seed.png";
+            progress = actions / 3.0; // 0 to 0.66
+        } else if (actions <= 5) {
+            levelName = "Stade : Pousse";
+            imagePath = "/esprit/tn/images/plant/sprout.png";
+            progress = (actions - 2) / 4.0 + 0.25; 
+        } else if (actions <= 9) {
+            levelName = "Stade : Fleur";
+            imagePath = "/esprit/tn/images/plant/flower.png";
+            progress = (actions - 5) / 5.0 + 0.5;
+        } else {
+            levelName = "Stade : Arbre";
+            imagePath = "/esprit/tn/images/plant/tree.png";
+            progress = 1.0;
+        }
+
+        lblPlantLevel.setText(levelName);
+        progressPlant.setProgress(progress);
+
         try {
-            isAdmin = UserSession.getInstance().isAdmin();
-        } catch (Exception ignored) {}
-
-        boolean showChatbot = !isAdmin;
-        chatbotToggleButton.setVisible(showChatbot);
-        chatbotToggleButton.setManaged(showChatbot);
-        chatbotContainer.setVisible(false);
-        chatbotContainer.setManaged(false);
-
-        if (showChatbot) {
-            addBubble("Bienvenue ! Je suis ton assistant Firmetna. Comment puis-je t'aider ?", false);
-        }
-
-        // ================= DRAG LOGIC =================
-        setupDragLogic();
-    }
-
-    private void setupDragLogic() {
-        chatHeader.setOnMousePressed(e -> {
-            chatOffsetX = e.getSceneX();
-            chatOffsetY = e.getSceneY();
-        });
-
-        chatHeader.setOnMouseDragged(e -> {
-            double deltaX = e.getSceneX() - chatOffsetX;
-            double deltaY = e.getSceneY() - chatOffsetY;
-            chatbotContainer.setLayoutX(chatbotContainer.getLayoutX() + deltaX);
-            chatbotContainer.setLayoutY(chatbotContainer.getLayoutY() + deltaY);
-            chatOffsetX = e.getSceneX();
-            chatOffsetY = e.getSceneY();
-        });
-
-        chatbotToggleButton.setOnMousePressed(e -> {
-            buttonOffsetX = e.getSceneX();
-            buttonOffsetY = e.getSceneY();
-        });
-
-        chatbotToggleButton.setOnMouseDragged(e -> {
-            double deltaX = e.getSceneX() - buttonOffsetX;
-            double deltaY = e.getSceneY() - buttonOffsetY;
-            chatbotToggleButton.setLayoutX(chatbotToggleButton.getLayoutX() + deltaX);
-            chatbotToggleButton.setLayoutY(chatbotToggleButton.getLayoutY() + deltaY);
-            buttonOffsetX = e.getSceneX();
-            buttonOffsetY = e.getSceneY();
-        });
-    }
-
-    @FXML
-    private void toggleChatbot() {
-        boolean isVisible = chatbotContainer.isVisible();
-        if (!isVisible) {
-            chatbotContainer.setVisible(true);
-            chatbotContainer.setManaged(true);
-            chatbotContainer.setOpacity(0);
-            chatbotContainer.setTranslateY(20);
-
-            javafx.animation.FadeTransition fade = new javafx.animation.FadeTransition(javafx.util.Duration.millis(200), chatbotContainer);
-            fade.setToValue(1);
-
-            javafx.animation.TranslateTransition slide = new javafx.animation.TranslateTransition(javafx.util.Duration.millis(200), chatbotContainer);
-            slide.setToY(0);
-
-            fade.play();
-            slide.play();
-        } else {
-            chatbotContainer.setVisible(false);
-            chatbotContainer.setManaged(false);
+            var resource = getClass().getResource(imagePath);
+            if (resource != null) {
+                imgPlant.setImage(new Image(resource.toExternalForm()));
+                imgPlant.setVisible(true);
+            } else {
+                // Fallback: Use Emoji in a tooltip or just a print for now
+                System.out.println("Image missing: " + imagePath);
+                // We could overlay an emoji label here if we had one in FXML
+            }
+        } catch (Exception e) {
+            System.err.println("Could not load plant image: " + imagePath);
         }
     }
 
-    @FXML
-    private void handleSendChat() {
-        String question = chatInput.getText();
-        if (question == null || question.trim().isEmpty()) return;
+    private void loadStatistics() {
+        try {
+            int productsCount = produitService.countAll();
+            int eventsCount = evenementService.getAll().size();
+            int partnersCount = partnerService.getAll().size();
 
-        addBubble(question, true);
-        chatInput.clear();
-
-        Label typing = new Label("L'assistant réfléchit...");
-        typing.setStyle("-fx-text-fill: #888; -fx-font-style: italic;");
-        chatMessages.getChildren().add(typing);
-
-        new Thread(() -> {
-            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
-            String answer = chatbotService.ask(question);
-            javafx.application.Platform.runLater(() -> {
-                chatMessages.getChildren().remove(typing);
-                addBubble(answer, false);
-                chatScrollPane.setVvalue(1.0);
-            });
-        }).start();
-    }
-
-    private void addBubble(String text, boolean isUser) {
-        Label label = new Label(text);
-        label.setWrapText(true);
-        label.setMaxWidth(220);
-        label.setPadding(new Insets(8, 12, 8, 12));
-
-        if (isUser) {
-            label.setStyle("-fx-background-color: #e3f2fd; -fx-background-radius: 15 15 0 15; -fx-text-fill: #1565c0;");
-        } else {
-            label.setStyle("-fx-background-color: #f1f8e9; -fx-background-radius: 15 15 15 0; -fx-text-fill: #2e7d32;");
+            lblTotalProducts.setText(productsCount + (productsCount >= 30 ? "+" : ""));
+            lblTotalEvents.setText(String.valueOf(eventsCount));
+            lblTotalPartners.setText(String.valueOf(partnersCount));
+        } catch (Exception e) {
+            System.err.println("Error loading front statistics: " + e.getMessage());
         }
-
-        HBox container = new HBox(label);
-        container.setAlignment(isUser ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
-        chatMessages.getChildren().add(container);
     }
 
     @FXML
@@ -183,12 +163,38 @@ public class FrontController {
         System.out.println("Opening Panier from Front");
     }
 
-    @FXML private void handleEvenements(ActionEvent event) { System.out.println("Opening Evenements"); }
+    @FXML 
+    private void handleEvenements(ActionEvent event) { 
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_evenements.fxml", "Événements");
+    }
+
     @FXML
     private void handleForum(ActionEvent event) {
         NavigationService.switchScene(event, "/esprit/tn/fxml/forum.fxml", "Forum - Firmetna");
     }
+
     @FXML private void handleNotifications(ActionEvent event) { System.out.println("Opening Notifications"); }
-    @FXML private void handleDons(ActionEvent event) { System.out.println("Opening Dons"); }
-    @FXML private void handlePartenariats(ActionEvent event) { System.out.println("Opening Partenariats"); }
+
+    @FXML 
+    private void handleDons(ActionEvent event) { 
+        NavigationService.switchScene(event, "/esprit/tn/fxml/front_donations_offres.fxml", "Donations & Solidarité");
+    }
+    @FXML 
+    private void handlePartenariats(ActionEvent event) { 
+        NavigationService.switchScene(event, "/esprit/tn/fxml/FrontPartnerView.fxml", "Espace Partenaires");
+    }
+
+    @FXML
+    private void handleOpenChatbot(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/tn/fxml/chatbot.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Chatbot Firmetna");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -36,24 +36,23 @@
                                 <Button onAction="#handleAccueil" styleClass="nav-item" text="🏠 Accueil" />
                                 <MenuButton styleClass="nav-item-dropdown" text="📦 Produits">
                                     <items>
-                                        <MenuItem text="Fruits" />
-                                        <MenuItem text="Légumes" />
+                                        <MenuItem onAction="#handleProduits" text="Tous les produits" />
+                                        <MenuItem onAction="#handleProduitsVegetaux" text="Végétaux" />
+                                        <MenuItem onAction="#handleProduitsAnimaux" text="Animaux" />
                                     </items>
                                 </MenuButton>
-                                <Button styleClass="nav-item" text="📅 Événements" />
-                                <Button styleClass="nav-item" text="💬 Forum" />
-                                <Button styleClass="nav-item" text="❤ Dons" />
-                                <Button styleClass="nav-item" text="🤝 Partenariats" />
+                                <Button onAction="#handleEvenements" styleClass="nav-item" text="📅 Événements" />
+                                <Button onAction="#handleForum" styleClass="nav-item" text="💬 Forum" />
+                                <Button onAction="#handleDons" styleClass="nav-item" text="❤ Dons" />
+                                <Button onAction="#handlePartenariats" styleClass="nav-item" text="🤝 Partenariats" />
                             </children>
                         </HBox>
                         <Region HBox.hgrow="ALWAYS" />
                         <MenuButton styleClass="nav-profile-btn" text="Profil">
                             <items>
                                 <MenuItem onAction="#handleBack" text="Mon Compte" />
-                                <MenuItem text="Mes Publications" />
-                                <MenuItem text="Mon Panier" />
                                 <SeparatorMenuItem />
-                                <MenuItem onAction="#handleLogout" text="Deconnexion" style="-fx-text-fill: #e74c3c;" />
+                                <MenuItem onAction="#handleLogout" style="-fx-text-fill: #e74c3c;" text="Deconnexion" />
                             </items>
                         </MenuButton>
                     </children>

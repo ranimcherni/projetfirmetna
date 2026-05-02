@@ -2,8 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.*?>
 
 <StackPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ForumController">
     <children>
@@ -13,7 +12,7 @@
         <!-- Main Content Overlay -->
         <VBox spacing="20">
             <children>
-                <!-- NAVIGATION BAR (Shared with Profile/Front) -->
+                <!-- NAVIGATION BAR (Consistent with Front/Profile) -->
                 <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="front-nav-bar">
                     <padding>
                         <Insets bottom="12.0" left="25.0" right="25.0" top="12.0" />
@@ -29,71 +28,75 @@
                                 <Label styleClass="nav-brand" text="FIRMETNA" />
                             </children>
                         </HBox>
+                        
                         <Region HBox.hgrow="ALWAYS" />
+
                         <HBox alignment="CENTER" spacing="15.0">
                             <children>
-                                <Button onAction="#returnToHome" styleClass="nav-item" text="🏠 Accueil" />
-                                <Button styleClass="nav-item" text="📦 Produits" />
-                                <Button styleClass="nav-item" text="📅 Événements" />
-                                <Button styleClass="nav-item-active" text="💬 Forum" />
-                                <Button styleClass="nav-item" text="❤ Dons" />
-                                <Button styleClass="nav-item" text="🤝 Partenariats" />
+                                <Button onAction="#handleAccueil" styleClass="nav-item" text="🏠 ACCUEIL" />
+                                <MenuButton styleClass="nav-item-dropdown" text="📦 PRODUITS">
+                                    <items>
+                                        <MenuItem onAction="#handleProduits" text="Tous les produits" />
+                                        <MenuItem onAction="#handleProduitsVegetaux" text="Végétaux" />
+                                        <MenuItem onAction="#handleProduitsAnimaux" text="Animaux" />
+                                    </items>
+                                </MenuButton>
+                                <Button onAction="#handleEvenements" styleClass="nav-item" text="📅 ÉVÉNEMENTS" />
+                                <Button styleClass="nav-item-active" text="💬 FORUM" />
+                                <Button onAction="#handleDons" styleClass="nav-item" text="❤ DONS" />
+                                <Button onAction="#handlePartenariats" styleClass="nav-item" text="🤝 PARTENARIATS" />
                             </children>
                         </HBox>
+
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button onAction="#returnToHome" styleClass="nav-item" text="Retour" />
+
+                        <MenuButton styleClass="nav-profile-btn" text="Profil">
+                            <items>
+                                <MenuItem onAction="#handleProfil" text="Mon Compte" />
+                                <SeparatorMenuItem />
+                                <MenuItem onAction="#handleLogout" style="-fx-text-fill: #e74c3c;" text="Deconnexion" />
+                            </items>
+                        </MenuButton>
                     </children>
                 </HBox>
 
-                <!-- Centered Forum Card -->
-                <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets bottom="30.0" top="20.0" />
-                    </padding>
+                <!-- Forum Content Area -->
+                <VBox spacing="25" VBox.vgrow="ALWAYS" style="-fx-padding: 20 60 40 60;">
                     <children>
-                        <VBox maxWidth="1000" spacing="25" styleClass="profile-card-modern" VBox.vgrow="ALWAYS">
-                            <padding>
-                                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
-                            </padding>
+                        <VBox spacing="5">
                             <children>
-                                <!-- Header Section -->
-                                <HBox alignment="CENTER_LEFT" spacing="20">
-                                    <children>
-                                        <VBox spacing="5" HBox.hgrow="ALWAYS">
-                                            <children>
-                                                <Label style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d5a27;" text="Communauté et Forum" />
-                                                <Label style="-fx-text-fill: #7f8c8d; -fx-font-size: 14;" text="Échangez avec d'autres passionnés de l'agriculture" />
-                                            </children>
-                                        </VBox>
-                                        <Button onAction="#switchToAddPublication" prefHeight="45" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-padding: 0 20; -fx-cursor: hand;" text="+ Nouvelle Publication" />
-                                    </children>
-                                </HBox>
-
-                                <Separator style="-fx-opacity: 0.1;" />
-
-                                <!-- Search and Filter Bar -->
-                                <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: #f8f9fa; -fx-padding: 15; -fx-background-radius: 12;">
-                                    <children>
-                                        <TextField fx:id="searchField" prefHeight="40" promptText="Rechercher une publication..." styleClass="form-field" HBox.hgrow="ALWAYS" />
-                                        <ComboBox fx:id="comboFilter" prefHeight="40" prefWidth="180" styleClass="form-field" />
-                                    </children>
-                                </HBox>
-
-                                <!-- List Content -->
-                                <ListView fx:id="listPublications" style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #eee;" VBox.vgrow="ALWAYS" />
-
-                                <!-- Footer Actions -->
-                                <HBox alignment="CENTER_RIGHT" spacing="15">
-                                    <children>
-                                        <Button onAction="#deletePublicationAction" prefHeight="40" style="-fx-background-color: transparent; -fx-border-color: #e74c3c; -fx-border-radius: 8; -fx-text-fill: #e74c3c; -fx-font-weight: bold; -fx-padding: 0 20; -fx-cursor: hand;" text="Supprimer" />
-                                        <Button onAction="#viewPublicationAction" prefHeight="45" prefWidth="200" style="-fx-background-color: #2d5a27; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-cursor: hand;" text="Ouvrir la Publication" />
-                                    </children>
-                                </HBox>
+                                <Label text="Communauté Firmetna" styleClass="header-title" style="-fx-text-fill: #1b4332;" />
+                                <Label text="Partagez votre passion pour l'agriculture" style="-fx-text-fill: #2d5a27; -fx-font-size: 16px; -fx-font-weight: bold;" />
                             </children>
                         </VBox>
+
+                        <!-- Search & Filter Bar (Glassmorphism) -->
+                        <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 30; -fx-padding: 15 25; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 30; -fx-border-width: 1.5;">
+                            <children>
+                                <TextField fx:id="searchField" promptText="Rechercher une publication..." HBox.hgrow="ALWAYS" styleClass="search-box" style="-fx-background-radius: 25; -fx-padding: 10 20;" />
+                                <ComboBox fx:id="comboFilter" prefWidth="180.0" style="-fx-background-radius: 25;" />
+                                <Button text="+ Nouvelle Publication" onAction="#switchToAddPublication" styleClass="btn-primary" />
+                            </children>
+                        </HBox>
+
+                        <!-- List Area with ScrollPane feeling -->
+                        <ListView fx:id="listPublications" VBox.vgrow="ALWAYS" styleClass="list-view-forum" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 20; -fx-padding: 15; -fx-border-color: rgba(255,255,255,0.1); -fx-border-radius: 20;" />
+
+                        <!-- Bottom Actions -->
+                        <HBox spacing="15" alignment="CENTER_RIGHT">
+                            <children>
+                                <Button text="Supprimer" onAction="#deletePublicationAction" styleClass="btn-danger" />
+                            </children>
+                        </HBox>
                     </children>
                 </VBox>
             </children>
         </VBox>
+        <!-- FLOAT BUTTON CHATBOT -->
+        <AnchorPane pickOnBounds="false">
+            <children>
+                <Button onAction="#handleOpenChatbot" styleClass="chatbot-float-btn" text="🤖" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+            </children>
+        </AnchorPane>
     </children>
 </StackPane>
