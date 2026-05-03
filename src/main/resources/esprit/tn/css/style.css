@@ -156,11 +156,7 @@
 }
 
 .glass-card {
-<<<<<<< HEAD
-    -fx-background-color: rgba(255, 255, 255, 0.9);
-=======
     -fx-background-color: rgba(255, 255, 255, 0.75);
->>>>>>> gestion-user
     -fx-background-radius: 20;
     -fx-border-color: rgba(39, 174, 96, 0.3);
     -fx-border-width: 2;
@@ -569,17 +565,11 @@
 }
 
 .admin-table .column-header-background {
-<<<<<<< HEAD
-    -fx-background-color: #f8f9fa;
-    -fx-background-radius: 15 15 0 0;
-    -fx-padding: 10 0;
-=======
     -fx-background-color: linear-gradient(to bottom, #4b6584, #34495e); /* Premium Slate Gradient */
     -fx-background-radius: 15 15 0 0;
     -fx-padding: 10 0;
     -fx-border-color: rgba(255, 255, 255, 0.1);
     -fx-border-width: 0 0 1 0;
->>>>>>> gestion-user
 }
 
 .admin-table .column-header {
@@ -588,11 +578,7 @@
 }
 
 .admin-table .column-header .label {
-<<<<<<< HEAD
-    -fx-text-fill: #7f8c8d;
-=======
     -fx-text-fill: #fed330; /* Harvest Gold */
->>>>>>> gestion-user
     -fx-font-weight: bold;
     -fx-font-size: 13;
 }
@@ -602,10 +588,7 @@
     -fx-cell-size: 65;
     -fx-border-color: #f1f2f6;
     -fx-border-width: 0 0 1 0;
-<<<<<<< HEAD
-=======
     -fx-text-fill: #2c3e50; /* Deep Slate Blue Text */
->>>>>>> gestion-user
 }
 
 .admin-table .table-row-cell:odd {
@@ -617,11 +600,7 @@
 }
 
 .admin-table .table-row-cell:selected {
-<<<<<<< HEAD
-    -fx-background-color: #e8f5e9;
-=======
     -fx-background-color: #d1d8e0; /* Light Slate Blue Tint */
->>>>>>> gestion-user
 }
 
 .user-initials-bubble {
@@ -822,42 +801,6 @@
     -fx-letter-spacing: 1px;
 }
 
-<<<<<<< HEAD
-/* EVENT CARD STYLES */
-.event-card {
-    -fx-background-color: white;
-    -fx-background-radius: 15;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
-    -fx-cursor: hand;
-    -fx-min-width: 280;
-    -fx-max-width: 280;
-    -fx-transition: all 0.3s;
-}
-
-.event-card:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(39, 174, 96, 0.2), 15, 0, 0, 8);
-    -fx-translate-y: -5px;
-}
-
-.event-card-image-container {
-    -fx-background-radius: 15 15 0 0;
-    -fx-overflow: hidden;
-}
-
-.event-card-image-container ImageView {
-    -fx-background-radius: 15 15 0 0;
-}
-
-.event-card-title {
-    -fx-text-fill: #1b4332;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-
-.event-card-info {
-    -fx-text-fill: #636e72;
-    -fx-font-size: 14px;
-=======
 /* --- MODERN MFA DIALOG STYLES --- */
 .mfa-container {
     -fx-background-color: white;
@@ -998,7 +941,6 @@
     -fx-text-fill: #f39c12;
     -fx-font-weight: bold;
     -fx-font-size: 14;
->>>>>>> gestion-user
 }
 
 .admin-sidebar-item {
@@ -1041,8 +983,6 @@
 .agri-bar .bar { -fx-background-color: #2d5a27; }
 .client-bar .bar { -fx-background-color: #93c47d; }
 .donateur-bar .bar { -fx-background-color: #f4c2c2; }
-<<<<<<< HEAD
-=======
 
 /* Marketplace Styles */
 .marketplace-topbar {
@@ -1249,4 +1189,3 @@
     -fx-background-radius: 10;
     -fx-padding: 6;
 }
->>>>>>> gestion-user
